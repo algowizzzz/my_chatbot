@@ -1,0 +1,748 @@
+:root {
+  --background-dark: #1C1F1C;
+  --text-light: #FFFFFF;
+  --accent-color: #8E8EA0;
+  --border-color: rgba(255, 255, 255, 0.1);
+}
+
+body {
+  margin: 0;
+  overflow: hidden; /* Prevent page scroll */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--background-dark);
+  color: var(--text-light);
+}
+
+.app-container {
+  display: flex;
+  height: 100vh;
+}
+
+.header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--text-light);
+}
+
+.logo {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-left: 2rem; /* Add left margin to match right side */
+}
+
+.plan-info {
+  font-size: 0.9rem;
+  color: var(--accent-color);
+  margin-right: 2rem; /* Add right margin to keep content away from edge */
+  white-space: nowrap; /* Keep text in single line */
+}
+
+.upgrade-link {
+  color: #9B8AFB;
+  text-decoration: none;
+  margin-left: 0.5rem;
+}
+
+.content-wrapper {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - 60px); /* Subtract header height */
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.greeting {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem; /* Add some space below greeting */
+  position: sticky;
+  top: 0;
+  background-color: var(--background-dark);
+  z-index: 1;
+}
+
+.greeting-icon {
+  font-size: 1.5rem;
+  color: #E8A686;
+}
+
+.greeting-text {
+  font-size: 2.5rem;
+  font-weight: normal;
+  margin: 0;
+}
+
+.input-container {
+  position: absolute; /* Changed from sticky to absolute */
+  bottom: 2rem;
+  left: 2rem;
+  right: 2rem;
+  background-color: #2C2C2C;
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 4rem); /* Account for left/right padding */
+}
+
+.main-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  resize: none;
+  min-height: 40px;  /* Reduced height */
+  max-height: 120px; /* Added max-height */
+  flex: 1;
+  overflow-y: auto;
+}
+
+.main-input::placeholder {
+  color: #8E8EA0;
+}
+
+.input-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.model-selector {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--accent-color);
+}
+
+.style-button {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--accent-color);
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.input-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-button {
+  background: transparent;
+  border: none;
+  color: var(--accent-color);
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.quick-actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem; /* Reduced margin */
+  position: sticky;
+  top: 80px; /* Adjust based on greeting height */
+  background-color: var(--background-dark);
+  z-index: 1;
+  padding: 1rem 0;
+}
+
+.quick-action-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: var(--text-light);
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.recent-chats {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  max-height: calc(100vh - 640px); /* Reduced from 800px to 640px (20% reduction) */
+}
+
+.recent-chats-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+}
+
+.view-all {
+  margin-left: auto;
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+.chat-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+/* Focus states */
+.main-input:focus {
+  outline: none;
+}
+
+.quick-action-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.action-button:hover {
+  color: var(--text-light);
+}
+
+.dropdown-section {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  min-width: 216px;
+}
+
+.dropdown-button {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-light);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.dropdown-arrow {
+  font-size: 0.8rem;
+  margin-left: 8px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: var(--background-dark);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  margin-top: 4px;
+  z-index: 1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-content a {
+  color: var(--text-light);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 0.9rem;
+}
+
+.dropdown-content a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Show dropdown content when hovering over the dropdown container */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-button:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.sidebar {
+  width: 260px;
+  background-color: #202123;
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.chats-list {
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 1rem;
+}
+
+.chat-item {
+  padding: 0.75rem;
+  margin: 0.25rem 0;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--text-light);
+  transition: background-color 0.2s;
+}
+
+.chat-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.chat-item.active {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Add smooth scrolling */
+.main-content, .sidebar, .recent-chats {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-color) var(--background-dark);
+}
+
+/* Customize scrollbar for WebKit browsers */
+.main-content::-webkit-scrollbar,
+.sidebar::-webkit-scrollbar,
+.recent-chats::-webkit-scrollbar {
+  width: 8px;
+}
+
+.main-content::-webkit-scrollbar-track,
+.sidebar::-webkit-scrollbar-track,
+.recent-chats::-webkit-scrollbar-track {
+  background: var(--background-dark);
+}
+
+.main-content::-webkit-scrollbar-thumb,
+.sidebar::-webkit-scrollbar-thumb,
+.recent-chats::-webkit-scrollbar-thumb {
+  background-color: var(--accent-color);
+  border-radius: 4px;
+}
+
+/* Add container for header content */
+.header-content {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  position: relative;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #2C2C2C;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.user-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.user-name {
+  font-weight: 500;
+}
+
+.dropdown-arrow {
+  font-size: 12px;
+}
+
+.user-info:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  border-radius: 4px;
+  padding: 8px 0;
+  min-width: 150px;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: #333;
+}
+
+.dropdown-content a:hover {
+  background-color: #f5f5f5;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.message {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  color: var(--text-light);
+}
+
+.message.user {
+  background-color: rgba(255, 255, 255, 0.1);
+  margin-left: 20%;
+}
+
+.message.assistant {
+  background-color: rgba(255, 255, 255, 0.05);
+  margin-right: 20%;
+}
+
+.input-form {
+  display: flex;
+  gap: 10px;
+  padding: 20px;
+  background-color: var(--background-dark);
+  border-top: 1px solid var(--border-color);
+}
+
+.message-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-light);
+}
+
+.message-input::placeholder {
+  color: var(--accent-color);
+}
+
+.send-button, .new-chat-button {
+  padding: 10px 20px;
+  background-color: #2C2C2C;
+  color: var(--text-light);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.send-button:hover, .new-chat-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Add these new styles */
+.document-sidebar {
+  width: 300px;
+  background-color: #202123;
+  border-left: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.document-header {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.document-header h2 {
+  color: var(--text-light);
+  margin: 0 0 1rem 0;
+  font-size: 1.2rem;
+}
+
+.upload-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-label {
+  padding: 0.5rem 1rem;
+  background-color: #2C2C2C;
+  color: var(--text-light);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.file-label:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.selected-file {
+  color: var(--text-light);
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  word-break: break-all;
+}
+
+.upload-button {
+  padding: 0.5rem 1rem;
+  background-color: #2C2C2C;
+  color: var(--text-light);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.upload-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.documents-list {
+  margin-top: 1rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.document-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--text-light);
+  cursor: pointer;
+}
+
+.document-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  overflow: hidden;
+}
+
+.delete-document-button {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  font-size: 1.2rem;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.document-item:hover .delete-document-button {
+  opacity: 1;
+}
+
+.delete-document-button:hover {
+  color: #ff4444;
+}
+
+.document-title {
+  font-size: 0.9rem;
+  word-break: break-all;
+}
+
+.document-date {
+  font-size: 0.8rem;
+  color: var(--accent-color);
+}
+
+.no-documents {
+  color: var(--accent-color);
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: var(--accent-color);
+  transition: width 0.3s ease;
+}
+
+/* Update button states */
+.upload-button:disabled,
+.file-label.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.selected-document-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+.clear-document-button {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  font-size: 1rem;
+}
+
+.clear-document-button:hover {
+  color: var(--accent-color);
+}
+
+.document-item.selected {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-left: 3px solid var(--accent-color);
+}
+
+.document-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.multi-search-toggle {
+  padding: 0.5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-light);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.multi-search-toggle.active {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  height: 20px;
+  width: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  position: relative;
+}
+
+.checkbox-container:hover .checkmark {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.checkbox-container input:checked ~ .checkmark {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkbox-container .checkmark:after {
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.selected-count {
+  padding: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  margin-top: 1rem;
+  text-align: center;
+  color: var(--accent-color);
+  font-size: 0.9rem;
+}
+
+.document-item.searched {
+  border-left: 3px solid var(--accent-color);
+  background-color: rgba(255, 255, 255, 0.1);
+}
