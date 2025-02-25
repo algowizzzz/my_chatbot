@@ -2,6 +2,9 @@
 
 An intelligent chatbot that allows users to upload documents and have AI-powered conversations about their content. Built with LangChain, OpenAI, and vector embeddings for accurate document search and retrieval.
 
+<img width="1467" alt="image" src="https://github.com/user-attachments/assets/e5e16e02-4fdb-415e-b0a3-600153cf6866" />
+<img width="570" alt="image" src="https://github.com/user-attachments/assets/3091f321-3ea8-4e73-b2bf-245cc1d20272" />
+
 ## Core Features
 
 - 📝 **Document Management**
