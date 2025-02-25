@@ -1,0 +1,12 @@
+This is a test document. My name is Saad.
+# Script:
+
+Hey everyone, welcome back! Today, we’re diving into a quick one-minute showdown: when should you use LangChain versus CrewAI?
+
+Curious about which framework fits your next big project? watch the full video. I’m dropping a bonus tip on integrating both for even more powerful results. Trust me, you don’t want to miss it!
+
+Think of LangChain as your ultimate toolkit for building LLM-powered applications—flexible, modular, and perfect for projects like chatbots or content generators. It’s like crafting a solo masterpiece.
+
+Now, CrewAI steps in when you need a team effort. It’s designed for multi-agent orchestration—imagine a well-coordinated band where every instrument plays its part to tackle complex, collaborative tasks. And the best part? It’s open source, so you can use it at work without extra licensing fees. But hey, always double-check your company’s policies!
+
+Like, subscribe, and stay tuned for the deep dive in our next video. Let’s build smarter, together!
