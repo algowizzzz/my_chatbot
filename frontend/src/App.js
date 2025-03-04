@@ -4,7 +4,13 @@ import TopBar from './components/TopBar';
 import Sidebar from './components/Sidebar';
 import DocumentPanel from './components/DocumentPanel';
 import { Layout } from 'antd';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ChatPage from './pages/ChatPage';
+import ConfigPage from './pages/ConfigPage';
 const { Content, Sider } = Layout;
+
+// Add API base URL
+const API_BASE_URL = 'http://localhost:5004'; // adjust this to match your backend port
 
 function App() {
   const [chatHistory, setChatHistory] = useState([]);
@@ -29,7 +35,7 @@ function App() {
 
   const fetchChats = async () => {
     try {
-      const response = await fetch('/api/chats');
+      const response = await fetch(`${API_BASE_URL}/api/chats`);
       const data = await response.json();
       setChats(data);
       if (data.length > 0 && !currentChat) {
@@ -43,7 +49,7 @@ function App() {
 
   const fetchChatHistory = async (chatId) => {
     try {
-      const response = await fetch(`/api/chats/${chatId}/messages`);
+      const response = await fetch(`${API_BASE_URL}/api/chats/${chatId}/messages`);
       const data = await response.json();
       setChatHistory(data);
     } catch (error) {
@@ -77,7 +83,7 @@ function App() {
 
   const handleChatRename = async (chatId, newTitle) => {
     try {
-      const response = await fetch(`/api/chats/${chatId}/rename`, {
+      const response = await fetch(`${API_BASE_URL}/api/chats/${chatId}/rename`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title: newTitle })
@@ -113,8 +119,8 @@ function App() {
 
       // Use the correct endpoint based on mode
       const endpoint = mode === 'rag' 
-        ? '/api/documents/query' 
-        : '/api/documents/query/direct';
+        ? `${API_BASE_URL}/api/documents/query` 
+        : `${API_BASE_URL}/api/documents/query/direct`;
       
       const body = mode === 'rag' 
         ? { query: message, documentIds: selectedDocs }
@@ -147,7 +153,7 @@ function App() {
 
       // Save messages to backend if you're tracking chat history
       if (currentChat) {
-        await fetch(`/api/chats/${currentChat._id}/messages`, {
+        await fetch(`${API_BASE_URL}/api/chats/${currentChat._id}/messages`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ 
@@ -170,63 +176,70 @@ function App() {
   };
 
   return (
-    <Layout style={{ height: '100vh' }}>
-      <Sider 
-        width={250} 
-        theme="light"
-        style={{
-          overflow: 'auto',
-          height: '100vh',
-          position: 'fixed',
-          left: 0,
-        }}
-      >
-        <Sidebar 
-          chats={chats}
-          currentChat={currentChat}
-          onChatSelect={handleChatSelect}
-          onChatRename={handleChatRename}
-        />
-      </Sider>
-      
-      <Layout style={{ marginLeft: 250, marginRight: rightSiderVisible ? 300 : 0 }}>
-        <TopBar 
-          mode={mode} 
-          setMode={setMode}
-          onNewChat={handleClick}
-        />
-        
-        <Content style={{ 
-          height: 'calc(100vh - 64px)',
-          padding: '20px',
-          overflow: 'auto'
-        }}>
-          <ChatWindow 
-            messages={chatHistory}
-            onSendMessage={handleSendMessage}
-          />
-        </Content>
-      </Layout>
+    <Router>
+      <Routes>
+        <Route path="/" element={
+          <Layout style={{ height: '100vh' }}>
+            <Sider 
+              width={250} 
+              theme="light"
+              style={{
+                overflow: 'auto',
+                height: '100vh',
+                position: 'fixed',
+                left: 0,
+              }}
+            >
+              <Sidebar 
+                chats={chats}
+                currentChat={currentChat}
+                onChatSelect={handleChatSelect}
+                onChatRename={handleChatRename}
+              />
+            </Sider>
+            
+            <Layout style={{ marginLeft: 250, marginRight: rightSiderVisible ? 300 : 0 }}>
+              <TopBar 
+                mode={mode} 
+                setMode={setMode}
+                onNewChat={handleClick}
+              />
+              
+              <Content style={{ 
+                height: 'calc(100vh - 64px)',
+                padding: '20px',
+                overflow: 'auto'
+              }}>
+                <ChatWindow 
+                  messages={chatHistory}
+                  onSendMessage={handleSendMessage}
+                />
+              </Content>
+            </Layout>
 
-      {rightSiderVisible && (
-        <Sider 
-          width={300} 
-          theme="light"
-          style={{
-            overflow: 'auto',
-            height: '100vh',
-            position: 'fixed',
-            right: 0,
-          }}
-        >
-          <DocumentPanel
-            visible={rightSiderVisible}
-            selectedDocs={selectedDocs}
-            onDocSelect={handleDocSelect}
-          />
-        </Sider>
-      )}
-    </Layout>
+            {rightSiderVisible && (
+              <Sider 
+                width={300} 
+                theme="light"
+                style={{
+                  overflow: 'auto',
+                  height: '100vh',
+                  position: 'fixed',
+                  right: 0,
+                }}
+              >
+                <DocumentPanel
+                  visible={rightSiderVisible}
+                  selectedDocs={selectedDocs}
+                  onDocSelect={handleDocSelect}
+                />
+              </Sider>
+            )}
+          </Layout>
+        } />
+        <Route path="/config" element={<ConfigPage apiBaseUrl={API_BASE_URL} />} />
+      </Routes>
+    </Router>
   );
 }
 
