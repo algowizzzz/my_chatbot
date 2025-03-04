@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const documentRoutes = require('./routes/documentRoutes');
+const graphRagRouter = require('./routes/graphRag');
 
 // Verify environment variables are loaded
 console.log('Environment Check:', {
@@ -24,6 +25,26 @@ app.use(express.json());
 
 // Routes
 app.use('/api/documents', documentRoutes);
+app.use('/api/graph', graphRagRouter);
+
+// Add chats endpoints
+app.get('/api/chats', async (req, res) => {
+    try {
+        // For now, return empty array until we implement chat storage
+        res.json([]);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.patch('/api/chats/:id', async (req, res) => {
+    try {
+        // For now, just return success
+        res.json({ success: true });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
 // Initialize vector store
 const vectorStore = require('./utils/vectorStore');
