@@ -1,7 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Input, Button } from 'antd';
+import { Input, Button, Spin, Typography, Tooltip } from 'antd';
+import { SendOutlined, PlusOutlined } from '@ant-design/icons';
+import './ChatWindow.css';
 
-const ChatWindow = ({ messages, onSendMessage }) => {
+const { Text } = Typography;
+
+const ChatWindow = ({ messages, onSendMessage, loading, onNewChat }) => {
   const [message, setMessage] = useState('');
   const messagesEndRef = useRef(null);
 
@@ -21,45 +25,64 @@ const ChatWindow = ({ messages, onSendMessage }) => {
   };
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex-1 overflow-auto mb-4 p-4">
+    <div className="chat-window">
+      <div className="chat-messages">
+        {messages.length === 0 && (
+          <div style={{ textAlign: 'center', color: '#666', margin: 'auto' }}>
+            <Text type="secondary">No messages yet. Start a conversation!</Text>
+          </div>
+        )}
         {messages.map((msg, index) => (
           <div
             key={index}
-            className={`mb-4 ${
-              msg.role === 'user' ? 'flex justify-end' : 'flex justify-start'
-            }`}
+            className={`message-container ${msg.role}`}
           >
             <div
-              className={`max-w-[70%] p-3 rounded-lg ${
-                msg.role === 'user'
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-gray-100'
-              }`}
+              className={`message-bubble ${msg.role}`}
             >
               {msg.content}
             </div>
           </div>
         ))}
+        {loading && (
+          <div className="loading-container">
+            <Spin />
+            <Text type="secondary" style={{ display: 'block', marginTop: '8px' }}>
+              AI is thinking...
+            </Text>
+          </div>
+        )}
         <div ref={messagesEndRef} />
       </div>
       
-      <div className="p-4 border-t bg-white">
-        <div className="flex gap-2">
+      <div className="input-container">
+        <div className="input-wrapper">
+          <Tooltip title="New chat">
+            <Button
+              type="text"
+              onClick={onNewChat}
+              size="large"
+              icon={<PlusOutlined />}
+              style={{ marginRight: '8px', borderRadius: '8px' }}
+            />
+          </Tooltip>
           <Input
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onPressEnter={handleSend}
             placeholder="Type your message..."
             size="large"
+            disabled={loading}
+            style={{ borderRadius: '8px', flex: 1 }}
           />
           <Button 
             type="primary" 
             onClick={handleSend}
             size="large"
-          >
-            Send
-          </Button>
+            icon={<SendOutlined />}
+            loading={loading}
+            style={{ borderRadius: '8px' }}
+          />
         </div>
       </div>
     </div>
