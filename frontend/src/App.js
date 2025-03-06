@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import ChatWindow from './components/ChatWindow';
 import ChatList from './components/ChatList';
-import DocumentPanel from './components/DocumentPanel';
 import DocumentUpload from './components/DocumentUpload';
 import LandingPage from './components/LandingPage';
-import { Layout, Button, message, Select, Modal, List } from 'antd';
+import { Layout, Button, message, Modal, List, Select } from 'antd';
 import { 
-  PlusOutlined, 
   MessageOutlined, 
   MenuFoldOutlined, 
   MenuUnfoldOutlined, 
@@ -21,7 +19,7 @@ import ConfigPage from './pages/ConfigPage';
 const { Content, Sider } = Layout;
 
 // Add API base URL
-const API_BASE_URL = 'http://localhost:5005'; // adjust this to match your backend port
+export const API_BASE_URL = 'http://localhost:5005'; // backend server port
 
 function App() {
   const [chatHistory, setChatHistory] = useState([]);
@@ -114,7 +112,7 @@ function App() {
       const newChat = await response.json();
       console.log('Created new chat:', newChat);
       
-      setChats(prev => [newChat, ...prev]);
+      setChats(prev => Array.isArray(prev) ? [newChat, ...prev] : [newChat]);
       setCurrentChat(newChat);
       setChatHistory([]);
       message.success('New chat created');
@@ -307,7 +305,7 @@ function App() {
         try {
           setLoading(true);
           console.log(`Attempting to delete document with ID: ${documentId}`);
-          const deleteUrl = `${API_BASE_URL}/api/documents/${documentId}`;
+          const deleteUrl = `${API_BASE_URL}/api/documents/${documentId}?userId=test-user`;
           console.log(`DELETE request to: ${deleteUrl}`);
           
           const response = await fetch(deleteUrl, {

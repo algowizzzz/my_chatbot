@@ -73,9 +73,22 @@ function LandingPage() {
   };
 
   const handleAgentClick = (agentTitle) => {
-    // Only Doc Intelligence button navigates to the chatbot
+    // Navigate to the chatbot with the appropriate mode
+    console.log('Agent clicked:', agentTitle);
+    
     if (agentTitle === "Doc Intelligence") {
-      navigate('/app');
+      console.log('Navigating to doc_qa mode');
+      navigate('/app?mode=doc_qa');
+    } else if (agentTitle === "Graph RAG") {
+      console.log('Navigating to graph_rag mode');
+      // Force reload to ensure the mode is applied correctly
+      window.location.href = '/app?mode=graph_rag';
+    } else if (agentTitle === "AI Assistant") {
+      console.log('Navigating to direct mode');
+      navigate('/app?mode=direct');
+    } else if (agentTitle === "Business Processes") {
+      console.log('Navigating to business processes page');
+      navigate('/processes');
     }
   };
 
