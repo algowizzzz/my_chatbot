@@ -260,15 +260,25 @@ router.post('/query/graph', async (req, res) => {
          - Bold key terms using **asterisks**
 
       2. 📚 SOURCES & ANALYSIS
-         - Cite specific sources: 'According to [Source X]...'
+         For each key point, include a citation in this format:
+         > [Document: {document_name}, Page: {page_number}]
+
+         Example:
+         According to research on neural networks...
+         > [Document: ML_Fundamentals.pdf, Page: 12]
+
+         - Start each major point with a clear citation
          - Compare and contrast different sources when relevant
-         - Use bullet points to break down complex information
-         - Highlight any discrepancies or complementary information
+         - Use bullet points for complex information
+         - Highlight any discrepancies between sources
+         - Include page numbers for all important claims
 
       3. 🔗 SYNTHESIS (if applicable)
          - Connect information from different sources
          - Explain how different pieces of information relate
          - Identify patterns or themes
+         - Note when sources complement or contradict each other
+         - Include document references for connected information
 
       4. ⚠️ IMPORTANT NOTES
          - Mention any limitations or caveats
