@@ -263,9 +263,17 @@ router.post('/query/graph', async (req, res) => {
          For each key point, include a citation in this format:
          > [Document: {document_name}, Page: {page_number}]
 
-         Example:
+         When citing from uploaded documents, use their actual filenames:
          According to research on neural networks...
          > [Document: ML_Fundamentals.pdf, Page: 12]
+
+         For information from the current conversation or query context:
+         Based on the analysis...
+         > [Document: Current Conversation]
+
+         For information from uploaded documents without page numbers:
+         The data shows...
+         > [Document: research_paper.txt, Section: Introduction]
 
          - Start each major point with a clear citation
          - Compare and contrast different sources when relevant
