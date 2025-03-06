@@ -37,6 +37,26 @@ app.get('/api/chats', async (req, res) => {
     }
 });
 
+app.post('/api/chats/new', async (req, res) => {
+    try {
+        // Create a new chat with a unique ID
+        const newChat = {
+            _id: new mongoose.Types.ObjectId().toString(),
+            title: req.body.title || 'New Chat',
+            userId: req.body.userId || 'test-user',
+            createdAt: new Date(),
+            updatedAt: new Date()
+        };
+        
+        // In a real app, we would save this to the database
+        // For now, just return the new chat object
+        res.status(201).json(newChat);
+    } catch (error) {
+        console.error('Error creating new chat:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
 app.patch('/api/chats/:id', async (req, res) => {
     try {
         // For now, just return success

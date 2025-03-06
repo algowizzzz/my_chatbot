@@ -3,6 +3,7 @@ import ChatWindow from './components/ChatWindow';
 import ChatList from './components/ChatList';
 import DocumentPanel from './components/DocumentPanel';
 import DocumentUpload from './components/DocumentUpload';
+import LandingPage from './components/LandingPage';
 import { Layout, Button, message, Select, Modal, List } from 'antd';
 import { 
   PlusOutlined, 
@@ -15,7 +16,7 @@ import {
   ExclamationCircleOutlined,
   RobotOutlined
 } from '@ant-design/icons';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import ConfigPage from './pages/ConfigPage';
 const { Content, Sider } = Layout;
 
@@ -319,11 +320,8 @@ function App() {
     });
   };
 
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={
-          <Layout style={{ height: '100vh' }}>
+  const ChatbotApp = () => (
+    <Layout style={{ height: '100vh' }}>
             {/* Top header with logo - full width */}
             <div style={{ 
               position: 'fixed', 
@@ -560,9 +558,16 @@ function App() {
                 )}
               </div>
             </Modal>
-          </Layout>
-        } />
+    </Layout>
+  );
+
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/app" element={<ChatbotApp />} />
         <Route path="/config" element={<ConfigPage apiBaseUrl={API_BASE_URL} />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
   );
