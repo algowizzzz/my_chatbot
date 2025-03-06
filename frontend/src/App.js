@@ -74,7 +74,7 @@ function App() {
   
   const fetchDocuments = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/documents/list/test123`);
+      const response = await fetch(`${API_BASE_URL}/api/documents/list/test-user`);
       if (!response.ok) {
         throw new Error(`Failed to fetch documents: ${response.statusText}`);
       }
@@ -127,6 +127,28 @@ function App() {
   const handleChatSelect = (chat) => {
     setCurrentChat(chat);
     fetchChatHistory(chat._id);
+  };
+
+  const handleChatUpdate = (updatedChat) => {
+    if (!updatedChat || !updatedChat._id) {
+      console.error('Invalid chat data received:', updatedChat);
+      return;
+    }
+
+    // Create new arrays/objects to force React to recognize the state change
+    const updatedChats = [...chats];
+    const chatIndex = updatedChats.findIndex(chat => chat._id === updatedChat._id);
+    
+    if (chatIndex !== -1) {
+      updatedChats[chatIndex] = { ...updatedChats[chatIndex], ...updatedChat };
+      setChats(updatedChats);
+      
+      // Update current chat if it's the one being renamed
+      if (currentChat?._id === updatedChat._id) {
+        const updatedCurrentChat = { ...currentChat, ...updatedChat };
+        setCurrentChat(updatedCurrentChat);
+      }
+    }
   };
 
 
@@ -309,7 +331,7 @@ function App() {
           
           // Refresh documents list
           fetchDocuments();
-          message.success('Document deleted successfully');
+          message.success(responseData.message);
         } catch (error) {
           console.error('Error deleting document:', error);
           message.error(`Failed to delete document: ${error.message}`);
@@ -436,6 +458,7 @@ function App() {
                   onChatSelect={handleChatSelect}
                   currentChat={currentChat}
                   onDeleteChat={handleDeleteChat}
+                  onChatUpdate={handleChatUpdate}
                 />
               </div>
             </Sider>
@@ -467,14 +490,25 @@ function App() {
             
 
             
-            <Layout style={{ marginLeft: 280, height: '100vh', marginTop: '100px' }}>
+            <Layout style={{ marginLeft: 280, height: 'calc(100vh - 100px)', marginTop: '100px' }}>
               <Content style={{ 
-                height: 'calc(100vh - 100px)',
+                height: '100%',
                 padding: '20px',
                 display: 'flex',
-                flexDirection: 'column'
+                flexDirection: 'column',
+                overflow: 'hidden',
+                position: 'relative'
               }}>
-                <div style={{ flex: 1, overflow: 'hidden' }}>
+                <div style={{ 
+                  position: 'absolute',
+                  top: '20px',
+                  left: '20px',
+                  right: '20px',
+                  bottom: '20px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  overflow: 'hidden'
+                }}>
                   <ChatWindow 
                     messages={chatHistory}
                     onSendMessage={handleSendMessage}
@@ -495,7 +529,7 @@ function App() {
             >
               <DocumentUpload
                 onUploadSuccess={(data) => {
-                  message.success(`Document "${data.name}" uploaded successfully`);
+                  message.success(data.message);
                   fetchDocuments();
                   setUploadModalVisible(false);
                 }}
