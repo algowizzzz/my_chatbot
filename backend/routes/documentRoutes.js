@@ -9,6 +9,20 @@ const vectorStore = require('../utils/vectorStore');
 const documentProcessor = require('../utils/textSplitter');
 const { ChatOpenAI } = require('@langchain/openai');
 const { HumanMessage, SystemMessage } = require('@langchain/core/messages');
+const { analyzeEntities } = require('../utils/textAnalysis');
+
+// Get all documents
+router.get('/', async (req, res) => {
+  try {
+    const documents = await Document.find({ userId: req.query.userId || 'test-user' })
+      .select('name type createdAt _id')
+      .sort('-createdAt');
+    res.json(documents);
+  } catch (error) {
+    console.error('Error fetching documents:', error);
+    res.status(500).json({ error: 'Failed to fetch documents' });
+  }
+});
 
 // Configure multer for memory storage
 const upload = multer({ 
@@ -145,7 +159,7 @@ router.post('/query', async (req, res) => {
     console.log('Searching for:', query, 'in document:', documentId);
     const searchResults = await vectorStore.semanticSearch(query, {
       filterDocumentId: documentId,
-      maxResults: 3
+      maxResults: 5
     });
 
     console.log('Search results:', JSON.stringify(searchResults, null, 2));
@@ -182,6 +196,95 @@ router.post('/query', async (req, res) => {
       error: 'Failed to process query',
       details: error.message,
       stack: error.stack
+    });
+  }
+});
+
+// Add route for Graph RAG queries
+router.post('/query/graph', async (req, res) => {
+  try {
+    const { query, documentId } = req.body;
+    
+    if (!query) {
+      return res.status(400).json({ error: 'Query is required' });
+    }
+
+    // Search for relevant chunks in the primary document
+    console.log('Searching primary document:', documentId);
+    const primaryResults = await vectorStore.semanticSearch(query, {
+      filterDocumentId: documentId,
+      maxResults: 3
+    });
+
+    if (!primaryResults || primaryResults.length === 0) {
+      return res.status(404).json({ 
+        error: 'No relevant content found',
+        query,
+        documentId 
+      });
+    }
+
+    // Get related chunks from other documents based on the top result
+    const topChunkId = primaryResults[0]?.metadata?.chunkId;
+    let relatedChunks = [];
+    
+    if (topChunkId) {
+      relatedChunks = await vectorStore.getRelatedChunks(
+        topChunkId,
+        2 // Get 2 related chunks
+      );
+    }
+
+    // Combine primary and related results
+    const allResults = [
+      ...primaryResults,
+      ...relatedChunks
+    ];
+
+    // Extract entities and relationships
+    const entityAnalysis = await analyzeEntities(allResults);
+    
+    // Format context for ChatGPT with chain of thought
+    const context = allResults
+      .map(result => result.content)
+      .join('\n\n');
+
+    // Generate response using ChatGPT with proper message objects
+    const messages = [
+      new SystemMessage(`You are a helpful assistant. Use the provided context to answer questions accurately. 
+      First analyze the key points from each chunk, then synthesize them into a coherent answer. 
+      If you find relevant information in both the primary and related documents, explain how they connect.
+      Format your response as follows:
+      1. Direct answer to the question
+      2. Key points from each source (if multiple sources were used)
+      3. How the information connects (if applicable)
+      4. Any important caveats or limitations`),
+      new HumanMessage(`Context:\n${context}\n\nQuestion: ${query}`)
+    ];
+
+    const response = await model.invoke(messages);
+
+    // Prepare chunk analysis
+    const chunkAnalysis = {
+      totalChunks: allResults.length,
+      primaryChunks: primaryResults.length,
+      relatedChunks: relatedChunks.length,
+      averageRelevanceScore: allResults.reduce((acc, chunk) => acc + chunk.score, 0) / allResults.length,
+      pageRanges: [...new Set(allResults.map(chunk => chunk.metadata.pageNumber))].sort((a, b) => a - b),
+      entityAnalysis
+    };
+
+    res.json({
+      answer: response.content,
+      relevantChunks: allResults,
+      analysis: chunkAnalysis
+    });
+
+  } catch (error) {
+    console.error('Graph RAG query error:', error);
+    res.status(500).json({ 
+      error: 'Failed to process graph query',
+      details: error.message
     });
   }
 });

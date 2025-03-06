@@ -27,7 +27,7 @@ function App() {
   const [chatHistory, setChatHistory] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [chats, setChats] = useState([]);
-  const [mode, setMode] = useState('direct'); // 'direct' or 'rag'
+  const [mode, setMode] = useState('direct'); // 'direct', 'doc_qa', or 'graph_rag'
   const [selectedDocs, setSelectedDocs] = useState([]);
   const [rightSiderVisible, setRightSiderVisible] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -44,9 +44,9 @@ function App() {
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   
-  // Fetch documents when mode changes to RAG
+  // Fetch documents when mode changes to document-based modes
   useEffect(() => {
-    if (mode === 'rag') {
+    if (mode === 'doc_qa' || mode === 'graph_rag') {
       fetchDocuments();
     }
   }, [mode]);
@@ -169,13 +169,21 @@ function App() {
       setChatHistory(prev => [...prev, newUserMessage]);
 
       // Use the correct endpoint based on mode
-      const endpoint = mode === 'rag' 
-        ? `${API_BASE_URL}/api/documents/query` 
-        : `${API_BASE_URL}/api/documents/query/direct`;
+      let endpoint, body;
       
-      const body = mode === 'rag' 
-        ? { query: message, documentId: selectedDocs[0] } // Use first selected doc for now
-        : { query: message };
+      switch(mode) {
+        case 'doc_qa':
+          endpoint = `${API_BASE_URL}/api/documents/query`;
+          body = { query: message, documentId: selectedDocs[0] };
+          break;
+        case 'graph_rag':
+          endpoint = `${API_BASE_URL}/api/documents/query/graph`;
+          body = { query: message, documentId: selectedDocs[0] };
+          break;
+        default: // direct mode
+          endpoint = `${API_BASE_URL}/api/documents/query/direct`;
+          body = { query: message };
+      }
 
       console.log('Sending request to:', endpoint);
       console.log('With body:', body);
@@ -195,10 +203,11 @@ function App() {
       const data = await response.json();
       console.log('Server response:', data);
       
-      // Add assistant's response to chat
+      // Add assistant's response to chat with analysis if available
       const assistantMessage = { 
         role: 'assistant', 
-        content: data.answer
+        content: data.answer,
+        analysis: data.analysis // Include the chunk analysis data
       };
       setChatHistory(prev => [...prev, assistantMessage]);
 
@@ -384,12 +393,13 @@ function App() {
                   style={{ width: '100%', marginBottom: '10px' }}
                   options={[
                     { value: 'direct', label: 'General ChatGPT' },
-                    { value: 'rag', label: 'Document Q&A' }
+                    { value: 'doc_qa', label: 'Document Q&A' },
+                    { value: 'graph_rag', label: 'Graph RAG' }
                   ]}
                 />
                 
-                {/* Document Selection UI - Only shown in Document Q&A mode */}
-                {mode === 'rag' && (
+                {/* Document Selection UI - Shown in both document-based modes */}
+                {(mode === 'doc_qa' || mode === 'graph_rag') && (
                   <div style={{ marginBottom: '16px', borderTop: '1px solid #f0f0f0', paddingTop: '16px' }}>
                     <div style={{ marginBottom: '10px' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
