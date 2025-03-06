@@ -40,8 +40,10 @@ class VectorStoreManager {
           const embedding = await this.embeddings.embedQuery(chunk.content);
           
           // Clean and prepare metadata
+          const chunkId = `${documentId}_${i}`;
           const metadata = {
             documentId: String(documentId),
+            chunkId: chunkId,
             chunkIndex: String(i),
             pageNumber: String(chunk.metadata?.pageNumber || 1),
             section: String(chunk.metadata?.section || 'Main Content'),
@@ -60,7 +62,7 @@ class VectorStoreManager {
           });
 
           return {
-            id: `${documentId}_${i}`,
+            id: chunkId,
             values: embedding,
             metadata
           };
@@ -78,7 +80,7 @@ class VectorStoreManager {
     }
   }
 
-  async semanticSearch(query, { maxResults = 5, filterDocumentId = null, minScore = 0.7 } = {}) {
+  async semanticSearch(query, { maxResults = 5, filterDocumentId = null, minScore = 0.6 } = {}) {
     try {
       const queryEmbedding = await this.embeddings.embedQuery(query);
       
@@ -124,28 +126,34 @@ class VectorStoreManager {
   }
 
   async getRelatedChunks(chunkId, maxResults = 3) {
-    // Get the vector for the specified chunk
-    const chunkVector = await this.index.fetch([chunkId]);
-    
-    if (!chunkVector.vectors[chunkId]) {
-      throw new Error('Chunk not found');
+    try {
+      // Get the vector for the specified chunk
+      const chunkVector = await this.index.fetch([chunkId]);
+      
+      if (!chunkVector.vectors[chunkId]) {
+        console.warn('Chunk not found:', chunkId);
+        return [];
+      }
+
+      // Find related chunks
+      const results = await this.index.query({
+        vector: chunkVector.vectors[chunkId].values,
+        topK: maxResults + 1, // Add 1 to exclude the source chunk
+        includeMetadata: true
+      });
+
+      // Remove the source chunk and return related chunks
+      return results.matches
+        .filter(match => match.id !== chunkId)
+        .map(match => ({
+          content: match.metadata.content,
+          score: match.score,
+          metadata: match.metadata
+        }));
+    } catch (error) {
+      console.error('Error getting related chunks:', error);
+      return [];
     }
-
-    // Find related chunks
-    const results = await this.index.query({
-      vector: chunkVector.vectors[chunkId].values,
-      topK: maxResults + 1, // Add 1 to exclude the source chunk
-      includeMetadata: true
-    });
-
-    // Remove the source chunk and return related chunks
-    return results.matches
-      .filter(match => match.id !== chunkId)
-      .map(match => ({
-        content: match.metadata.content,
-        score: match.score,
-        metadata: match.metadata
-      }));
   }
 }
 
