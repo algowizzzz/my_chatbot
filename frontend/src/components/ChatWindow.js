@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Input, Button, Spin, Typography, Tooltip, Progress } from 'antd';
 import { SendOutlined, PlusOutlined, BarChartOutlined, TeamOutlined, ApiOutlined } from '@ant-design/icons';
+import MarkdownIt from 'markdown-it';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css';
 import './ChatWindow.css';
 
 const { Text } = Typography;
@@ -81,6 +84,45 @@ const ChunkAnalysis = ({ analysis }) => {
 };
 
 const Message = ({ msg, isLastUserMessage }) => {
+  const renderMarkdown = (content) => {
+    const md = new MarkdownIt({
+      html: false,
+      linkify: true,
+      typographer: true,
+      breaks: true,
+      highlight: function (str, lang) {
+        if (lang && hljs.getLanguage(lang)) {
+          try {
+            return hljs.highlight(str, { language: lang }).value;
+          } catch (__) {}
+        }
+        return ''; // use external default escaping
+      }
+    });
+
+    // Custom rendering rules for section headings
+    md.renderer.rules.heading_open = (tokens, idx) => {
+      const token = tokens[idx];
+      const level = token.tag;
+      const nextToken = tokens[idx + 1];
+      const content = nextToken ? nextToken.content : '';
+      
+      // Add emoji icons to main sections
+      if (content.includes('ANSWER')) {
+        return `<${level} class="section-heading">💡 `;
+      } else if (content.includes('SOURCES')) {
+        return `<${level} class="section-heading">📚 `;
+      } else if (content.includes('SYNTHESIS')) {
+        return `<${level} class="section-heading">🔗 `;
+      } else if (content.includes('IMPORTANT')) {
+        return `<${level} class="section-heading">⚠️ `;
+      }
+      return `<${level}>`;
+    };
+
+    return { __html: md.render(content) };
+  };
+
   if (msg.role === 'user') {
     return (
       <div className={`message-bubble ${msg.role}`}>
@@ -94,9 +136,10 @@ const Message = ({ msg, isLastUserMessage }) => {
       {isLastUserMessage && msg.analysis && (
         <ChunkAnalysis analysis={msg.analysis} />
       )}
-      <div className={`message-bubble ${msg.role}`}>
-        {msg.content}
-      </div>
+      <div 
+        className={`message-bubble ${msg.role}`}
+        dangerouslySetInnerHTML={renderMarkdown(msg.content)}
+      />
     </div>
   );
 };

@@ -124,6 +124,119 @@
   line-height: 1.5;
 }
 
+/* Markdown Typography */
+.message-bubble.assistant h1,
+.message-bubble.assistant h2,
+.message-bubble.assistant h3,
+.message-bubble.assistant h4 {
+  margin-top: 16px;
+  margin-bottom: 8px;
+  color: #262626;
+  font-weight: 600;
+  border-bottom: 1px solid #e8e8e8;
+  padding-bottom: 4px;
+}
+
+.message-bubble.assistant h1 { font-size: 1.4em; }
+.message-bubble.assistant h2 { font-size: 1.25em; }
+.message-bubble.assistant h3 { font-size: 1.1em; }
+.message-bubble.assistant h4 { font-size: 1em; }
+
+.message-bubble.assistant p {
+  margin: 8px 0;
+  line-height: 1.6;
+}
+
+.message-bubble.assistant ul,
+.message-bubble.assistant ol {
+  margin: 8px 0;
+  padding-left: 24px;
+}
+
+.message-bubble.assistant li {
+  margin: 6px 0;
+  line-height: 1.5;
+  position: relative;
+}
+
+.message-bubble.assistant code {
+  background-color: rgba(24, 144, 255, 0.05);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9em;
+  color: #1890ff;
+}
+
+.message-bubble.assistant pre {
+  background-color: #f8f9fa;
+  padding: 12px;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 12px 0;
+  border: 1px solid #e8e8e8;
+}
+
+.message-bubble.assistant pre code {
+  background-color: transparent;
+  padding: 0;
+  color: #595959;
+}
+
+.message-bubble.assistant strong {
+  color: #1890ff;
+  font-weight: 600;
+}
+
+.message-bubble.assistant em {
+  font-style: italic;
+  color: #595959;
+}
+
+.message-bubble.assistant blockquote {
+  border-left: 4px solid #1890ff;
+  margin: 12px 0;
+  padding: 8px 16px;
+  background-color: rgba(24, 144, 255, 0.05);
+  color: #595959;
+}
+
+.message-bubble.assistant a {
+  color: #1890ff;
+  text-decoration: none;
+  border-bottom: 1px dashed #1890ff;
+  transition: all 0.2s;
+}
+
+.message-bubble.assistant a:hover {
+  color: #40a9ff;
+  border-bottom-style: solid;
+}
+
+.message-bubble.assistant hr {
+  border: none;
+  border-top: 1px solid #e8e8e8;
+  margin: 16px 0;
+}
+
+/* Emoji icons */
+.message-bubble.assistant h2:first-of-type,
+.message-bubble.assistant h3:first-of-type {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.1em;
+  color: #1890ff;
+  margin-top: 12px;
+}
+
+/* Source citations */
+.message-bubble.assistant .source-citation {
+  font-size: 0.9em;
+  color: #8c8c8c;
+  font-style: italic;
+}
+
 .message-bubble.user {
   background-color: #1890ff;
   color: white;
@@ -134,6 +247,101 @@
   background-color: #f5f5f5;
   color: rgba(0, 0, 0, 0.85);
   border-top-left-radius: 4px;
+  padding: 16px 20px;
+}
+
+/* Section headings */
+.message-bubble.assistant .section-heading {
+  color: #1890ff;
+  font-size: 1.1em;
+  margin-top: 16px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e8e8e8;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.message-bubble.assistant .section-heading:first-child {
+  margin-top: 0;
+}
+
+/* Lists and spacing */
+.message-bubble.assistant ul,
+.message-bubble.assistant ol {
+  margin: 8px 0 16px;
+  padding-left: 24px;
+}
+
+.message-bubble.assistant li {
+  margin: 6px 0;
+  line-height: 1.6;
+  color: #262626;
+}
+
+.message-bubble.assistant li strong {
+  color: #1890ff;
+}
+
+/* Source citations */
+.message-bubble.assistant .source-citation {
+  display: inline-block;
+  font-size: 0.9em;
+  color: #8c8c8c;
+  font-style: italic;
+  margin: 4px 0;
+  padding-left: 16px;
+  border-left: 2px solid #1890ff;
+}
+
+/* Code blocks */
+.message-bubble.assistant pre {
+  background-color: #f8f9fa;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin: 12px 0;
+  border: 1px solid #e8e8e8;
+  overflow-x: auto;
+}
+
+.message-bubble.assistant pre code {
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+
+/* Inline code */
+.message-bubble.assistant code {
+  background-color: rgba(24, 144, 255, 0.05);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9em;
+  color: #1890ff;
+}
+
+/* Blockquotes */
+.message-bubble.assistant blockquote {
+  border-left: 4px solid #1890ff;
+  margin: 12px 0;
+  padding: 8px 16px;
+  background-color: rgba(24, 144, 255, 0.05);
+  color: #595959;
+  font-style: italic;
+}
+
+/* Links */
+.message-bubble.assistant a {
+  color: #1890ff;
+  text-decoration: none;
+  border-bottom: 1px dashed #1890ff;
+  transition: all 0.2s;
+}
+
+.message-bubble.assistant a:hover {
+  color: #40a9ff;
+  border-bottom-style: solid;
 }
 
 .input-container {
