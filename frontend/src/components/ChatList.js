@@ -32,13 +32,6 @@ const ChatList = ({ chats = [], onChatSelect, currentChat, onDeleteChat, onChatU
     }
     
     try {
-      // Optimistically update the UI first
-      const updatedChat = chats.find(c => c._id === chatId);
-      if (updatedChat) {
-        const optimisticUpdate = { ...updatedChat, title: newChatTitle.trim() };
-        onChatUpdate(optimisticUpdate);
-      }
-
       setLoading(true);
       const response = await fetch(`${API_BASE_URL}/api/chats/${chatId}/rename`, {
         method: 'PUT',
@@ -54,8 +47,8 @@ const ChatList = ({ chats = [], onChatSelect, currentChat, onDeleteChat, onChatU
         throw new Error(data.error || 'Failed to rename chat');
       }
       
-      // Update with the server response data
-      if (data.chat && onChatUpdate) {
+      // Update the chat in the parent component
+      if (onChatUpdate && data.chat) {
         onChatUpdate(data.chat);
       }
       
@@ -64,13 +57,6 @@ const ChatList = ({ chats = [], onChatSelect, currentChat, onDeleteChat, onChatU
     } catch (error) {
       console.error('Error renaming chat:', error);
       message.error(error.message);
-      // Revert the optimistic update on error
-      if (onChatUpdate) {
-        const originalChat = chats.find(c => c._id === chatId);
-        if (originalChat) {
-          onChatUpdate(originalChat);
-        }
-      }
     } finally {
       setLoading(false);
     }

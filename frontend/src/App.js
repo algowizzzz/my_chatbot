@@ -135,19 +135,14 @@ function App() {
       return;
     }
 
-    // Create new arrays/objects to force React to recognize the state change
-    const updatedChats = [...chats];
-    const chatIndex = updatedChats.findIndex(chat => chat._id === updatedChat._id);
+    // Immediately update the chat in the list
+    setChats(prevChats => prevChats.map(chat => 
+      chat._id === updatedChat._id ? { ...chat, ...updatedChat } : chat
+    ));
     
-    if (chatIndex !== -1) {
-      updatedChats[chatIndex] = { ...updatedChats[chatIndex], ...updatedChat };
-      setChats(updatedChats);
-      
-      // Update current chat if it's the one being renamed
-      if (currentChat?._id === updatedChat._id) {
-        const updatedCurrentChat = { ...currentChat, ...updatedChat };
-        setCurrentChat(updatedCurrentChat);
-      }
+    // Update current chat if it's the one being renamed
+    if (currentChat?._id === updatedChat._id) {
+      setCurrentChat(prevChat => ({ ...prevChat, ...updatedChat }));
     }
   };
 

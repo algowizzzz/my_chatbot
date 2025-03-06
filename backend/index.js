@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const documentRoutes = require('./routes/documentRoutes');
+const chatRoutes = require('./routes/chatRoutes');
 const graphRagRouter = require('./routes/graphRag');
 
 // Verify environment variables are loaded
@@ -25,46 +26,8 @@ app.use(express.json());
 
 // Routes
 app.use('/api/documents', documentRoutes);
+app.use('/api/chats', chatRoutes);
 app.use('/api/graph', graphRagRouter);
-
-// Add chats endpoints
-app.get('/api/chats', async (req, res) => {
-    try {
-        // For now, return empty array until we implement chat storage
-        res.json([]);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
-
-app.post('/api/chats/new', async (req, res) => {
-    try {
-        // Create a new chat with a unique ID
-        const newChat = {
-            _id: new mongoose.Types.ObjectId().toString(),
-            title: req.body.title || 'New Chat',
-            userId: req.body.userId || 'test-user',
-            createdAt: new Date(),
-            updatedAt: new Date()
-        };
-        
-        // In a real app, we would save this to the database
-        // For now, just return the new chat object
-        res.status(201).json(newChat);
-    } catch (error) {
-        console.error('Error creating new chat:', error);
-        res.status(500).json({ error: error.message });
-    }
-});
-
-app.patch('/api/chats/:id', async (req, res) => {
-    try {
-        // For now, just return success
-        res.json({ success: true });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
 
 // Initialize vector store
 const vectorStore = require('./utils/vectorStore');

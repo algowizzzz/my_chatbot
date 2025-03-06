@@ -79,7 +79,7 @@ router.post('/upload', upload.single('document'), async (req, res) => {
     // Process document and store in MongoDB
     const document = new Document({
       name: req.file.originalname,
-      userId: req.body.userId,
+      userId: req.body.userId || 'test-user', // Default to test-user if not provided
       type: req.file.mimetype
     });
     await document.save();
