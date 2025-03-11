@@ -1,4 +1,24 @@
+# Dependencies
 node_modules/
+
+# Environment variables and secrets
 .env
+.env.*
+.ebextensions/*_env.config
+.ebextensions/env-vars.config
+update_env.sh
+
+# System files
 .DS_Store
+
+# Test files
 backend/test_doc.txt
+backend/logs/*.log
+
+# Build files
+dist/
+build/
+
+# IDE files
+.idea/
+.vscode/
