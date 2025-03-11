@@ -1,0 +1,127 @@
+.graph-document-upload {
+  padding: 16px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.upload-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.upload-icon {
+  font-size: 32px;
+  margin-right: 16px;
+  color: #1890ff;
+}
+
+.upload-text h3 {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+}
+
+.upload-text p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.upload-area {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.upload-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.upload-progress {
+  margin-top: 16px;
+}
+
+.processing-indicator {
+  margin-top: 16px;
+  text-align: center;
+  padding: 16px;
+  background-color: #fffbe6;
+  border-radius: 4px;
+  border: 1px solid #ffe58f;
+}
+
+.processing-note {
+  color: #666;
+  font-size: 12px;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+.processing-detail {
+  font-size: 12px;
+  color: #1890ff;
+  margin-top: 8px;
+}
+
+.upload-tip {
+  margin-top: 16px;
+  padding: 12px;
+  background-color: #f6f6f6;
+  border-radius: 6px;
+  border: 1px dashed #d9d9d9;
+}
+
+.upload-tip p {
+  margin: 0 0 4px;
+  font-size: 12px;
+  color: #666;
+}
+
+.upload-tip p:last-child {
+  margin-bottom: 0;
+}
+
+/* Document Selection Styles */
+.document-selection-section,
+.upload-section {
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.document-list {
+  margin-top: 16px;
+}
+
+.document-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.selected-document-card {
+  margin-top: 16px;
+  border-left: 3px solid #1890ff;
+}
+
+.document-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.document-metadata {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.document-metadata .ant-typography {
+  font-size: 12px;
+}

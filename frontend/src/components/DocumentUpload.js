@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './DocumentUpload.css';
 
-// Add API base URL
+// Use the same API base URL as the rest of the application
 const API_BASE_URL = 'http://localhost:5005';
 
 function DocumentUpload({ onUploadSuccess }) {

@@ -1,0 +1,3 @@
+Mar  7 04:37:07 ip-172-31-39-254 crond[3136]: (CRON) INFO (RANDOM_DELAY will be scaled with factor 41% if used.)
+Mar  7 04:37:07 ip-172-31-39-254 crond[3136]: (CRON) INFO (running with inotify support)
+Mar  7 04:40:01 ip-172-31-39-254 CROND[3705]: (root) CMD (/usr/lib64/sa/sa1 1 1)

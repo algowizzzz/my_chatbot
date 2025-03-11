@@ -1,0 +1,18 @@
+This is a test document for the Graph RAG system.
+
+It contains some sample text that can be processed by the Graph RAG system.
+
+The document includes entities like:
+- OpenAI
+- Graph RAG
+- Knowledge Graph
+- Entities
+- Relationships
+
+These entities have relationships:
+- OpenAI powers Graph RAG
+- Graph RAG uses Knowledge Graph
+- Knowledge Graph contains Entities
+- Entities form Relationships
+
+This document should be processed correctly by our system and the entities and relationships should be extracted and added to the knowledge graph.

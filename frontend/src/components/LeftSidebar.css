@@ -1,0 +1,167 @@
+/* 
+ * LeftSidebar Component Styles
+ * Based on Algowizz UI specifications
+ */
+
+.sidebar {
+  width: var(--sidebar-width);
+  background-color: var(--sidebar-background);
+  height: calc(100vh - var(--header-height));
+  color: var(--text-on-dark);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Section Styles */
+.sidebar-section {
+  padding: var(--spacing-md) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.section-title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-on-dark);
+  padding: var(--spacing-xs) var(--spacing-lg);
+  margin-bottom: var(--spacing-sm);
+}
+
+.section-content {
+  padding: 0 var(--spacing-md);
+}
+
+/* Dropdown Styles */
+.dropdown-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md);
+  cursor: pointer;
+  transition: background-color var(--transition-speed);
+  border-radius: var(--border-radius);
+}
+
+.dropdown-header:hover {
+  background-color: var(--sidebar-hover);
+}
+
+.dropdown-arrow {
+  font-size: 10px;
+  transition: transform var(--transition-speed);
+}
+
+.dropdown-arrow.expanded {
+  transform: rotate(180deg);
+}
+
+.dropdown-content {
+  margin-top: var(--spacing-xs);
+  padding: var(--spacing-xs) 0;
+  background-color: var(--sidebar-background);
+}
+
+/* File Actions */
+.file-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-md);
+}
+
+/* File List */
+.file-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.file-item {
+  padding: var(--spacing-md);
+  cursor: pointer;
+  transition: background-color var(--transition-speed);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-sm);
+}
+
+.file-item:hover {
+  background-color: var(--sidebar-hover);
+}
+
+/* Sidebar Button */
+.sidebar-button {
+  display: flex;
+  align-items: center;
+  color: var(--text-on-dark) !important;
+  padding: var(--spacing-md) !important;
+  width: 100%;
+  text-align: left;
+  border-radius: var(--border-radius);
+  transition: all var(--transition-speed);
+  margin-bottom: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+}
+
+.sidebar-button:hover {
+  background-color: var(--sidebar-hover) !important;
+  color: var(--accent-color) !important;
+}
+
+.sidebar-button.active {
+  background-color: var(--sidebar-hover) !important;
+  color: var(--accent-color) !important;
+}
+
+.sidebar-button.new-chat {
+  margin-bottom: var(--spacing-md);
+}
+
+/* Chat List */
+.chat-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.chat-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md);
+  cursor: pointer;
+  transition: background-color var(--transition-speed);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-sm);
+}
+
+.chat-item:hover {
+  background-color: var(--sidebar-hover);
+}
+
+.chat-item.active {
+  background-color: var(--sidebar-hover);
+}
+
+.chat-title {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chat-actions {
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  transition: opacity var(--transition-speed);
+}
+
+.chat-item:hover .chat-actions {
+  opacity: 1;
+}
+
+.empty-state {
+  padding: var(--spacing-md);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: var(--font-size-sm);
+  text-align: center;
+}

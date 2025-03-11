@@ -1,0 +1,24 @@
+# Ignore node modules
+node_modules/
+
+# Ignore logs
+logs/
+*.log
+
+# Ignore environment variables
+.env
+
+# Ignore git files
+.git/
+.gitignore
+
+# Ignore development files
+.vscode/
+.idea/
+
+# Ignore docker-compose files to avoid conflicts
+docker-compose*.yml
+
+# DO NOT ignore these files
+!Dockerfile
+!.ebextensions/

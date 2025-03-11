@@ -1,0 +1,972 @@
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Linux version 5.10.234-225.895.amzn2.x86_64 (mockbuild@ip-10-0-46-118) (gcc10-gcc (GCC) 10.5.0 20230707 (Red Hat 10.5.0-1), GNU ld version 2.35.2-9.amzn2.0.1) #1 SMP Tue Feb 11 11:40:46 UTC 2025
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Command line: BOOT_IMAGE=/boot/vmlinuz-5.10.234-225.895.amzn2.x86_64 root=UUID=9663eaac-7028-4abd-a835-6ca258d0dc37 ro console=tty0 console=ttyS0,115200n8 net.ifnames=0 biosdevname=0 nvme_core.io_timeout=4294967295 rd.emergency=poweroff rd.shell=0
+Mar  7 04:36:58 ip-172-31-39-254 kernel: KASLR disabled
+Mar  7 04:36:58 ip-172-31-39-254 kernel: BIOS-provided physical RAM map:
+Mar  7 04:36:58 ip-172-31-39-254 kernel: BIOS-e820: [mem 0x0000000000000000-0x000000000009dfff] usable
+Mar  7 04:36:58 ip-172-31-39-254 kernel: BIOS-e820: [mem 0x000000000009e000-0x000000000009ffff] reserved
+Mar  7 04:36:58 ip-172-31-39-254 kernel: BIOS-e820: [mem 0x00000000000e0000-0x00000000000fffff] reserved
+Mar  7 04:36:58 ip-172-31-39-254 kernel: BIOS-e820: [mem 0x0000000000100000-0x000000003fffffff] usable
+Mar  7 04:36:58 ip-172-31-39-254 kernel: BIOS-e820: [mem 0x00000000fc000000-0x00000000ffffffff] reserved
+Mar  7 04:36:58 ip-172-31-39-254 kernel: NX (Execute Disable) protection: active
+Mar  7 04:36:58 ip-172-31-39-254 kernel: SMBIOS 2.7 present.
+Mar  7 04:36:58 ip-172-31-39-254 kernel: DMI: Xen HVM domU, BIOS 4.11.amazon 08/24/2006
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Hypervisor detected: Xen HVM
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Xen version 4.11.
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Netfront and the Xen platform PCI driver have been compiled for this kernel: unplug emulated NICs.
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Blkfront and the Xen platform PCI driver have been compiled for this kernel: unplug emulated disks.#012You might have to change the root device#012from /dev/hd[a-d] to /dev/xvd[a-d]#012in your root= kernel command line option
+Mar  7 04:36:58 ip-172-31-39-254 kernel: tsc: Detected 2299.998 MHz processor
+Mar  7 04:36:58 ip-172-31-39-254 kernel: last_pfn = 0x40000 max_arch_pfn = 0x400000000
+Mar  7 04:36:58 ip-172-31-39-254 kernel: x86/PAT: Configuration [0-7]: WB  WC  UC- UC  WB  WP  UC- WT  
+Mar  7 04:36:58 ip-172-31-39-254 kernel: found SMP MP-table at [mem 0x000fbb70-0x000fbb7f]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: check: Scanning 1 areas for low memory corruption
+Mar  7 04:36:58 ip-172-31-39-254 kernel: RAMDISK: [mem 0x36873000-0x37430fff]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: Early table checksum verification disabled
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: RSDP 0x00000000000EA020 000024 (v02 Xen   )
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: XSDT 0x00000000FC00A250 00005C (v01 Xen    HVM      00000000 HVML 00000000)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: FACP 0x00000000FC00A150 0000F4 (v04 Xen    HVM      00000000 HVML 00000000)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: DSDT 0x00000000FC001000 008A79 (v02 Xen    HVM      00000000 INTL 20090123)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: FACS 0x00000000FC00A050 000040
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: FACS 0x00000000FC00A050 000040
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: SSDT 0x00000000FC009A80 000033 (v02 Xen    HVM      00000000 INTL 20090123)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: SSDT 0x00000000FC009AC0 000031 (v02 Xen    HVM      00000000 INTL 20090123)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: APIC 0x00000000FC009B00 0000D8 (v02 Xen    HVM      00000000 HVML 00000000)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: HPET 0x00000000FC009FE0 000038 (v01 Xen    HVM      00000000 HVML 00000000)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: WAET 0x00000000FC00A020 000028 (v01 Xen    HVM      00000000 HVML 00000000)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: Reserving FACP table memory at [mem 0xfc00a150-0xfc00a243]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: Reserving DSDT table memory at [mem 0xfc001000-0xfc009a78]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: Reserving FACS table memory at [mem 0xfc00a050-0xfc00a08f]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: Reserving FACS table memory at [mem 0xfc00a050-0xfc00a08f]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: Reserving SSDT table memory at [mem 0xfc009a80-0xfc009ab2]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: Reserving SSDT table memory at [mem 0xfc009ac0-0xfc009af0]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: Reserving APIC table memory at [mem 0xfc009b00-0xfc009bd7]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: Reserving HPET table memory at [mem 0xfc009fe0-0xfc00a017]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: Reserving WAET table memory at [mem 0xfc00a020-0xfc00a047]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: No NUMA configuration found
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Faking a node at [mem 0x0000000000000000-0x000000003fffffff]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: NODE_DATA(0) allocated [mem 0x3ffde000-0x3fffffff]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Zone ranges:
+Mar  7 04:36:58 ip-172-31-39-254 kernel:  DMA      [mem 0x0000000000001000-0x0000000000ffffff]
+Mar  7 04:36:58 ip-172-31-39-254 kernel:  DMA32    [mem 0x0000000001000000-0x000000003fffffff]
+Mar  7 04:36:58 ip-172-31-39-254 kernel:  Normal   empty
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Movable zone start for each node
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Early memory node ranges
+Mar  7 04:36:58 ip-172-31-39-254 kernel:  node   0: [mem 0x0000000000001000-0x000000000009dfff]
+Mar  7 04:36:58 ip-172-31-39-254 kernel:  node   0: [mem 0x0000000000100000-0x000000003fffffff]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Initmem setup node 0 [mem 0x0000000000001000-0x000000003fffffff]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: On node 0, zone DMA: 1 pages in unavailable ranges
+Mar  7 04:36:58 ip-172-31-39-254 kernel: On node 0, zone DMA: 98 pages in unavailable ranges
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: PM-Timer IO Port: 0xb008
+Mar  7 04:36:58 ip-172-31-39-254 kernel: IOAPIC[0]: apic_id 1, version 17, address 0xfec00000, GSI 0-47
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 dfl dfl)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 5 global_irq 5 low level)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 10 global_irq 10 low level)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 11 global_irq 11 low level)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Using ACPI (MADT) for SMP configuration information
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: HPET id: 0x8086a201 base: 0xfed00000
+Mar  7 04:36:58 ip-172-31-39-254 kernel: TSC deadline timer available
+Mar  7 04:36:58 ip-172-31-39-254 kernel: smpboot: Allowing 15 CPUs, 14 hotplug CPUs
+Mar  7 04:36:58 ip-172-31-39-254 kernel: PM: hibernation: Registered nosave memory: [mem 0x00000000-0x00000fff]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: PM: hibernation: Registered nosave memory: [mem 0x0009e000-0x0009ffff]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: PM: hibernation: Registered nosave memory: [mem 0x000a0000-0x000dffff]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: PM: hibernation: Registered nosave memory: [mem 0x000e0000-0x000fffff]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: [mem 0x40000000-0xfbffffff] available for PCI devices
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Booting paravirtualized kernel on Xen HVM
+Mar  7 04:36:58 ip-172-31-39-254 kernel: clocksource: refined-jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645519600211568 ns
+Mar  7 04:36:58 ip-172-31-39-254 kernel: setup_percpu: NR_CPUS:8192 nr_cpumask_bits:15 nr_cpu_ids:15 nr_node_ids:1
+Mar  7 04:36:58 ip-172-31-39-254 kernel: percpu: Embedded 62 pages/cpu s217088 r8192 d28672 u262144
+Mar  7 04:36:58 ip-172-31-39-254 kernel: PV qspinlock hash table entries: 256 (order: 0, 4096 bytes, linear)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Built 1 zonelists, mobility grouping on.  Total pages: 257928
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Policy zone: DMA32
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Kernel command line: BOOT_IMAGE=/boot/vmlinuz-5.10.234-225.895.amzn2.x86_64 root=UUID=9663eaac-7028-4abd-a835-6ca258d0dc37 ro console=tty0 console=ttyS0,115200n8 net.ifnames=0 biosdevname=0 nvme_core.io_timeout=4294967295 rd.emergency=poweroff rd.shell=0
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Fallback order for Node 0: 0 
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Dentry cache hash table entries: 131072 (order: 8, 1048576 bytes, linear)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Inode-cache hash table entries: 65536 (order: 7, 524288 bytes, linear)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: mem auto-init: stack:off, heap alloc:off, heap free:off
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Memory: 204012K/1048180K available (12300K kernel code, 9446K rwdata, 8064K rodata, 2464K init, 18744K bss, 91340K reserved, 0K cma-reserved)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=15, Nodes=1
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Kernel/User page tables isolation: enabled
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ftrace: allocating 40184 entries in 157 pages
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ftrace: allocated 157 pages with 5 groups
+Mar  7 04:36:58 ip-172-31-39-254 kernel: rcu: Hierarchical RCU implementation.
+Mar  7 04:36:58 ip-172-31-39-254 kernel: rcu: #011RCU restricting CPUs from NR_CPUS=8192 to nr_cpu_ids=15.
+Mar  7 04:36:58 ip-172-31-39-254 kernel: #011Rude variant of Tasks RCU enabled.
+Mar  7 04:36:58 ip-172-31-39-254 kernel: #011Tracing variant of Tasks RCU enabled.
+Mar  7 04:36:58 ip-172-31-39-254 kernel: rcu: RCU calculated value of scheduler-enlistment delay is 25 jiffies.
+Mar  7 04:36:58 ip-172-31-39-254 kernel: rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=15
+Mar  7 04:36:58 ip-172-31-39-254 kernel: NR_IRQS: 524544, nr_irqs: 952, preallocated irqs: 16
+Mar  7 04:36:58 ip-172-31-39-254 kernel: xen:events: Using 2-level ABI
+Mar  7 04:36:58 ip-172-31-39-254 kernel: xen:events: Xen HVM callback vector for event delivery is enabled
+Mar  7 04:36:58 ip-172-31-39-254 kernel: random: crng init done
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Console: colour VGA+ 80x25
+Mar  7 04:36:58 ip-172-31-39-254 kernel: printk: console [tty0] enabled
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Cannot get hvm parameter CONSOLE_EVTCHN (18): -22!
+Mar  7 04:36:58 ip-172-31-39-254 kernel: printk: console [ttyS0] enabled
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: Core revision 20200925
+Mar  7 04:36:58 ip-172-31-39-254 kernel: clocksource: hpet: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 30580167144 ns
+Mar  7 04:36:58 ip-172-31-39-254 kernel: APIC: Switch to symmetric I/O mode setup
+Mar  7 04:36:58 ip-172-31-39-254 kernel: x2apic: IRQ remapping doesn't support X2APIC mode
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Switched APIC routing to physical flat.
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ..TIMER: vector=0x30 apic1=0 pin1=2 apic2=0 pin2=0
+Mar  7 04:36:58 ip-172-31-39-254 kernel: clocksource: tsc-early: mask: 0xffffffffffffffff max_cycles: 0x212733415c7, max_idle_ns: 440795236380 ns
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Calibrating delay loop (skipped), value calculated using timer frequency.. 4599.99 BogoMIPS (lpj=9199992)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Last level iTLB entries: 4KB 64, 2MB 8, 4MB 8
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Last level dTLB entries: 4KB 64, 2MB 0, 4MB 0, 1GB 4
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Spectre V1 : Mitigation: usercopy/swapgs barriers and __user pointer sanitization
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Spectre V2 : Mitigation: Retpolines
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Spectre V2 : Spectre v2 / SpectreRSB mitigation: Filling RSB on context switch
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Spectre V2 : Spectre v2 / SpectreRSB : Filling RSB on VMEXIT
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Speculative Store Bypass: Vulnerable
+Mar  7 04:36:58 ip-172-31-39-254 kernel: MDS: Vulnerable: Clear CPU buffers attempted, no microcode
+Mar  7 04:36:58 ip-172-31-39-254 kernel: MMIO Stale Data: Vulnerable: Clear CPU buffers attempted, no microcode
+Mar  7 04:36:58 ip-172-31-39-254 kernel: x86/fpu: Supporting XSAVE feature 0x001: 'x87 floating point registers'
+Mar  7 04:36:58 ip-172-31-39-254 kernel: x86/fpu: Supporting XSAVE feature 0x002: 'SSE registers'
+Mar  7 04:36:58 ip-172-31-39-254 kernel: x86/fpu: Supporting XSAVE feature 0x004: 'AVX registers'
+Mar  7 04:36:58 ip-172-31-39-254 kernel: x86/fpu: xstate_offset[2]:  576, xstate_sizes[2]:  256
+Mar  7 04:36:58 ip-172-31-39-254 kernel: x86/fpu: Enabled xstate features 0x7, context size is 832 bytes, using 'standard' format.
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pid_max: default: 32768 minimum: 301
+Mar  7 04:36:58 ip-172-31-39-254 kernel: LSM: Security Framework initializing
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Yama: becoming mindful.
+Mar  7 04:36:58 ip-172-31-39-254 kernel: SELinux:  Initializing.
+Mar  7 04:36:58 ip-172-31-39-254 kernel: LSM support for eBPF active
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Mount-cache hash table entries: 2048 (order: 2, 16384 bytes, linear)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Mountpoint-cache hash table entries: 2048 (order: 2, 16384 bytes, linear)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: clocksource: xen: mask: 0xffffffffffffffff max_cycles: 0x1cd42e4dffb, max_idle_ns: 881590591483 ns
+Mar  7 04:36:58 ip-172-31-39-254 kernel: installing Xen timer for CPU 0
+Mar  7 04:36:58 ip-172-31-39-254 kernel: smpboot: CPU0: Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz (family: 0x6, model: 0x4f, stepping: 0x1)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: cpu 0 spinlock event irq 53
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Performance Events: unsupported p6 CPU model 79 no PMU driver, software events only.
+Mar  7 04:36:58 ip-172-31-39-254 kernel: rcu: Hierarchical SRCU implementation.
+Mar  7 04:36:58 ip-172-31-39-254 kernel: NMI watchdog: Perf NMI watchdog permanently disabled
+Mar  7 04:36:58 ip-172-31-39-254 kernel: smp: Bringing up secondary CPUs ...
+Mar  7 04:36:58 ip-172-31-39-254 kernel: smp: Brought up 1 node, 1 CPU
+Mar  7 04:36:58 ip-172-31-39-254 kernel: smpboot: Max logical packages: 15
+Mar  7 04:36:58 ip-172-31-39-254 kernel: smpboot: Total of 1 processors activated (4599.99 BogoMIPS)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: node 0 deferred pages initialised in 0ms
+Mar  7 04:36:58 ip-172-31-39-254 kernel: devtmpfs: initialized
+Mar  7 04:36:58 ip-172-31-39-254 kernel: x86/mm: Memory block size: 128MB
+Mar  7 04:36:58 ip-172-31-39-254 kernel: clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+Mar  7 04:36:58 ip-172-31-39-254 kernel: futex hash table entries: 4096 (order: 6, 262144 bytes, linear)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: NET: Registered protocol family 16
+Mar  7 04:36:58 ip-172-31-39-254 kernel: DMA: preallocated 128 KiB GFP_KERNEL pool for atomic allocations
+Mar  7 04:36:58 ip-172-31-39-254 kernel: DMA: preallocated 128 KiB GFP_KERNEL|GFP_DMA pool for atomic allocations
+Mar  7 04:36:58 ip-172-31-39-254 kernel: DMA: preallocated 128 KiB GFP_KERNEL|GFP_DMA32 pool for atomic allocations
+Mar  7 04:36:58 ip-172-31-39-254 kernel: audit: initializing netlink subsys (disabled)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: thermal_sys: Registered thermal governor 'fair_share'
+Mar  7 04:36:58 ip-172-31-39-254 kernel: thermal_sys: Registered thermal governor 'step_wise'
+Mar  7 04:36:58 ip-172-31-39-254 kernel: thermal_sys: Registered thermal governor 'user_space'
+Mar  7 04:36:58 ip-172-31-39-254 kernel: cpuidle: using governor ladder
+Mar  7 04:36:58 ip-172-31-39-254 kernel: cpuidle: using governor menu
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: bus type PCI registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: ACPI Hot Plug PCI Controller Driver version: 0.5
+Mar  7 04:36:58 ip-172-31-39-254 kernel: PCI: Using configuration type 1 for base access
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Kprobes globally optimized
+Mar  7 04:36:58 ip-172-31-39-254 kernel: audit: type=2000 audit(1741322218.742:1): state=initialized audit_enabled=0 res=1
+Mar  7 04:36:58 ip-172-31-39-254 kernel: HugeTLB registered 2.00 MiB page size, pre-allocated 0 pages
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: Added _OSI(Module Device)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: Added _OSI(Processor Device)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: Added _OSI(3.0 _SCP Extensions)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: Added _OSI(Processor Aggregator Device)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: Added _OSI(Linux-Dell-Video)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: Added _OSI(Linux-Lenovo-NV-HDMI-Audio)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: Added _OSI(Linux-HPI-Hybrid-Graphics)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: 3 ACPI AML tables successfully acquired and loaded
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: Interpreter enabled
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: (supports S0 S4 S5)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: Using IOAPIC for interrupt routing
+Mar  7 04:36:58 ip-172-31-39-254 kernel: PCI: Using host bridge windows from ACPI; if necessary, use "pci=nocrs" and report a bug
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: Enabled 2 GPEs in block 00 to 0F
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: PCI Root Bridge [PCI0] (domain 0000 [bus 00-ff])
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpi PNP0A03:00: _OSC: OS supports [ASPM ClockPM Segments MSI HPX-Type3]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpi PNP0A03:00: fail to add MMCONFIG information, can't access extended PCI configuration space under this bridge.
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [0] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [3] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [4] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [5] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [6] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [7] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [8] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [9] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [10] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [11] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [12] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [13] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [14] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [15] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [16] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [17] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [18] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [19] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [20] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [21] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [22] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [23] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [24] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [25] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [26] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [27] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [28] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [29] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [30] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: acpiphp: Slot [31] registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: PCI host bridge to bus 0000:00
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci_bus 0000:00: root bus resource [io  0x0000-0x0cf7 window]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci_bus 0000:00: root bus resource [io  0x0d00-0xffff window]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci_bus 0000:00: root bus resource [mem 0x000a0000-0x000bffff window]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci_bus 0000:00: root bus resource [mem 0x40000000-0xffffffff window]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci_bus 0000:00: root bus resource [bus 00-ff]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci 0000:00:00.0: [8086:1237] type 00 class 0x060000
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci 0000:00:01.0: [8086:7000] type 00 class 0x060100
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci 0000:00:01.1: [8086:7010] type 00 class 0x010180
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci 0000:00:01.1: reg 0x20: [io  0xc000-0xc00f]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci 0000:00:01.1: legacy IDE quirk: reg 0x10: [io  0x01f0-0x01f7]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci 0000:00:01.1: legacy IDE quirk: reg 0x14: [io  0x03f6]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci 0000:00:01.1: legacy IDE quirk: reg 0x18: [io  0x0170-0x0177]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci 0000:00:01.1: legacy IDE quirk: reg 0x1c: [io  0x0376]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: * Found PM-Timer Bug on the chipset. Due to workarounds for a bug,#012* this clock source is slow. Consider trying other clock sources
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci 0000:00:01.3: [8086:7113] type 00 class 0x068000
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci 0000:00:01.3: quirk: [io  0xb000-0xb03f] claimed by PIIX4 ACPI
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci 0000:00:02.0: [1013:00b8] type 00 class 0x030000
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci 0000:00:02.0: reg 0x10: [mem 0xf8000000-0xf9ffffff pref]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci 0000:00:02.0: reg 0x14: [mem 0xfbfff000-0xfbffffff]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci 0000:00:03.0: [5853:0001] type 00 class 0xff8000
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci 0000:00:03.0: reg 0x10: [io  0xc100-0xc1ff]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci 0000:00:03.0: reg 0x14: [mem 0xfa000000-0xfaffffff pref]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: PCI Interrupt Link [LNKA] (IRQs *5 10 11)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: PCI Interrupt Link [LNKB] (IRQs 5 *10 11)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: PCI Interrupt Link [LNKC] (IRQs 5 10 *11)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ACPI: PCI Interrupt Link [LNKD] (IRQs *5 10 11)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: xen:balloon: Initialising balloon driver
+Mar  7 04:36:58 ip-172-31-39-254 kernel: iommu: Default domain type: Translated 
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci 0000:00:02.0: vgaarb: setting as boot VGA device
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci 0000:00:02.0: vgaarb: VGA device added: decodes=io+mem,owns=io+mem,locks=none
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci 0000:00:02.0: vgaarb: bridge control possible
+Mar  7 04:36:58 ip-172-31-39-254 kernel: vgaarb: loaded
+Mar  7 04:36:58 ip-172-31-39-254 kernel: EDAC MC: Ver: 3.0.0
+Mar  7 04:36:58 ip-172-31-39-254 kernel: NetLabel: Initializing
+Mar  7 04:36:58 ip-172-31-39-254 kernel: NetLabel:  domain hash size = 128
+Mar  7 04:36:58 ip-172-31-39-254 kernel: NetLabel:  protocols = UNLABELED CIPSOv4 CALIPSO
+Mar  7 04:36:58 ip-172-31-39-254 kernel: NetLabel:  unlabeled traffic allowed by default
+Mar  7 04:36:58 ip-172-31-39-254 kernel: PCI: Using ACPI for IRQ routing
+Mar  7 04:36:58 ip-172-31-39-254 kernel: hpet: 3 channels of 0 reserved for per-cpu timers
+Mar  7 04:36:58 ip-172-31-39-254 kernel: hpet0: at MMIO 0xfed00000, IRQs 2, 8, 0
+Mar  7 04:36:58 ip-172-31-39-254 kernel: hpet0: 3 comparators, 64-bit 62.500000 MHz counter
+Mar  7 04:36:58 ip-172-31-39-254 kernel: clocksource: Switched to clocksource xen
+Mar  7 04:36:58 ip-172-31-39-254 kernel: VFS: Disk quotas dquot_6.6.0
+Mar  7 04:36:58 ip-172-31-39-254 kernel: VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pnp: PnP ACPI init
+Mar  7 04:36:58 ip-172-31-39-254 kernel: system 00:00: [mem 0x00000000-0x0009ffff] could not be reserved
+Mar  7 04:36:58 ip-172-31-39-254 kernel: system 00:01: [io  0x08a0-0x08a3] has been reserved
+Mar  7 04:36:58 ip-172-31-39-254 kernel: system 00:01: [io  0x0cc0-0x0ccf] has been reserved
+Mar  7 04:36:58 ip-172-31-39-254 kernel: system 00:01: [io  0x04d0-0x04d1] has been reserved
+Mar  7 04:36:58 ip-172-31-39-254 kernel: system 00:07: [io  0x10c0-0x1141] has been reserved
+Mar  7 04:36:58 ip-172-31-39-254 kernel: system 00:07: [io  0xb044-0xb047] has been reserved
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pnp: PnP ACPI: found 8 devices
+Mar  7 04:36:58 ip-172-31-39-254 kernel: clocksource: acpi_pm: mask: 0xffffff max_cycles: 0xffffff, max_idle_ns: 2085701024 ns
+Mar  7 04:36:58 ip-172-31-39-254 kernel: NET: Registered protocol family 2
+Mar  7 04:36:58 ip-172-31-39-254 kernel: IP idents hash table entries: 16384 (order: 5, 131072 bytes, linear)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: tcp_listen_portaddr_hash hash table entries: 512 (order: 1, 8192 bytes, linear)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: TCP established hash table entries: 8192 (order: 4, 65536 bytes, linear)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: TCP bind hash table entries: 8192 (order: 5, 131072 bytes, linear)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: TCP: Hash tables configured (established 8192 bind 8192)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: MPTCP token hash table entries: 1024 (order: 2, 24576 bytes, linear)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: UDP hash table entries: 512 (order: 2, 16384 bytes, linear)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: UDP-Lite hash table entries: 512 (order: 2, 16384 bytes, linear)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: NET: Registered protocol family 1
+Mar  7 04:36:58 ip-172-31-39-254 kernel: NET: Registered protocol family 44
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci_bus 0000:00: resource 4 [io  0x0000-0x0cf7 window]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci_bus 0000:00: resource 5 [io  0x0d00-0xffff window]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci_bus 0000:00: resource 6 [mem 0x000a0000-0x000bffff window]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci_bus 0000:00: resource 7 [mem 0x40000000-0xffffffff window]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci 0000:00:01.0: PIIX3: Enabling Passive Release
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci 0000:00:00.0: Limiting direct PCI/PCI transfers
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci 0000:00:01.0: Activating ISA DMA hang workarounds
+Mar  7 04:36:58 ip-172-31-39-254 kernel: pci 0000:00:02.0: Video device with shadowed ROM at [mem 0x000c0000-0x000dffff]
+Mar  7 04:36:58 ip-172-31-39-254 kernel: PCI: CLS 0 bytes, default 64
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Trying to unpack rootfs image as initramfs...
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Freeing initrd memory: 12024K
+Mar  7 04:36:58 ip-172-31-39-254 kernel: clocksource: tsc: mask: 0xffffffffffffffff max_cycles: 0x212733415c7, max_idle_ns: 440795236380 ns
+Mar  7 04:36:58 ip-172-31-39-254 kernel: check: Scanning for low memory corruption every 60 seconds
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Initialise system trusted keyrings
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Key type blacklist registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: workingset: timestamp_bits=36 max_order=18 bucket_order=0
+Mar  7 04:36:58 ip-172-31-39-254 kernel: zbud: loaded
+Mar  7 04:36:58 ip-172-31-39-254 kernel: SGI XFS with ACLs, security attributes, quota, no debug enabled
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Key type asymmetric registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Asymmetric key parser 'x509' registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Block layer SCSI generic (bsg) driver version 0.4 loaded (major 251)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: io scheduler mq-deadline registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: io scheduler kyber registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: io scheduler bfq registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: shpchp: Standard Hot Plug PCI Controller Driver version: 0.4
+Mar  7 04:36:58 ip-172-31-39-254 kernel: xen:grant_table: Grant tables using version 1 layout
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Grant table initialized
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Cannot get hvm parameter CONSOLE_EVTCHN (18): -22!
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Serial: 8250/16550 driver, 4 ports, IRQ sharing disabled
+Mar  7 04:36:58 ip-172-31-39-254 kernel: 00:06: ttyS0 at I/O 0x3f8 (irq = 4, base_baud = 115200) is a 16550A
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Invalid max_queues (4), will use default max: 1.
+Mar  7 04:36:58 ip-172-31-39-254 kernel: blkfront: xvda: barrier or flush: disabled; persistent grants: disabled; indirect descriptors: enabled; bounce buffer: disabled;
+Mar  7 04:36:58 ip-172-31-39-254 kernel: xen_netfront: Initialising Xen virtual ethernet driver
+Mar  7 04:36:58 ip-172-31-39-254 kernel: i8042: PNP: PS/2 Controller [PNP0303:PS2K,PNP0f13:PS2M] at 0x60,0x64 irq 1,12
+Mar  7 04:36:58 ip-172-31-39-254 kernel: i8042: Warning: Keylock active
+Mar  7 04:36:58 ip-172-31-39-254 kernel: serio: i8042 KBD port at 0x60,0x64 irq 1
+Mar  7 04:36:58 ip-172-31-39-254 kernel: serio: i8042 AUX port at 0x60,0x64 irq 12
+Mar  7 04:36:58 ip-172-31-39-254 kernel: rtc_cmos 00:02: registered as rtc0
+Mar  7 04:36:58 ip-172-31-39-254 kernel: rtc_cmos 00:02: setting system clock to 2025-03-07T04:36:58 UTC (1741322218)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: rtc_cmos 00:02: alarms up to one day, 114 bytes nvram, hpet irqs
+Mar  7 04:36:58 ip-172-31-39-254 kernel: intel_pstate: CPU model not supported
+Mar  7 04:36:58 ip-172-31-39-254 kernel: hid: raw HID events driver (C) Jiri Kosina
+Mar  7 04:36:58 ip-172-31-39-254 kernel: NET: Registered protocol family 10
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Segment Routing with IPv6
+Mar  7 04:36:58 ip-172-31-39-254 kernel: NET: Registered protocol family 17
+Mar  7 04:36:58 ip-172-31-39-254 kernel: IPI shorthand broadcast: enabled
+Mar  7 04:36:58 ip-172-31-39-254 kernel: sched_clock: Marking stable (649192797, 230218853)->(940669910, -61258260)
+Mar  7 04:36:58 ip-172-31-39-254 kernel: registered taskstats version 1
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Loading compiled-in X.509 certificates
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Loaded X.509 cert 'Build time autogenerated kernel key: 9aa22247b6ccb075c4247eca15ea48b198604241'
+Mar  7 04:36:58 ip-172-31-39-254 kernel: zswap: loaded using pool lzo/zbud
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Key type .fscrypt registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Key type fscrypt-provisioning registered
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ima: No TPM chip found, activating TPM-bypass!
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ima: Allocated hash algorithm: sha1
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ima: No architecture policies found
+Mar  7 04:36:58 ip-172-31-39-254 kernel: xvda: xvda1
+Mar  7 04:36:58 ip-172-31-39-254 kernel: clk: Disabling unused clocks
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Freeing unused decrypted memory: 2036K
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Freeing unused kernel image (initmem) memory: 2464K
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Write protecting the kernel read-only data: 22528k
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Freeing unused kernel image (text/rodata gap) memory: 2032K
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Freeing unused kernel image (rodata/data gap) memory: 128K
+Mar  7 04:36:58 ip-172-31-39-254 kernel: Run /init as init process
+Mar  7 04:36:58 ip-172-31-39-254 systemd[1]: systemd 219 running in system mode. (+PAM +AUDIT +SELINUX +IMA -APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ +LZ4 -SECCOMP +BLKID +ELFUTILS +KMOD +IDN)
+Mar  7 04:36:58 ip-172-31-39-254 systemd[1]: Detected virtualization xen.
+Mar  7 04:36:58 ip-172-31-39-254 systemd[1]: Detected architecture x86-64.
+Mar  7 04:36:58 ip-172-31-39-254 systemd[1]: Running in initial RAM disk.
+Mar  7 04:36:58 ip-172-31-39-254 systemd[1]: No hostname configured.
+Mar  7 04:36:58 ip-172-31-39-254 systemd[1]: Set hostname to <localhost>.
+Mar  7 04:36:58 ip-172-31-39-254 systemd[1]: Initializing machine ID from random generator.
+Mar  7 04:36:58 ip-172-31-39-254 systemd[1]: Reached target Local File Systems.
+Mar  7 04:36:58 ip-172-31-39-254 systemd[1]: Reached target Swap.
+Mar  7 04:36:58 ip-172-31-39-254 systemd[1]: Started Dispatch Password Requests to Console Directory Watch.
+Mar  7 04:36:58 ip-172-31-39-254 journal: Journal started
+Mar  7 04:36:58 ip-172-31-39-254 systemd-udevd: starting version 219
+Mar  7 04:36:58 ip-172-31-39-254 systemd-udevd: Network interface NamePolicy= disabled on kernel command line, ignoring.
+Mar  7 04:36:58 ip-172-31-39-254 systemd: Starting dracut pre-trigger hook...
+Mar  7 04:36:58 ip-172-31-39-254 systemd: Started dracut pre-trigger hook.
+Mar  7 04:36:58 ip-172-31-39-254 systemd: Starting udev Coldplug all Devices...
+Mar  7 04:36:58 ip-172-31-39-254 systemd-udevd: Network interface NamePolicy= disabled on kernel command line, ignoring.
+Mar  7 04:36:58 ip-172-31-39-254 systemd: Started udev Coldplug all Devices.
+Mar  7 04:36:58 ip-172-31-39-254 systemd: Reached target System Initialization.
+Mar  7 04:36:58 ip-172-31-39-254 systemd: Reached target Basic System.
+Mar  7 04:36:58 ip-172-31-39-254 systemd: Starting dracut initqueue hook...
+Mar  7 04:36:58 ip-172-31-39-254 kernel: SCSI subsystem initialized
+Mar  7 04:36:58 ip-172-31-39-254 kernel: scsi host0: ata_piix
+Mar  7 04:36:58 ip-172-31-39-254 kernel: scsi host1: ata_piix
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ata1: PATA max MWDMA2 cmd 0x1f0 ctl 0x3f6 bmdma 0xc000 irq 14
+Mar  7 04:36:58 ip-172-31-39-254 kernel: ata2: PATA max MWDMA2 cmd 0x170 ctl 0x376 bmdma 0xc008 irq 15
+Mar  7 04:36:59 ip-172-31-39-254 kernel: input: AT Translated Set 2 keyboard as /devices/platform/i8042/serio0/input/input0
+Mar  7 04:36:59 ip-172-31-39-254 systemd: Found device /dev/disk/by-uuid/9663eaac-7028-4abd-a835-6ca258d0dc37.
+Mar  7 04:36:59 ip-172-31-39-254 systemd: Starting File System Check on /dev/disk/by-uuid/9663eaac-7028-4abd-a835-6ca258d0dc37...
+Mar  7 04:36:59 ip-172-31-39-254 systemd-fsck: fsck.xfs doesn't exist, not checking file system on /dev/disk/by-uuid/9663eaac-7028-4abd-a835-6ca258d0dc37
+Mar  7 04:36:59 ip-172-31-39-254 systemd: Started File System Check on /dev/disk/by-uuid/9663eaac-7028-4abd-a835-6ca258d0dc37.
+Mar  7 04:36:59 ip-172-31-39-254 systemd: Started dracut initqueue hook.
+Mar  7 04:36:59 ip-172-31-39-254 systemd: Reached target Remote File Systems (Pre).
+Mar  7 04:36:59 ip-172-31-39-254 systemd: Reached target Remote File Systems.
+Mar  7 04:36:59 ip-172-31-39-254 systemd: Mounting /sysroot...
+Mar  7 04:36:59 ip-172-31-39-254 kernel: XFS (xvda1): Mounting V5 Filesystem
+Mar  7 04:37:01 ip-172-31-39-254 kernel: XFS (xvda1): Ending clean mount
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Mounted /sysroot.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Reached target Initrd Root File System.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Starting Reload Configuration from the Real Root...
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Reloading.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Started Reload Configuration from the Real Root.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Reached target Initrd File Systems.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Reached target Initrd Default Target.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Starting dracut pre-pivot and cleanup hook...
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Started dracut pre-pivot and cleanup hook.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Starting Cleaning Up and Shutting Down Daemons...
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Stopped target Timers.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Stopped dracut pre-pivot and cleanup hook.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Stopped target Remote File Systems.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Stopped target Initrd Default Target.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Stopped target Remote File Systems (Pre).
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Stopped dracut initqueue hook.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Stopped target Basic System.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Stopped target Slices.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Stopped target Paths.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Stopped target Sockets.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Stopped target System Initialization.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Stopped udev Coldplug all Devices.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Stopped dracut pre-trigger hook.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Stopping udev Kernel Device Manager...
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Stopped Apply Kernel Variables.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Stopped target Swap.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Stopped target Local File Systems.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Stopped Dispatch Password Requests to Console Directory Watch.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Stopped udev Kernel Device Manager.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Started Cleaning Up and Shutting Down Daemons.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Stopped Create Static Device Nodes in /dev.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Stopped Create list of required static device nodes for the current kernel.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Closed udev Kernel Socket.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Closed udev Control Socket.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Starting Cleanup udevd DB...
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Started Cleanup udevd DB.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Reached target Switch Root.
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Starting Switch Root...
+Mar  7 04:37:01 ip-172-31-39-254 systemd: Switching root.
+Mar  7 04:37:01 ip-172-31-39-254 journal: Journal stopped
+Mar  7 04:37:02 ip-172-31-39-254 journal: Runtime journal is using 5.9M (max allowed 47.6M, trying to leave 71.4M free of 464.3M available → current limit 47.6M).
+Mar  7 04:37:02 ip-172-31-39-254 systemd-journald[1025]: Received SIGTERM from PID 1 (systemd).
+Mar  7 04:37:02 ip-172-31-39-254 kernel: printk: systemd: 19 output lines suppressed due to ratelimiting
+Mar  7 04:37:02 ip-172-31-39-254 kernel: SELinux:  Runtime disable is deprecated, use selinux=0 on the kernel cmdline.
+Mar  7 04:37:02 ip-172-31-39-254 kernel: SELinux:  Disabled at runtime.
+Mar  7 04:37:02 ip-172-31-39-254 kernel: audit: type=1404 audit(1741322222.032:2): enforcing=0 old_enforcing=0 auid=4294967295 ses=4294967295 enabled=0 old-enabled=1 lsm=selinux res=1
+Mar  7 04:37:02 ip-172-31-39-254 kernel: xfs filesystem being remounted at / supports timestamps until 2038-01-19 (0x7fffffff)
+Mar  7 04:37:02 ip-172-31-39-254 journal: Journal started
+Mar  7 04:37:02 ip-172-31-39-254 systemd: systemd 219 running in system mode. (+PAM +AUDIT +SELINUX +IMA -APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ +LZ4 -SECCOMP +BLKID +ELFUTILS +KMOD +IDN)
+Mar  7 04:37:02 ip-172-31-39-254 systemd: Detected virtualization xen.
+Mar  7 04:37:02 ip-172-31-39-254 systemd: Detected architecture x86-64.
+Mar  7 04:37:02 ip-172-31-39-254 systemd: Set hostname to <ip-172-31-7-22.ec2.internal>.
+Mar  7 04:37:02 ip-172-31-39-254 systemd: Cannot add dependency job for unit display-manager.service, ignoring: Unit not found.
+Mar  7 04:37:02 ip-172-31-39-254 systemd: Started Read and set NIS domainname from /etc/sysconfig/network.
+Mar  7 04:37:02 ip-172-31-39-254 systemd: Starting Flush Journal to Persistent Storage...
+Mar  7 04:37:02 ip-172-31-39-254 systemd: Started LVM2 metadata daemon.
+Mar  7 04:37:02 ip-172-31-39-254 systemd: Started Relabel kernel modules early in the boot, if needed.
+Mar  7 04:37:02 ip-172-31-39-254 systemd: Starting Load Kernel Modules...
+Mar  7 04:37:02 ip-172-31-39-254 systemd: Started udev Coldplug all Devices.
+Mar  7 04:37:02 ip-172-31-39-254 systemd: Starting udev Wait for Complete Device Initialization...
+Mar  7 04:37:02 ip-172-31-39-254 systemd: Started Configure read-only root support.
+Mar  7 04:37:02 ip-172-31-39-254 systemd: Starting Load/Save Random Seed...
+Mar  7 04:37:02 ip-172-31-39-254 systemd: Started Flush Journal to Persistent Storage.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Started Load/Save Random Seed.
+Mar  7 04:37:03 ip-172-31-39-254 kernel: pps_core: LinuxPPS API ver. 1 registered
+Mar  7 04:37:03 ip-172-31-39-254 kernel: pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+Mar  7 04:37:03 ip-172-31-39-254 kernel: PTP clock support registered
+Mar  7 04:37:03 ip-172-31-39-254 systemd-modules-load: Inserted module 'ena'
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Started Load Kernel Modules.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Starting Apply Kernel Variables...
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Started Create Static Device Nodes in /dev.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Starting udev Kernel Device Manager...
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Started Apply Kernel Variables.
+Mar  7 04:37:03 ip-172-31-39-254 systemd-udevd: starting version 219
+Mar  7 04:37:03 ip-172-31-39-254 systemd-udevd: Network interface NamePolicy= disabled on kernel command line, ignoring.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Started udev Kernel Device Manager.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Starting Show Plymouth Boot Screen...
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Found device /dev/ttyS0.
+Mar  7 04:37:03 ip-172-31-39-254 kernel: input: Power Button as /devices/LNXSYSTM:00/LNXPWRBN:00/input/input4
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Received SIGRTMIN+20 from PID 2466 (plymouthd).
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Started Show Plymouth Boot Screen.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Started Forward Password Requests to Plymouth Directory Watch.
+Mar  7 04:37:03 ip-172-31-39-254 kernel: input: ImPS/2 Generic Wheel Mouse as /devices/platform/i8042/serio1/input/input3
+Mar  7 04:37:03 ip-172-31-39-254 kernel: ACPI: Power Button [PWRF]
+Mar  7 04:37:03 ip-172-31-39-254 kernel: input: Sleep Button as /devices/LNXSYSTM:00/LNXSLPBN:00/input/input5
+Mar  7 04:37:03 ip-172-31-39-254 kernel: ACPI: Sleep Button [SLPF]
+Mar  7 04:37:03 ip-172-31-39-254 kernel: mousedev: PS/2 mouse device common for all mice
+Mar  7 04:37:03 ip-172-31-39-254 kernel: cryptd: max_cpu_qlen set to 1000
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Created slice system-ec2net\x2difup.slice.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Starting Relabel kernel modules early in the boot, if needed...
+Mar  7 04:37:03 ip-172-31-39-254 kernel: AVX2 version of gcm_enc/dec engaged.
+Mar  7 04:37:03 ip-172-31-39-254 kernel: AES CTR mode by8 optimization enabled
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Found device /sys/subsystem/net/devices/eth0.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Started Relabel kernel modules early in the boot, if needed.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Started udev Wait for Complete Device Initialization.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Starting Activation of DM RAID sets...
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Started Monitoring of LVM2 mirrors, snapshots etc. using dmeventd or progress polling.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Reached target Local File Systems (Pre).
+Mar  7 04:37:03 ip-172-31-39-254 kernel: device-mapper: uevent: version 1.0.3
+Mar  7 04:37:03 ip-172-31-39-254 kernel: device-mapper: ioctl: 4.43.0-ioctl (2020-10-01) initialised: dm-devel@redhat.com
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Started Activation of DM RAID sets.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Reached target Local File Systems.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Starting Preprocess NFS configuration...
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Starting Create Volatile Files and Directories...
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Starting Tell Plymouth To Write Out Runtime Data...
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Reached target Local Encrypted Volumes.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Started Tell Plymouth To Write Out Runtime Data.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Started Preprocess NFS configuration.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Started Create Volatile Files and Directories.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Starting Security Auditing Service...
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Mounting RPC Pipe File System...
+Mar  7 04:37:03 ip-172-31-39-254 kernel: RPC: Registered named UNIX socket transport module.
+Mar  7 04:37:03 ip-172-31-39-254 kernel: RPC: Registered udp transport module.
+Mar  7 04:37:03 ip-172-31-39-254 kernel: RPC: Registered tcp transport module.
+Mar  7 04:37:03 ip-172-31-39-254 kernel: RPC: Registered tcp NFSv4.1 backchannel transport module.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Mounted RPC Pipe File System.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Reached target rpc_pipefs.target.
+Mar  7 04:37:03 ip-172-31-39-254 auditd[2594]: Started dispatcher: /sbin/audispd pid: 2596
+Mar  7 04:37:03 ip-172-31-39-254 auditd[2594]: Init complete, auditd 2.8.1 listening for events (startup state enable)
+Mar  7 04:37:03 ip-172-31-39-254 audispd: No plugins found, exiting
+Mar  7 04:37:03 ip-172-31-39-254 augenrules: /sbin/augenrules: No change
+Mar  7 04:37:03 ip-172-31-39-254 augenrules: No rules
+Mar  7 04:37:03 ip-172-31-39-254 augenrules: enabled 1
+Mar  7 04:37:03 ip-172-31-39-254 augenrules: failure 1
+Mar  7 04:37:03 ip-172-31-39-254 augenrules: pid 2594
+Mar  7 04:37:03 ip-172-31-39-254 augenrules: rate_limit 0
+Mar  7 04:37:03 ip-172-31-39-254 augenrules: backlog_limit 8192
+Mar  7 04:37:03 ip-172-31-39-254 augenrules: lost 0
+Mar  7 04:37:03 ip-172-31-39-254 augenrules: backlog 1
+Mar  7 04:37:03 ip-172-31-39-254 augenrules: backlog_wait_time 15000
+Mar  7 04:37:03 ip-172-31-39-254 augenrules: enabled 1
+Mar  7 04:37:03 ip-172-31-39-254 augenrules: failure 1
+Mar  7 04:37:03 ip-172-31-39-254 augenrules: pid 2594
+Mar  7 04:37:03 ip-172-31-39-254 augenrules: rate_limit 0
+Mar  7 04:37:03 ip-172-31-39-254 augenrules: backlog_limit 8192
+Mar  7 04:37:03 ip-172-31-39-254 augenrules: lost 0
+Mar  7 04:37:03 ip-172-31-39-254 augenrules: backlog 1
+Mar  7 04:37:03 ip-172-31-39-254 augenrules: backlog_wait_time 15000
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Started Security Auditing Service.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Starting Update UTMP about System Boot/Shutdown...
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Started Update UTMP about System Boot/Shutdown.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Reached target System Initialization.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Started Flexible branding.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Reached target Paths.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Started Daily Cleanup of Temporary Directories.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Reached target Timers.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Listening on RPCbind Server Activation Socket.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Starting RPC bind service...
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Listening on D-Bus System Message Bus Socket.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Reached target Sockets.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Reached target Basic System.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Starting Resets System Activity Logs...
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Starting Dump dmesg to /var/log/dmesg...
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Starting ACPI Event Daemon...
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Started libstoragemgmt plug-in server daemon.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Started irqbalance daemon.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Starting Hardware RNG Entropy Gatherer Wake threshold service...
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Starting Initial cloud-init job (pre-networking)...
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Starting GSSAPI Proxy Daemon...
+Mar  7 04:37:03 ip-172-31-39-254 acpid: starting up with netlink and the input layer
+Mar  7 04:37:03 ip-172-31-39-254 acpid: skipping incomplete file /etc/acpi/events/videoconf
+Mar  7 04:37:03 ip-172-31-39-254 acpid: 2 rules loaded
+Mar  7 04:37:03 ip-172-31-39-254 acpid: waiting for events: event logging is off
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Starting NTP client/server...
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Started D-Bus System Message Bus.
+Mar  7 04:37:03 ip-172-31-39-254 /usr/sbin/irqbalance: Balancing is ineffective on systems with a single cpu.  Shutting down
+Mar  7 04:37:03 ip-172-31-39-254 chronyd[2640]: chronyd version 4.2 starting (+CMDMON +NTP +REFCLOCK +RTC +PRIVDROP +SCFILTER +SIGND +ASYNCDNS -NTS +SECHASH +IPV6 +DEBUG)
+Mar  7 04:37:03 ip-172-31-39-254 chronyd[2640]: Frequency -18.628 +/- 0.106 ppm read from /var/lib/chrony/drift
+Mar  7 04:37:03 ip-172-31-39-254 chronyd[2640]: Loaded seccomp filter (level 2)
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Starting Login Service...
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Started RPC bind service.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Started Resets System Activity Logs.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Started Dump dmesg to /var/log/dmesg.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Started ACPI Event Daemon.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Started Hardware RNG Entropy Gatherer Wake threshold service.
+Mar  7 04:37:03 ip-172-31-39-254 systemd: Started NTP client/server.
+Mar  7 04:37:04 ip-172-31-39-254 systemd: Started Hardware RNG Entropy Gatherer Daemon.
+Mar  7 04:37:04 ip-172-31-39-254 systemd: Started Login Service.
+Mar  7 04:37:04 ip-172-31-39-254 systemd-logind: New seat seat0.
+Mar  7 04:37:04 ip-172-31-39-254 systemd: Started GSSAPI Proxy Daemon.
+Mar  7 04:37:04 ip-172-31-39-254 systemd: Reached target NFS client services.
+Mar  7 04:37:04 ip-172-31-39-254 systemd: Reached target Remote File Systems (Pre).
+Mar  7 04:37:04 ip-172-31-39-254 systemd: Reached target Remote File Systems.
+Mar  7 04:37:04 ip-172-31-39-254 rngd: Disabling 5: JITTER Entropy generator (jitter)
+Mar  7 04:37:04 ip-172-31-39-254 rngd: Initializing available sources
+Mar  7 04:37:04 ip-172-31-39-254 rngd: Failed to init entropy source hwrng
+Mar  7 04:37:04 ip-172-31-39-254 rngd: Enabling RDRAND rng support
+Mar  7 04:37:04 ip-172-31-39-254 rngd: Initializing entropy source rdrand
+Mar  7 04:37:05 ip-172-31-39-254 cloud-init: Cloud-init v. 19.3-46.amzn2.0.5 running 'init-local' at Fri, 07 Mar 2025 04:37:05 +0000. Up 7.55 seconds.
+Mar  7 04:37:05 ip-172-31-39-254 systemd: Started Initial cloud-init job (pre-networking).
+Mar  7 04:37:05 ip-172-31-39-254 systemd: Reached target Network (Pre).
+Mar  7 04:37:05 ip-172-31-39-254 systemd: Starting LSB: Bring up/down networking...
+Mar  7 04:37:05 ip-172-31-39-254 network: Bringing up loopback interface:  [  OK  ]
+Mar  7 04:37:05 ip-172-31-39-254 network: Bringing up interface eth0:
+Mar  7 04:37:05 ip-172-31-39-254 dhclient[2799]: DHCPDISCOVER on eth0 to 255.255.255.255 port 67 interval 4 (xid=0x7b7aee78)
+Mar  7 04:37:05 ip-172-31-39-254 dhclient[2799]: DHCPREQUEST on eth0 to 255.255.255.255 port 67 (xid=0x7b7aee78)
+Mar  7 04:37:05 ip-172-31-39-254 dhclient[2799]: DHCPOFFER from 172.31.32.1
+Mar  7 04:37:05 ip-172-31-39-254 dhclient[2799]: DHCPACK from 172.31.32.1 (xid=0x7b7aee78)
+Mar  7 04:37:05 ip-172-31-39-254 NET: dhclient: Locked /run/dhclient/resolv.lock
+Mar  7 04:37:05 ip-172-31-39-254 NET[2858]: /usr/sbin/dhclient-script : updated /etc/resolv.conf
+Mar  7 04:37:05 ip-172-31-39-254 dhclient[2799]: bound to 172.31.39.254 -- renewal in 1764 seconds.
+Mar  7 04:37:05 ip-172-31-39-254 network: Determining IP information for eth0... done.
+Mar  7 04:37:05 ip-172-31-39-254 ec2net: [get_meta] Querying IMDS for meta-data/network/interfaces/macs/0e:aa:d0:0b:31:81/local-ipv4s
+Mar  7 04:37:05 ip-172-31-39-254 ec2net: [get_meta] Getting token for IMDSv2.
+Mar  7 04:37:06 ip-172-31-39-254 ec2net: [get_meta] Trying to get http://169.254.169.254/latest/meta-data/network/interfaces/macs/0e:aa:d0:0b:31:81/local-ipv4s
+Mar  7 04:37:06 ip-172-31-39-254 ec2net: [remove_aliases] Removing aliases of eth0
+Mar  7 04:37:06 ip-172-31-39-254 network: Determining IPv6 information for eth0... done.
+Mar  7 04:37:06 ip-172-31-39-254 network: [  OK  ]
+Mar  7 04:37:06 ip-172-31-39-254 systemd: Started LSB: Bring up/down networking.
+Mar  7 04:37:06 ip-172-31-39-254 systemd: Reached target Network.
+Mar  7 04:37:06 ip-172-31-39-254 systemd: Starting Postfix Mail Transport Agent...
+Mar  7 04:37:06 ip-172-31-39-254 systemd: Starting Initial cloud-init job (metadata service crawler)...
+Mar  7 04:37:06 ip-172-31-39-254 dhclient[2921]: XMT: Solicit on eth0, interval 1010ms.
+Mar  7 04:37:06 ip-172-31-39-254 cloud-init: Cloud-init v. 19.3-46.amzn2.0.5 running 'init' at Fri, 07 Mar 2025 04:37:06 +0000. Up 8.58 seconds.
+Mar  7 04:37:06 ip-172-31-39-254 cloud-init: ci-info: ++++++++++++++++++++++++++++++++++++++Net device info+++++++++++++++++++++++++++++++++++++++
+Mar  7 04:37:06 ip-172-31-39-254 cloud-init: ci-info: +--------+------+-----------------------------+---------------+--------+-------------------+
+Mar  7 04:37:06 ip-172-31-39-254 cloud-init: ci-info: | Device |  Up  |           Address           |      Mask     | Scope  |     Hw-Address    |
+Mar  7 04:37:06 ip-172-31-39-254 cloud-init: ci-info: +--------+------+-----------------------------+---------------+--------+-------------------+
+Mar  7 04:37:06 ip-172-31-39-254 cloud-init: ci-info: |  eth0  | True |        172.31.39.254        | 255.255.240.0 | global | 0e:aa:d0:0b:31:81 |
+Mar  7 04:37:06 ip-172-31-39-254 cloud-init: ci-info: |  eth0  | True | fe80::caa:d0ff:fe0b:3181/64 |       .       |  link  | 0e:aa:d0:0b:31:81 |
+Mar  7 04:37:06 ip-172-31-39-254 cloud-init: ci-info: |   lo   | True |          127.0.0.1          |   255.0.0.0   |  host  |         .         |
+Mar  7 04:37:06 ip-172-31-39-254 cloud-init: ci-info: |   lo   | True |           ::1/128           |       .       |  host  |         .         |
+Mar  7 04:37:06 ip-172-31-39-254 cloud-init: ci-info: +--------+------+-----------------------------+---------------+--------+-------------------+
+Mar  7 04:37:06 ip-172-31-39-254 cloud-init: ci-info: ++++++++++++++++++++++++++++++++Route IPv4 info++++++++++++++++++++++++++++++++
+Mar  7 04:37:06 ip-172-31-39-254 cloud-init: ci-info: +-------+-----------------+-------------+-----------------+-----------+-------+
+Mar  7 04:37:06 ip-172-31-39-254 cloud-init: ci-info: | Route |   Destination   |   Gateway   |     Genmask     | Interface | Flags |
+Mar  7 04:37:06 ip-172-31-39-254 cloud-init: ci-info: +-------+-----------------+-------------+-----------------+-----------+-------+
+Mar  7 04:37:06 ip-172-31-39-254 cloud-init: ci-info: |   0   |     0.0.0.0     | 172.31.32.1 |     0.0.0.0     |    eth0   |   UG  |
+Mar  7 04:37:06 ip-172-31-39-254 cloud-init: ci-info: |   1   | 169.254.169.254 |   0.0.0.0   | 255.255.255.255 |    eth0   |   UH  |
+Mar  7 04:37:06 ip-172-31-39-254 cloud-init: ci-info: |   2   |   172.31.32.0   |   0.0.0.0   |  255.255.240.0  |    eth0   |   U   |
+Mar  7 04:37:06 ip-172-31-39-254 cloud-init: ci-info: +-------+-----------------+-------------+-----------------+-----------+-------+
+Mar  7 04:37:06 ip-172-31-39-254 cloud-init: ci-info: +++++++++++++++++++Route IPv6 info+++++++++++++++++++
+Mar  7 04:37:06 ip-172-31-39-254 cloud-init: ci-info: +-------+-------------+---------+-----------+-------+
+Mar  7 04:37:06 ip-172-31-39-254 cloud-init: ci-info: | Route | Destination | Gateway | Interface | Flags |
+Mar  7 04:37:06 ip-172-31-39-254 cloud-init: ci-info: +-------+-------------+---------+-----------+-------+
+Mar  7 04:37:06 ip-172-31-39-254 cloud-init: ci-info: |   9   |  fe80::/64  |    ::   |    eth0   |   U   |
+Mar  7 04:37:06 ip-172-31-39-254 cloud-init: ci-info: |   11  |    local    |    ::   |    eth0   |   U   |
+Mar  7 04:37:06 ip-172-31-39-254 cloud-init: ci-info: |   12  |  multicast  |    ::   |    eth0   |   U   |
+Mar  7 04:37:06 ip-172-31-39-254 cloud-init: ci-info: +-------+-------------+---------+-----------+-------+
+Mar  7 04:37:06 ip-172-31-39-254 dbus[2637]: [system] Activating via systemd: service name='org.freedesktop.hostname1' unit='dbus-org.freedesktop.hostname1.service'
+Mar  7 04:37:06 ip-172-31-39-254 systemd: Starting Hostname Service...
+Mar  7 04:37:06 ip-172-31-39-254 systemd: Started Postfix Mail Transport Agent.
+Mar  7 04:37:06 ip-172-31-39-254 dbus[2637]: [system] Successfully activated service 'org.freedesktop.hostname1'
+Mar  7 04:37:06 ip-172-31-39-254 systemd: Started Hostname Service.
+Mar  7 04:37:06 ip-172-31-39-254 systemd-hostnamed: Changed static host name to 'ip-172-31-39-254.ec2.internal'
+Mar  7 04:37:06 ip-172-31-39-254 systemd-hostnamed: Changed host name to 'ip-172-31-39-254.ec2.internal'
+Mar  7 04:37:07 ip-172-31-39-254 dhclient[2921]: XMT: Solicit on eth0, interval 1950ms.
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Started Initial cloud-init job (metadata service crawler).
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Reached target Cloud-config availability.
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Starting Permit User Sessions...
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Reached target Network is Online.
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Starting Notify NFS peers of a restart...
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Starting Dynamically Generate Message Of The Day...
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Started amazon-ssm-agent.
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Starting Finds and configures elastic network interfaces...
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Starting Apply the settings specified in cloud-config...
+Mar  7 04:37:07 ip-172-31-39-254 ec2net: [ec2ifscan] Scanning for unconfigured interfaces
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Starting System Logging Service...
+Mar  7 04:37:07 ip-172-31-39-254 sm-notify[3111]: Version 1.3.0 starting
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Starting OpenSSH Server Key Generation...
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Started Permit User Sessions.
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Started Notify NFS peers of a restart.
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Started Finds and configures elastic network interfaces.
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Starting Wait for Plymouth Boot Screen to Quit...
+Mar  7 04:37:07 ip-172-31-39-254 rsyslogd: [origin software="rsyslogd" swVersion="8.24.0-57.amzn2.2.0.2" x-pid="3122" x-info="http://www.rsyslog.com"] start
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Started Command Scheduler.
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Started Job spooling tools.
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Starting Terminate Plymouth Boot Screen...
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Started System Logging Service.
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Started Dynamically Generate Message Of The Day.
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Received SIGRTMIN+21 from PID 2466 (plymouthd).
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Started Terminate Plymouth Boot Screen.
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Started Wait for Plymouth Boot Screen to Quit.
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Started Getty on tty1.
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Started Serial Getty on ttyS0.
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Reached target Login Prompts.
+Mar  7 04:37:07 ip-172-31-39-254 sshd-keygen: Generating SSH2 RSA host key: [  OK  ]
+Mar  7 04:37:07 ip-172-31-39-254 amazon-ssm-agent: Error occurred fetching the seelog config file path:  open /etc/amazon/ssm/seelog.xml: no such file or directory
+Mar  7 04:37:07 ip-172-31-39-254 amazon-ssm-agent: Initializing new seelog logger
+Mar  7 04:37:07 ip-172-31-39-254 amazon-ssm-agent: New Seelog Logger Creation Complete
+Mar  7 04:37:07 ip-172-31-39-254 amazon-ssm-agent: 2025-03-07 04:37:07.7371 INFO Proxy environment variables:
+Mar  7 04:37:07 ip-172-31-39-254 sshd-keygen: Generating SSH2 ECDSA host key: [  OK  ]
+Mar  7 04:37:07 ip-172-31-39-254 sshd-keygen: Generating SSH2 ED25519 host key: [  OK  ]
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Started OpenSSH Server Key Generation.
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Starting OpenSSH server daemon...
+Mar  7 04:37:07 ip-172-31-39-254 systemd: Started OpenSSH server daemon.
+Mar  7 04:37:07 ip-172-31-39-254 amazon-ssm-agent: 2025-03-07 04:37:07.7371 INFO no_proxy:
+Mar  7 04:37:07 ip-172-31-39-254 amazon-ssm-agent: 2025-03-07 04:37:07.7371 INFO https_proxy:
+Mar  7 04:37:07 ip-172-31-39-254 cloud-init: Cloud-init v. 19.3-46.amzn2.0.5 running 'modules:config' at Fri, 07 Mar 2025 04:37:07 +0000. Up 10.04 seconds.
+Mar  7 04:37:08 ip-172-31-39-254 systemd: Started Apply the settings specified in cloud-config.
+Mar  7 04:37:08 ip-172-31-39-254 systemd: Starting Execute cloud user/final scripts...
+Mar  7 04:37:08 ip-172-31-39-254 systemd: Starting Initial hibernation setup job...
+Mar  7 04:37:08 ip-172-31-39-254 amazon-ssm-agent: 2025-03-07 04:37:07.7371 INFO http_proxy:
+Mar  7 04:37:08 ip-172-31-39-254 amazon-ssm-agent: 2025-03-07 04:37:07.7371 INFO Checking if agent identity type OnPrem can be assumed
+Mar  7 04:37:08 ip-172-31-39-254 amazon-ssm-agent: 2025-03-07 04:37:07.7378 INFO Checking if agent identity type EC2 can be assumed
+Mar  7 04:37:08 ip-172-31-39-254 hibinit-agent: Effective config: {'grub_update': True, 'swap_percentage': 100, 'state_dir': '/var/lib/hibinit-agent', 'log_to_syslog': True, 'touch_swap': False, 'swap_mb': 4000, 'swapoff': 'swapoff {swapfile}', 'mkswap': 'mkswap {swapfile}', 'swapon': 'swapon {swapfile}', 'btrfs_enabled': False}
+Mar  7 04:37:08 ip-172-31-39-254 hibinit-agent: Requesting new IMDSv2 token.
+Mar  7 04:37:08 ip-172-31-39-254 hibinit-agent: Instance Launch has not enabled Hibernation Configured Flag. hibinit-agent exiting!!
+Mar  7 04:37:08 ip-172-31-39-254 systemd: Started Initial hibernation setup job.
+Mar  7 04:37:08 ip-172-31-39-254 systemd: Reached target Multi-User System.
+Mar  7 04:37:08 ip-172-31-39-254 systemd: Reached target Graphical Interface.
+Mar  7 04:37:08 ip-172-31-39-254 systemd: Reached target aws-eb.target.
+Mar  7 04:37:08 ip-172-31-39-254 systemd: Starting Update UTMP about System Runlevel Changes...
+Mar  7 04:37:08 ip-172-31-39-254 systemd: Started Update UTMP about System Runlevel Changes.
+Mar  7 04:37:08 ip-172-31-39-254 amazon-ssm-agent: 2025-03-07 04:37:07.8241 INFO Agent will take identity from EC2
+Mar  7 04:37:08 ip-172-31-39-254 amazon-ssm-agent: 2025-03-07 04:37:07.8370 INFO [amazon-ssm-agent] amazon-ssm-agent - v3.3.1611.0
+Mar  7 04:37:08 ip-172-31-39-254 cloud-init: Cloud-init v. 19.3-46.amzn2.0.5 running 'modules:final' at Fri, 07 Mar 2025 04:37:08 +0000. Up 10.53 seconds.
+Mar  7 04:37:08 ip-172-31-39-254 [eb-cfn-init]: [2025-03-07T04:37:08Z] Started EB User Data
+Mar  7 04:37:08 ip-172-31-39-254 [eb-cfn-init]: + SLEEP_TIME=2
+Mar  7 04:37:08 ip-172-31-39-254 [eb-cfn-init]: + SLEEP_TIME_MAX=3600
+Mar  7 04:37:08 ip-172-31-39-254 [eb-cfn-init]: + true
+Mar  7 04:37:08 ip-172-31-39-254 [eb-cfn-init]: + curl https://elasticbeanstalk-platform-assets-us-east-1.s3.amazonaws.com/stalks/eb_docker_amazon_linux_2_1.0.363.0_20250226022037/lib/UserDataScript.sh
+Mar  7 04:37:08 ip-172-31-39-254 [eb-cfn-init]:  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+Mar  7 04:37:08 ip-172-31-39-254 [eb-cfn-init]:                                 Dload  Upload   Total   Spent    Left  Speed
+Mar  7 04:37:08 ip-172-31-39-254 amazon-ssm-agent: 2025-03-07 04:37:07.8370 INFO [amazon-ssm-agent] OS: linux, Arch: amd64
+Mar  7 04:37:08 ip-172-31-39-254 amazon-ssm-agent: 2025-03-07 04:37:07.8370 INFO [amazon-ssm-agent] Starting Core Agent
+Mar  7 04:37:08 ip-172-31-39-254 amazon-ssm-agent: 2025-03-07 04:37:07.8370 INFO [amazon-ssm-agent] Registrar detected. Attempting registration
+Mar  7 04:37:08 ip-172-31-39-254 amazon-ssm-agent: 2025-03-07 04:37:07.8370 INFO [Registrar] Starting registrar module
+Mar  7 04:37:08 ip-172-31-39-254 amazon-ssm-agent: 2025-03-07 04:37:07.8391 INFO [EC2Identity] Checking disk for registration info
+Mar  7 04:37:09 ip-172-31-39-254 amazon-ssm-agent: 2025-03-07 04:37:07.8404 INFO [EC2Identity] No registration info found for ec2 instance, attempting registration
+Mar  7 04:37:09 ip-172-31-39-254 dhclient[2921]: XMT: Solicit on eth0, interval 3810ms.
+Mar  7 04:37:09 ip-172-31-39-254 amazon-ssm-agent: 2025-03-07 04:37:07.8404 INFO [EC2Identity] Found registration keys
+Mar  7 04:37:09 ip-172-31-39-254 amazon-ssm-agent: 2025-03-07 04:37:07.8404 INFO [EC2Identity] Checking write access before registering
+Mar  7 04:37:09 ip-172-31-39-254 amazon-ssm-agent: 2025-03-07 04:37:07.8405 INFO [EC2Identity] Registering EC2 instance with Systems Manager
+Mar  7 04:37:09 ip-172-31-39-254 amazon-ssm-agent: 2025-03-07 04:37:07.8910 INFO [EC2Identity] EC2 registration was successful.
+Mar  7 04:37:09 ip-172-31-39-254 amazon-ssm-agent: 2025-03-07 04:37:07.8911 INFO [amazon-ssm-agent] Registration attempted. Resuming core agent startup.
+Mar  7 04:37:09 ip-172-31-39-254 [eb-cfn-init]: #015  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0#015  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0#015100  4838  100  4838    0     0   4482      0  0:00:01  0:00:01 --:--:--  4483
+Mar  7 04:37:09 ip-172-31-39-254 [eb-cfn-init]: + RESULT=0
+Mar  7 04:37:09 ip-172-31-39-254 [eb-cfn-init]: + [[ 0 -ne 0 ]]
+Mar  7 04:37:09 ip-172-31-39-254 [eb-cfn-init]: + /bin/bash /tmp/ebbootstrap.sh 'https://cloudformation-waitcondition-us-east-1.s3.amazonaws.com/arn%3Aaws%3Acloudformation%3Aus-east-1%3A430118820292%3Astack/awseb-e-sjintugmq2-stack/ac1ec8e0-fb0d-11ef-a70b-120b3bd00a23/ac218800-fb0d-11ef-a70b-120b3bd00a23/AWSEBInstanceLaunchWaitHandle?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250307T043604Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86399&X-Amz-Credential=AKIA6L7Q4OWT3JRXU3BZ%2F20250307%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=ad094201984c067278c0147ded149ed4f323d985c6a55dde7f2a4bbd9285238d' arn:aws:cloudformation:us-east-1:430118820292:stack/awseb-e-sjintugmq2-stack/ac1ec8e0-fb0d-11ef-a70b-120b3bd00a23 7e6b1848-fc40-47ac-8300-961220e22008 https://elasticbeanstalk-health.us-east-1.amazonaws.com '' https://elasticbeanstalk-platform-assets-us-east-1.s3.amazonaws.com/stalks/eb_docker_amazon_linux_2_1.0.363.0_20250226022037 us-east-1
+Mar  7 04:37:09 ip-172-31-39-254 [eb-cfn-init]: [2025-03-07T04:37:09.572Z] Started EB Bootstrapping Script.
+Mar  7 04:37:09 ip-172-31-39-254 [eb-cfn-init]: [2025-03-07T04:37:09.577Z] Received parameters:
+Mar  7 04:37:09 ip-172-31-39-254 [eb-cfn-init]: TARBALLS =
+Mar  7 04:37:09 ip-172-31-39-254 [eb-cfn-init]: EB_GEMS =
+Mar  7 04:37:09 ip-172-31-39-254 [eb-cfn-init]: SIGNAL_URL = https://cloudformation-waitcondition-us-east-1.s3.amazonaws.com/arn%3Aaws%3Acloudformation%3Aus-east-1%3A430118820292%3Astack/awseb-e-sjintugmq2-stack/ac1ec8e0-fb0d-11ef-a70b-120b3bd00a23/ac218800-fb0d-11ef-a70b-120b3bd00a23/AWSEBInstanceLaunchWaitHandle?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250307T043604Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86399&X-Amz-Credential=AKIA6L7Q4OWT3JRXU3BZ%2F20250307%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=ad094201984c067278c0147ded149ed4f323d985c6a55dde7f2a4bbd9285238d
+Mar  7 04:37:09 ip-172-31-39-254 [eb-cfn-init]: STACK_ID = arn:aws:cloudformation:us-east-1:430118820292:stack/awseb-e-sjintugmq2-stack/ac1ec8e0-fb0d-11ef-a70b-120b3bd00a23
+Mar  7 04:37:09 ip-172-31-39-254 [eb-cfn-init]: REGION = us-east-1
+Mar  7 04:37:09 ip-172-31-39-254 [eb-cfn-init]: GUID =
+Mar  7 04:37:09 ip-172-31-39-254 [eb-cfn-init]: HEALTHD_GROUP_ID = 7e6b1848-fc40-47ac-8300-961220e22008
+Mar  7 04:37:09 ip-172-31-39-254 [eb-cfn-init]: HEALTHD_ENDPOINT = https://elasticbeanstalk-health.us-east-1.amazonaws.com
+Mar  7 04:37:09 ip-172-31-39-254 [eb-cfn-init]: PROXY_SERVER =
+Mar  7 04:37:09 ip-172-31-39-254 [eb-cfn-init]: HEALTHD_PROXY_LOG_LOCATION =
+Mar  7 04:37:09 ip-172-31-39-254 [eb-cfn-init]: PLATFORM_ASSETS_URL = https://elasticbeanstalk-platform-assets-us-east-1.s3.amazonaws.com/stalks/eb_docker_amazon_linux_2_1.0.363.0_20250226022037
+Mar  7 04:37:09 ip-172-31-39-254 [eb-cfn-init]: [2025-03-07T04:37:09.598Z] engine url is set to https://elasticbeanstalk-platform-assets-us-east-1.s3.amazonaws.com/stalks/eb_docker_amazon_linux_2_1.0.363.0_20250226022037/lib/platform-engine.zip
+Mar  7 04:37:09 ip-172-31-39-254 [eb-cfn-init]: [2025-03-07T04:37:09.602Z] first init of instance.
+Mar  7 04:37:09 ip-172-31-39-254 [eb-cfn-init]: [2025-03-07T04:37:09.605Z] Started executing cfn_init _OnInstanceBoot.
+Mar  7 04:37:09 ip-172-31-39-254 [eb-cfn-init]: [2025-03-07T04:37:09.608Z] Running cfn-init ConfigSet: _OnInstanceBoot.
+Mar  7 04:37:09 ip-172-31-39-254 [eb-cfn-init]: [2025-03-07T04:37:09.611Z] Using stack-id from userdata
+Mar  7 04:37:09 ip-172-31-39-254 amazon-ssm-agent: 2025-03-07 04:37:07.8911 INFO [CredentialRefresher] credentialRefresher has started
+Mar  7 04:37:09 ip-172-31-39-254 amazon-ssm-agent: 2025-03-07 04:37:07.8912 INFO [CredentialRefresher] Starting credentials refresher loop
+Mar  7 04:37:09 ip-172-31-39-254 amazon-ssm-agent: 2025-03-07 04:37:07.9174 WARN EC2RoleProvider Failed to connect to Systems Manager with instance profile role credentials. Err: retrieved credentials failed to report to ssm. Error: AccessDeniedException: User: arn:aws:sts::430118820292:assumed-role/aws-elasticbeanstalk-ec2-role/i-04fa4397b5eb745c1 is not authorized to perform: ssm:UpdateInstanceInformation on resource: arn:aws:ec2:us-east-1:430118820292:instance/i-04fa4397b5eb745c1 because no identity-based policy allows the ssm:UpdateInstanceInformation action
+Mar  7 04:37:10 ip-172-31-39-254 chronyd[2640]: Selected source 169.254.169.123
+Mar  7 04:37:10 ip-172-31-39-254 [eb-cfn-init]: [2025-03-07T04:37:10.903Z] Command Returned:
+Mar  7 04:37:10 ip-172-31-39-254 [eb-cfn-init]: [2025-03-07T04:37:10.907Z] Completed executing cfn_init.
+Mar  7 04:37:10 ip-172-31-39-254 [eb-cfn-init]: [2025-03-07T04:37:10.909Z] finished _OnInstanceBoot
+Mar  7 04:37:10 ip-172-31-39-254 [eb-cfn-init]: [2025-03-07T04:37:10.912Z] installing platform engine
+Mar  7 04:37:11 ip-172-31-39-254 amazon-ssm-agent: 2025-03-07 04:37:11.0070 ERROR EC2RoleProvider Failed to connect to Systems Manager with SSM role credentials. error calling RequestManagedInstanceRoleToken: AccessDeniedException: Systems Manager's instance management role is not configured for account: 430118820292
+Mar  7 04:37:11 ip-172-31-39-254 amazon-ssm-agent: status code: 400, request id: 71fec3c3-e1c2-454c-8059-a73bd4a0f85d
+Mar  7 04:37:11 ip-172-31-39-254 amazon-ssm-agent: 2025-03-07 04:37:11.0070 ERROR [CredentialRefresher] Retrieve credentials produced error: no valid credentials could be retrieved for ec2 identity. Default Host Management Err: error calling RequestManagedInstanceRoleToken: AccessDeniedException: Systems Manager's instance management role is not configured for account: 430118820292
+Mar  7 04:37:11 ip-172-31-39-254 amazon-ssm-agent: status code: 400, request id: 71fec3c3-e1c2-454c-8059-a73bd4a0f85d
+Mar  7 04:37:11 ip-172-31-39-254 amazon-ssm-agent: 2025-03-07 04:37:11.0071 INFO [CredentialRefresher] Sleeping for 26m41s before retrying retrieve credentials
+Mar  7 04:37:11 ip-172-31-39-254 [eb-cfn-init]: 2025-03-07 04:37:11 URL:https://elasticbeanstalk-platform-assets-us-east-1.s3.amazonaws.com/stalks/eb_docker_amazon_linux_2_1.0.363.0_20250226022037/lib/platform-engine.zip [33423424/33423424] -> "/tmp/platform-engine.zip" [1]
+Mar  7 04:37:12 ip-172-31-39-254 [eb-cfn-init]: [2025-03-07T04:37:12.003Z] executing platform engine. see /var/log/eb-engine.log.
+Mar  7 04:37:13 ip-172-31-39-254 chronyd[2640]: System clock was stepped by 0.578383 seconds
+Mar  7 04:37:13 ip-172-31-39-254 systemd: Time has been changed
+Mar  7 04:37:13 ip-172-31-39-254 systemd: Reloading.
+Mar  7 04:37:13 ip-172-31-39-254 dhclient[2921]: XMT: Solicit on eth0, interval 7940ms.
+Mar  7 04:37:13 ip-172-31-39-254 systemd: Reloading.
+Mar  7 04:37:13 ip-172-31-39-254 systemd: Reloading.
+Mar  7 04:37:13 ip-172-31-39-254 systemd: Starting This is cfn-hup daemon...
+Mar  7 04:37:13 ip-172-31-39-254 systemd: Started This is cfn-hup daemon.
+Mar  7 04:37:13 ip-172-31-39-254 systemd: Stopping System Logging Service...
+Mar  7 04:37:13 ip-172-31-39-254 rsyslogd: [origin software="rsyslogd" swVersion="8.24.0-57.amzn2.2.0.2" x-pid="3122" x-info="http://www.rsyslog.com"] exiting on signal 15.
+Mar  7 04:37:13 ip-172-31-39-254 systemd: Stopped System Logging Service.
+Mar  7 04:37:13 ip-172-31-39-254 systemd: Starting System Logging Service...
+Mar  7 04:37:13 ip-172-31-39-254 rsyslogd: [origin software="rsyslogd" swVersion="8.24.0-57.amzn2.2.0.2" x-pid="3346" x-info="http://www.rsyslog.com"] start
+Mar  7 04:37:13 ip-172-31-39-254 systemd: Started System Logging Service.
+Mar  7 04:37:13 ip-172-31-39-254 systemd: Reloading.
+Mar  7 04:37:13 ip-172-31-39-254 systemd: Starting Docker Socket for the API.
+Mar  7 04:37:13 ip-172-31-39-254 systemd: Starting containerd container runtime...
+Mar  7 04:37:13 ip-172-31-39-254 systemd: Listening on Docker Socket for the API.
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15Z" level=warning msg="containerd config version `1` has been deprecated and will be converted on each startup in containerd v2.0, use `containerd config migrate` after upgrading to containerd 2.0 to avoid conversion on startup"
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.188213577Z" level=info msg="starting containerd" revision=bcc810d6b9066471b0b6fa75f557a15a1cbf31bb version=1.7.25
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.219451537Z" level=info msg="loading plugin \"io.containerd.snapshotter.v1.aufs\"..." type=io.containerd.snapshotter.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.220750865Z" level=info msg="skip loading plugin \"io.containerd.snapshotter.v1.aufs\"..." error="aufs is not supported (modprobe aufs failed: exit status 1 \"modprobe: FATAL: Module aufs not found in directory /lib/modules/5.10.234-225.895.amzn2.x86_64\\n\"): skip plugin" type=io.containerd.snapshotter.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.221022724Z" level=info msg="loading plugin \"io.containerd.event.v1.exchange\"..." type=io.containerd.event.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.221218378Z" level=info msg="loading plugin \"io.containerd.internal.v1.opt\"..." type=io.containerd.internal.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.221480458Z" level=info msg="loading plugin \"io.containerd.warning.v1.deprecations\"..." type=io.containerd.warning.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.221641523Z" level=info msg="loading plugin \"io.containerd.snapshotter.v1.blockfile\"..." type=io.containerd.snapshotter.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.221825827Z" level=info msg="skip loading plugin \"io.containerd.snapshotter.v1.blockfile\"..." error="no scratch file generator: skip plugin" type=io.containerd.snapshotter.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.221975926Z" level=info msg="loading plugin \"io.containerd.snapshotter.v1.btrfs\"..." type=io.containerd.snapshotter.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.223492398Z" level=info msg="skip loading plugin \"io.containerd.snapshotter.v1.btrfs\"..." error="path /var/lib/containerd/io.containerd.snapshotter.v1.btrfs (xfs) must be a btrfs filesystem to be used with the btrfs snapshotter: skip plugin" type=io.containerd.snapshotter.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.223691581Z" level=info msg="loading plugin \"io.containerd.snapshotter.v1.devmapper\"..." type=io.containerd.snapshotter.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.223870101Z" level=info msg="skip loading plugin \"io.containerd.snapshotter.v1.devmapper\"..." error="devmapper not configured: skip plugin" type=io.containerd.snapshotter.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.224034066Z" level=info msg="loading plugin \"io.containerd.snapshotter.v1.native\"..." type=io.containerd.snapshotter.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.224276523Z" level=info msg="loading plugin \"io.containerd.snapshotter.v1.overlayfs\"..." type=io.containerd.snapshotter.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.224599655Z" level=info msg="loading plugin \"io.containerd.snapshotter.v1.zfs\"..." type=io.containerd.snapshotter.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.224857141Z" level=info msg="skip loading plugin \"io.containerd.snapshotter.v1.zfs\"..." error="path /var/lib/containerd/io.containerd.snapshotter.v1.zfs must be a zfs filesystem to be used with the zfs snapshotter: skip plugin" type=io.containerd.snapshotter.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.225035607Z" level=info msg="loading plugin \"io.containerd.content.v1.content\"..." type=io.containerd.content.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.225238515Z" level=info msg="loading plugin \"io.containerd.snapshotter.v1.soci\"..." type=io.containerd.snapshotter.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.228316213Z" level=info msg="loading plugin \"io.containerd.metadata.v1.bolt\"..." type=io.containerd.metadata.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.228627362Z" level=info msg="metadata content store policy set" policy=shared
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.238938872Z" level=info msg="loading plugin \"io.containerd.gc.v1.scheduler\"..." type=io.containerd.gc.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.239210304Z" level=info msg="loading plugin \"io.containerd.differ.v1.walking\"..." type=io.containerd.differ.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.239419921Z" level=info msg="loading plugin \"io.containerd.lease.v1.manager\"..." type=io.containerd.lease.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.239603390Z" level=info msg="loading plugin \"io.containerd.streaming.v1.manager\"..." type=io.containerd.streaming.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.239780284Z" level=info msg="loading plugin \"io.containerd.runtime.v1.linux\"..." type=io.containerd.runtime.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.239999697Z" level=info msg="loading plugin \"io.containerd.monitor.v1.cgroups\"..." type=io.containerd.monitor.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.241411720Z" level=info msg="loading plugin \"io.containerd.runtime.v2.task\"..." type=io.containerd.runtime.v2
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.241699031Z" level=info msg="loading plugin \"io.containerd.runtime.v2.shim\"..." type=io.containerd.runtime.v2
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.241898509Z" level=info msg="loading plugin \"io.containerd.sandbox.store.v1.local\"..." type=io.containerd.sandbox.store.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.242134365Z" level=info msg="loading plugin \"io.containerd.sandbox.controller.v1.local\"..." type=io.containerd.sandbox.controller.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.242325753Z" level=info msg="loading plugin \"io.containerd.service.v1.containers-service\"..." type=io.containerd.service.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.242539821Z" level=info msg="loading plugin \"io.containerd.service.v1.content-service\"..." type=io.containerd.service.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.243817645Z" level=info msg="loading plugin \"io.containerd.service.v1.diff-service\"..." type=io.containerd.service.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.244019914Z" level=info msg="loading plugin \"io.containerd.service.v1.images-service\"..." type=io.containerd.service.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.244213118Z" level=info msg="loading plugin \"io.containerd.service.v1.introspection-service\"..." type=io.containerd.service.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.244386930Z" level=info msg="loading plugin \"io.containerd.service.v1.namespaces-service\"..." type=io.containerd.service.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.244557984Z" level=info msg="loading plugin \"io.containerd.service.v1.snapshots-service\"..." type=io.containerd.service.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.244730086Z" level=info msg="loading plugin \"io.containerd.service.v1.tasks-service\"..." type=io.containerd.service.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.244906280Z" level=info msg="loading plugin \"io.containerd.grpc.v1.containers\"..." type=io.containerd.grpc.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.245494637Z" level=info msg="loading plugin \"io.containerd.grpc.v1.content\"..." type=io.containerd.grpc.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.245512203Z" level=info msg="loading plugin \"io.containerd.grpc.v1.diff\"..." type=io.containerd.grpc.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.245522927Z" level=info msg="loading plugin \"io.containerd.grpc.v1.events\"..." type=io.containerd.grpc.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.245534710Z" level=info msg="loading plugin \"io.containerd.grpc.v1.images\"..." type=io.containerd.grpc.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.245546104Z" level=info msg="loading plugin \"io.containerd.grpc.v1.introspection\"..." type=io.containerd.grpc.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.245560203Z" level=info msg="loading plugin \"io.containerd.grpc.v1.leases\"..." type=io.containerd.grpc.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.245571245Z" level=info msg="loading plugin \"io.containerd.grpc.v1.namespaces\"..." type=io.containerd.grpc.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.245593237Z" level=info msg="loading plugin \"io.containerd.grpc.v1.sandbox-controllers\"..." type=io.containerd.grpc.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.245605994Z" level=info msg="loading plugin \"io.containerd.grpc.v1.sandboxes\"..." type=io.containerd.grpc.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.245617645Z" level=info msg="loading plugin \"io.containerd.grpc.v1.snapshots\"..." type=io.containerd.grpc.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.245627629Z" level=info msg="loading plugin \"io.containerd.grpc.v1.streaming\"..." type=io.containerd.grpc.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.245639317Z" level=info msg="loading plugin \"io.containerd.grpc.v1.tasks\"..." type=io.containerd.grpc.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.245650884Z" level=info msg="loading plugin \"io.containerd.transfer.v1.local\"..." type=io.containerd.transfer.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.245669326Z" level=info msg="loading plugin \"io.containerd.grpc.v1.transfer\"..." type=io.containerd.grpc.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.245680363Z" level=info msg="loading plugin \"io.containerd.grpc.v1.version\"..." type=io.containerd.grpc.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.245689001Z" level=info msg="loading plugin \"io.containerd.internal.v1.restart\"..." type=io.containerd.internal.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.247381126Z" level=info msg="loading plugin \"io.containerd.tracing.processor.v1.otlp\"..." type=io.containerd.tracing.processor.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.247399986Z" level=info msg="skip loading plugin \"io.containerd.tracing.processor.v1.otlp\"..." error="skip plugin: tracing endpoint not configured" type=io.containerd.tracing.processor.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.247409201Z" level=info msg="loading plugin \"io.containerd.internal.v1.tracing\"..." type=io.containerd.internal.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.247430693Z" level=info msg="skip loading plugin \"io.containerd.internal.v1.tracing\"..." error="skip plugin: tracing endpoint not configured" type=io.containerd.internal.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.247439185Z" level=info msg="loading plugin \"io.containerd.grpc.v1.healthcheck\"..." type=io.containerd.grpc.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.247466002Z" level=info msg="loading plugin \"io.containerd.nri.v1.nri\"..." type=io.containerd.nri.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.247476559Z" level=info msg="NRI interface is disabled by configuration."
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.247486109Z" level=info msg="loading plugin \"io.containerd.grpc.v1.cri\"..." type=io.containerd.grpc.v1
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.247550610Z" level=info msg="Start cri plugin with config {PluginConfig:{ContainerdConfig:{Snapshotter:overlayfs DefaultRuntimeName:runc DefaultRuntime:{Type: Path: Engine: PodAnnotations:[] ContainerAnnotations:[] Root: Options:map[] PrivilegedWithoutHostDevices:false PrivilegedWithoutHostDevicesAllDevicesAllowed:false BaseRuntimeSpec: NetworkPluginConfDir: NetworkPluginMaxConfNum:0 Snapshotter: SandboxMode:} UntrustedWorkloadRuntime:{Type: Path: Engine: PodAnnotations:[] ContainerAnnotations:[] Root: Options:map[] PrivilegedWithoutHostDevices:false PrivilegedWithoutHostDevicesAllDevicesAllowed:false BaseRuntimeSpec: NetworkPluginConfDir: NetworkPluginMaxConfNum:0 Snapshotter: SandboxMode:} Runtimes:map[runc:{Type:io.containerd.runc.v2 Path: Engine: PodAnnotations:[] ContainerAnnotations:[] Root: Options:map[BinaryName: CriuImagePath: CriuPath: CriuWorkPath: IoGid:0 IoUid:0 NoNewKeyring:false NoPivotRoot:false Root: ShimCgroup: SystemdCgroup:false] PrivilegedWithoutHostDevices:false PrivilegedWithoutHostDevicesAllDevicesAllowed:false BaseRuntimeSpec: NetworkPluginConfDir: NetworkPluginMaxConfNum:0 Snapshotter: SandboxMode:podsandbox}] NoPivot:false DisableSnapshotAnnotations:true DiscardUnpackedLayers:false IgnoreBlockIONotEnabledErrors:false IgnoreRdtNotEnabledErrors:false} CniConfig:{NetworkPluginBinDir:/opt/cni/bin NetworkPluginConfDir:/etc/cni/net.d NetworkPluginMaxConfNum:1 NetworkPluginSetupSerially:false NetworkPluginConfTemplate: IPPreference:} Registry:{ConfigPath: Mirrors:map[] Configs:map[] Auths:map[] Headers:map[]} ImageDecryption:{KeyModel:node} DisableTCPService:true StreamServerAddress:127.0.0.1 StreamServerPort:0 StreamIdleTimeout:4h0m0s EnableSelinux:false SelinuxCategoryRange:1024 SandboxImage:registry.k8s.io/pause:3.8 StatsCollectPeriod:10 SystemdCgroup:false EnableTLSStreaming:false X509KeyPairStreaming:{TLSCertFile: TLSKeyFile:} MaxContainerLogLineSize:16384 DisableCgroup:false DisableApparmor:false RestrictOOMScoreAdj:false MaxConcurrentDownloads:3 DisableProcMount:false UnsetSeccompProfile: TolerateMissingHugetlbController:true DisableHugetlbController:true DeviceOwnershipFromSecurityContext:false IgnoreImageDefinedVolumes:false NetNSMountsUnderStateDir:false EnableUnprivilegedPorts:false EnableUnprivilegedICMP:false EnableCDI:false CDISpecDirs:[/etc/cdi /var/run/cdi] ImagePullProgressTimeout:5m0s DrainExecSyncIOTimeout:0s ImagePullWithSyncFs:false IgnoreDeprecationWarnings:[]} ContainerdRootDir:/var/lib/containerd ContainerdEndpoint:/run/containerd/containerd.sock RootDir:/var/lib/containerd/io.containerd.grpc.v1.cri StateDir:/run/containerd/io.containerd.grpc.v1.cri}"
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.247596808Z" level=info msg="Connect containerd service"
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.247631774Z" level=info msg="using legacy CRI server"
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.247638389Z" level=info msg="using experimental NRI integration - disable nri plugin to prevent this"
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.251522856Z" level=info msg="Get image filesystem path \"/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs\""
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.253666764Z" level=error msg="failed to load cni during init, please check CRI plugin status before setting up network for pods" error="cni config load failed: no network config found in /etc/cni/net.d: cni plugin not initialized: failed to load cni config"
+Mar  7 04:37:15 ip-172-31-39-254 systemd: Started containerd container runtime.
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.255242669Z" level=info msg="Start subscribing containerd event"
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.256672233Z" level=info msg="Start recovering state"
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.256725294Z" level=info msg="Start event monitor"
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.256737475Z" level=info msg="Start snapshots syncer"
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.256745951Z" level=info msg="Start cni network conf syncer for default"
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.256754484Z" level=info msg="Start streaming server"
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.257048931Z" level=info msg=serving... address=/run/containerd/containerd.sock.ttrpc
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.257118735Z" level=info msg=serving... address=/run/containerd/containerd.sock
+Mar  7 04:37:15 ip-172-31-39-254 containerd: time="2025-03-07T04:37:15.258052189Z" level=info msg="containerd successfully booted in 0.089800s"
+Mar  7 04:37:15 ip-172-31-39-254 systemd: Starting Docker Application Container Engine...
+Mar  7 04:37:17 ip-172-31-39-254 docker: time="2025-03-07T04:37:17.222846093Z" level=info msg="Starting up"
+Mar  7 04:37:17 ip-172-31-39-254 docker: time="2025-03-07T04:37:17.651371068Z" level=info msg="Loading containers: start."
+Mar  7 04:37:17 ip-172-31-39-254 kernel: bridge: filtering via arp/ip/ip6tables is no longer available by default. Update your scripts to load br_netfilter if you need this.
+Mar  7 04:37:17 ip-172-31-39-254 kernel: Bridge firewalling registered
+Mar  7 04:37:17 ip-172-31-39-254 kernel: bpfilter: Loaded bpfilter_umh pid 3427
+Mar  7 04:37:17 ip-172-31-39-254 journal: Started bpfilter
+Mar  7 04:37:17 ip-172-31-39-254 kernel: Initializing XFRM netlink socket
+Mar  7 04:37:17 ip-172-31-39-254 docker: time="2025-03-07T04:37:17.994265335Z" level=info msg="Loading containers: done."
+Mar  7 04:37:18 ip-172-31-39-254 docker: time="2025-03-07T04:37:18.030419998Z" level=info msg="Docker daemon" commit=71907ca containerd-snapshotter=false storage-driver=overlay2 version=25.0.8
+Mar  7 04:37:18 ip-172-31-39-254 docker: time="2025-03-07T04:37:18.031652768Z" level=info msg="Daemon has completed initialization"
+Mar  7 04:37:18 ip-172-31-39-254 docker: time="2025-03-07T04:37:18.075928800Z" level=info msg="API listen on /run/docker.sock"
+Mar  7 04:37:18 ip-172-31-39-254 systemd: Started Docker Application Container Engine.
+Mar  7 04:37:18 ip-172-31-39-254 systemd: Reloading.
+Mar  7 04:37:18 ip-172-31-39-254 systemd: Reloading.
+Mar  7 04:37:18 ip-172-31-39-254 systemd: Starting This is eb-docker-events daemon...
+Mar  7 04:37:18 ip-172-31-39-254 systemd: Started This is eb-docker-events daemon.
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: [2025-03-07T04:37:18.302Z] Successfully bootstrapped instance.
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: [2025-03-07T04:37:18.306Z] Sending signal 0 to CFN wait condition https://cloudformation-waitcondition-us-east-1.s3.amazonaws.com/arn%3Aaws%3Acloudformation%3Aus-east-1%3A430118820292%3Astack/awseb-e-sjintugmq2-stack/ac1ec8e0-fb0d-11ef-a70b-120b3bd00a23/ac218800-fb0d-11ef-a70b-120b3bd00a23/AWSEBInstanceLaunchWaitHandle?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250307T043604Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86399&X-Amz-Credential=AKIA6L7Q4OWT3JRXU3BZ%2F20250307%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=ad094201984c067278c0147ded149ed4f323d985c6a55dde7f2a4bbd9285238d
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: CloudFormation signaled successfully with status SUCCESS
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: [2025-03-07T04:37:18.567Z] Tailing /var/log/eb-engine.log
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: ******************* eb-engine taillog *******************
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.407025 [INFO] Running command: systemctl show -p PartOf cfn-hup.service
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.416105 [INFO] Running command: systemctl daemon-reload
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.491553 [INFO] Running command: systemctl reset-failed
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.496663 [INFO] Running command: systemctl is-enabled aws-eb.target
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.500148 [INFO] Running command: systemctl enable aws-eb.target
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.579967 [INFO] Running command: systemctl start aws-eb.target
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.583849 [INFO] Running command: systemctl enable cfn-hup.service
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.661315 [INFO] Created symlink from /etc/systemd/system/multi-user.target.wants/cfn-hup.service to /etc/systemd/system/cfn-hup.service.
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.661337 [INFO] Running command: systemctl is-active cfn-hup.service
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.665566 [INFO] cfn-hup process is not running, starting it now
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.665579 [INFO] Running command: systemctl show -p PartOf cfn-hup.service
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.669639 [INFO] Running command: systemctl is-active cfn-hup.service
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.672711 [INFO] Running command: systemctl start cfn-hup.service
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.717296 [INFO] Instance has NOT been bootstrapped
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.717306 [INFO] Executing instruction: SetupPublishLogCronjob
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.717309 [INFO] Setup publish logs cron job...
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.717313 [INFO] Copying file /opt/elasticbeanstalk/config/private/logtasks/cron/publishlogs to /etc/cron.d/publishlogs
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.719445 [INFO] Executing instruction: Start Docker
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.719452 [INFO] Starting Docker...
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.719480 [INFO] Copying file /opt/elasticbeanstalk/config/private/docker-log.conf to /etc/systemd/system/docker.service.d/docker-log.conf
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.721863 [INFO] Copying file /opt/elasticbeanstalk/config/private/docker-rsyslog.conf to /etc/rsyslog.d/docker-log.conf
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.723912 [INFO] Running command: systemctl restart rsyslog.service
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.754075 [INFO] Running command: systemctl show -p PartOf docker.service
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.768215 [INFO] Running command: systemctl daemon-reload
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.874395 [INFO] Running command: systemctl reset-failed
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.878535 [INFO] Running command: systemctl show -p PartOf docker.service
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.889081 [INFO] Running command: systemctl is-active docker.service
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:13.897153 [INFO] Running command: systemctl start docker.service
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:18.096444 [INFO] Instance has NOT been bootstrapped
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:18.096454 [INFO] Executing instruction: Setup Docker Options
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:18.096458 [INFO] Setting up configurations for docker platform
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:18.110343 [INFO] Running command: systemctl show -p PartOf eb-docker-events.service
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:18.118182 [INFO] Running command: systemctl daemon-reload
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:18.176963 [INFO] Running command: systemctl reset-failed
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:18.183478 [INFO] Running command: systemctl enable eb-docker-events.service
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:18.253242 [INFO] Created symlink from /etc/systemd/system/docker.service.wants/eb-docker-events.service to /etc/systemd/system/eb-docker-events.service.
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:18.253285 [INFO] Running command: systemctl show -p PartOf eb-docker-events.service
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:18.259893 [INFO] Running command: systemctl is-active eb-docker-events.service
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:18.263747 [INFO] Running command: systemctl start eb-docker-events.service
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:18.300090 [INFO] Instance has NOT been bootstrapped
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:18.300099 [INFO] Executing instruction: MarkBootstrapped
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:18.300103 [INFO] Starting MarkBootstrapped
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:18.300106 [INFO] Instance has NOT been bootstrapped
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:18.300157 [INFO] Marked instance as Bootstrapped
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:18.300161 [INFO] Executing instruction: Save CFN Stack Info
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:18.300187 [INFO] Executing cleanup logic
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025/03/07 04:37:18.300195 [INFO] Platform Engine finished execution on command: env-launch
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: ******************* End of taillog *******************
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: [2025-03-07T04:37:18.587Z] Tailing /var/log/eb-tools.log
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: ******************* eb-tools taillog *******************
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: ***eb-tools is not available yet.***
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: ******************* End of taillog *******************
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: [2025-03-07T04:37:18.603Z] Tailing /var/log/eb-hooks.log
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: ******************* eb-hooks taillog *******************
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: ***eb-hooks is not available yet.***
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: ******************* End of taillog *******************
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: [2025-03-07T04:37:18.611Z] Tailing /var/log/cfn-init.log
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: ******************* cfn-init taillog *******************
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025-03-07 04:37:10,581 [INFO] -----------------------Starting build-----------------------
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025-03-07 04:37:10,587 [INFO] Running configSets: _OnInstanceBoot
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025-03-07 04:37:10,592 [INFO] Running configSet _OnInstanceBoot
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: + RESULT=0
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: + [[ 0 -ne 0 ]]
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: + exit 0
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025-03-07 04:37:10,595 [INFO] Running config AWSEBBaseConfig
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025-03-07 04:37:10,868 [INFO] Command clearbackupfiles succeeded
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025-03-07 04:37:10,871 [INFO] Running config AWSEBCfnHupEndpointOverride
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025-03-07 04:37:10,875 [INFO] Command clearbackupfiles succeeded
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025-03-07 04:37:10,876 [INFO] ConfigSets completed
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025-03-07 04:37:10,876 [INFO] -----------------------Build complete-----------------------
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: ******************* End of taillog *******************
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: [2025-03-07T04:37:18.636Z] Tailing /var/log/cfn-hup.log
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: ******************* cfn-hup taillog *******************
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025-03-07 04:37:14,020 [DEBUG] CloudFormation client initialized with endpoint https://cloudformation.us-east-1.amazonaws.com
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025-03-07 04:37:14,021 [DEBUG] SQS client initialized with endpoint https://sqs.us-east-1.amazonaws.com
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025-03-07 04:37:14,021 [DEBUG] CloudFormation client initialized with endpoint https://cloudformation.us-east-1.amazonaws.com
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025-03-07 04:37:14,021 [DEBUG] Enabled single threading mode.
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025-03-07 04:37:14,021 [DEBUG] Creating /var/lib/cfn-hup/data
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025-03-07 04:37:14,044 [INFO] No umask value specified in config file. Using the default one: 0o22
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025-03-07 04:37:14,170 [INFO] Pid: 3340
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025-03-07 04:37:14,511 [INFO] Refreshing listener credentials
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 2025-03-07 04:37:14,586 [INFO] Scheduling next credential refresh in 1799.0 seconds
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: ******************* End of taillog *******************
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: 
+Mar  7 04:37:18 ip-172-31-39-254 [eb-cfn-init]: [2025-03-07T04:37:18.667Z] Completed EB Bootstrapping Script.
+Mar  7 04:37:18 ip-172-31-39-254 systemd: Started Execute cloud user/final scripts.
+Mar  7 04:37:18 ip-172-31-39-254 systemd: Reached target Cloud-init target.
+Mar  7 04:37:18 ip-172-31-39-254 systemd: Startup finished in 785ms (kernel) + 3.370s (initrd) + 16.135s (userspace) = 20.290s.
+Mar  7 04:37:21 ip-172-31-39-254 dhclient[2921]: XMT: Solicit on eth0, interval 16280ms.
+Mar  7 04:37:37 ip-172-31-39-254 dhclient[2921]: XMT: Solicit on eth0, interval 32950ms.
+Mar  7 04:37:42 ip-172-31-39-254 docker: 2025/03/07 04:37:42 http: superfluous response.WriteHeader call from go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp.(*respWriterWrapper).WriteHeader (wrap.go:98)
+Mar  7 04:38:10 ip-172-31-39-254 dhclient[2921]: XMT: Solicit on eth0, interval 64990ms.
+Mar  7 04:39:15 ip-172-31-39-254 dhclient[2921]: XMT: Solicit on eth0, interval 126140ms.
+Mar  7 04:40:01 ip-172-31-39-254 systemd: Created slice User Slice of root.
+Mar  7 04:40:01 ip-172-31-39-254 systemd: Started Session 1 of user root.
+Mar  7 04:40:01 ip-172-31-39-254 systemd: Removed slice User Slice of root.
+Mar  7 04:41:21 ip-172-31-39-254 dhclient[2921]: XMT: Solicit on eth0, interval 126280ms.

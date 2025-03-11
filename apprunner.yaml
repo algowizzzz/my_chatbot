@@ -3,14 +3,14 @@ runtime: nodejs16
 build:
   commands:
     build:
-      - cd backend && npm ci
+      - npm install
+      - cd frontend && npm install && npm run build
+      - cd ../backend && npm install
 run:
   command: node backend/index.js
   network:
     port: 5005
-    env: HTTP
+    env: PORT
   env:
-    - name: PORT
-      value: "5005"
     - name: NODE_ENV
-      value: "production"
+      value: production
