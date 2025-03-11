@@ -1,0 +1,110 @@
+/* DocumentList Component Styles */
+.document-list-container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-top: 1px solid var(--border-color);
+  margin-top: 10px;
+}
+
+.document-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.document-list-header h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.upload-doc-btn {
+  background-color: var(--accent-color);
+  border: none;
+}
+
+.upload-doc-btn:hover {
+  background-color: var(--accent-hover);
+}
+
+.empty-document-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md);
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.document-list {
+  overflow-y: auto;
+  max-height: 300px;
+}
+
+.document-list-item {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background-color var(--transition-speed);
+}
+
+.document-list-item:hover {
+  background-color: var(--hover-color);
+}
+
+.document-list-item.selected {
+  background-color: var(--selected-color);
+}
+
+.doc-icon {
+  font-size: 16px;
+  color: var(--text-secondary);
+}
+
+.doc-icon.selected {
+  color: var(--accent-color);
+}
+
+.doc-title {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin-bottom: 2px;
+}
+
+.doc-info {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.2;
+  max-height: 1.2em;
+  overflow: hidden;
+}
+
+.doc-action-btn {
+  opacity: 0.6;
+  transition: opacity var(--transition-speed);
+}
+
+.doc-action-btn:hover {
+  opacity: 1;
+}
+
+.doc-action-btn.delete:hover {
+  color: var(--error-color);
+}
+
+.document-selection-info {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--spacing-xs) var(--spacing-md);
+  background-color: var(--subtle-background);
+  font-size: 0.8rem;
+}
+
+.document-checkbox {
+  margin-right: 8px;
+}

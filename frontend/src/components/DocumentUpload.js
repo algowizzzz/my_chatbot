@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './DocumentUpload.css';
 
+// Use the same API base URL as the rest of the application
+const API_BASE_URL = 'http://localhost:5005';
+
 function DocumentUpload({ onUploadSuccess }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -16,7 +19,7 @@ function DocumentUpload({ onUploadSuccess }) {
       setError(null);
       setProgress(0);
 
-      const response = await axios.post('/api/documents/upload', formData, {
+      const response = await axios.post(`${API_BASE_URL}/api/documents/upload`, formData, {
         onUploadProgress: (progressEvent) => {
           const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
           setProgress(percentCompleted);

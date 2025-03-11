@@ -1,0 +1,110 @@
+/* ChatList Component Styles */
+.chat-list-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.chat-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chat-list-header h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.new-chat-btn {
+  background-color: var(--accent-color);
+  border: none;
+}
+
+.new-chat-btn:hover {
+  background-color: var(--accent-hover);
+}
+
+/* Bulk Delete Styles */
+.chat-list-item.selected {
+  background-color: rgba(24, 144, 255, 0.1);
+}
+
+.chat-list-header .ant-space {
+  flex-wrap: wrap;
+}
+
+.empty-chat-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: var(--spacing-lg);
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.chat-list {
+  overflow-y: auto;
+  height: calc(100% - 60px);
+}
+
+.chat-list-item {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  transition: background-color var(--transition-speed);
+}
+
+.chat-list-item:hover {
+  background-color: var(--hover-color);
+}
+
+.chat-list-item.active {
+  background-color: var(--selected-color);
+}
+
+.chat-icon {
+  font-size: 16px;
+  color: var(--text-secondary);
+}
+
+.chat-icon.active {
+  color: var(--accent-color);
+}
+
+.chat-title {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin-bottom: 2px;
+}
+
+.chat-preview {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.2;
+  max-height: 1.2em;
+  overflow: hidden;
+}
+
+.chat-action-btn {
+  opacity: 0.6;
+  transition: opacity var(--transition-speed);
+}
+
+.chat-action-btn:hover {
+  opacity: 1;
+}
+
+.chat-action-btn.delete:hover {
+  color: var(--error-color);
+}

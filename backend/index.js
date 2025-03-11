@@ -2,8 +2,13 @@ require('dotenv').config();  // Must be first line
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const path = require('path');
+const { errorHandler } = require('./middleware/errorHandler');
 const documentRoutes = require('./routes/documentRoutes');
 const graphRagRouter = require('./routes/graphRag');
+const chatRoutes = require('./routes/chatRoutes');
+const chatMessageRoutes = require('./routes/chatMessageRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 // Verify environment variables are loaded
 console.log('Environment Check:', {
@@ -21,30 +26,20 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // Middleware
 app.use(cors());
-app.use(express.json());
+
+// Increase request size limits for document uploads
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 // Routes
 app.use('/api/documents', documentRoutes);
 app.use('/api/graph', graphRagRouter);
+app.use('/api/chats', chatRoutes);
+app.use('/api/messages', chatMessageRoutes); // Renamed from /api/chat for consistency
+app.use('/api/auth', authRoutes);
 
-// Add chats endpoints
-app.get('/api/chats', async (req, res) => {
-    try {
-        // For now, return empty array until we implement chat storage
-        res.json([]);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
-
-app.patch('/api/chats/:id', async (req, res) => {
-    try {
-        // For now, just return success
-        res.json({ success: true });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
+// Error handling middleware (must be after routes)
+app.use(errorHandler);
 
 // Initialize vector store
 const vectorStore = require('./utils/vectorStore');
@@ -54,7 +49,26 @@ vectorStore.initialize().then(() => {
   console.error('Vector store initialization failed:', err);
 });
 
-const PORT = process.env.PORT || 5004;
+// Serve static files from the React app in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+  // Handle any requests that don't match the ones above
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+  });
+}
+
+// Parse command line arguments for port
+const args = process.argv.slice(2);
+let portArg;
+args.forEach(arg => {
+  if (arg.startsWith('--port=')) {
+    portArg = arg.split('=')[1];
+  }
+});
+
+const PORT = portArg || process.env.PORT || 5005;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

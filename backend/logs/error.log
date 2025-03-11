@@ -1,0 +1,1 @@
+{"level":"error","message":"(node:60306) Warning: Accessing non-existent property 'openai' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)","timestamp":"2025-03-07T03:54:27.414Z"}

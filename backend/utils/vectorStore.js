@@ -115,12 +115,34 @@ class VectorStoreManager {
   }
 
   async deleteDocument(documentId) {
-    // Delete all vectors associated with the document
-    await this.index.deleteMany({
-      filter: {
-        documentId: documentId
+    try {
+      console.log(`Attempting to delete vectors for document: ${documentId}`);
+      
+      // First, query to get all vector IDs associated with this document
+      const queryResponse = await this.index.query({
+        topK: 100, // Fetch up to 100 vectors for this document
+        filter: { documentId: documentId },
+        includeMetadata: true
+      });
+      
+      if (!queryResponse.matches || queryResponse.matches.length === 0) {
+        console.log(`No vectors found for document: ${documentId}`);
+        return;
       }
-    });
+      
+      console.log(`Found ${queryResponse.matches.length} vectors to delete for document: ${documentId}`);
+      
+      // Extract the vector IDs
+      const vectorIds = queryResponse.matches.map(match => match.id);
+      
+      // Delete vectors one by one using their IDs (no filtering)
+      await this.index.deleteMany(vectorIds);
+      
+      console.log(`Successfully deleted ${vectorIds.length} vectors for document: ${documentId}`);
+    } catch (error) {
+      console.error(`Error deleting vectors for document ${documentId}:`, error);
+      throw error;
+    }
   }
 
   async getRelatedChunks(chunkId, maxResults = 3) {

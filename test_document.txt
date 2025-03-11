@@ -1,0 +1,1 @@
+This is a test document for Graph RAG. It contains information about artificial intelligence and knowledge graphs. Knowledge graphs are structured representations of facts that can be used for reasoning and question answering.

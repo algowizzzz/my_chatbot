@@ -1,0 +1,52 @@
+/* 
+ * Algowizz Chatbot Theme
+ * Color palette and design variables based on UI specifications
+ */
+
+:root {
+  /* Color Palette */
+  --primary-background: #F4F7FC;
+  --sidebar-background: #2E3A59;
+  --header-background: #2E3A59;
+  --accent-color: #2196F3;
+  --text-primary: #202124;
+  --text-on-dark: #FFFFFF;
+  --subtle-border: #DADCE0;
+  
+  /* Chat Message Colors */
+  --user-message-bg: #FFFFFF;
+  --user-message-border: #DADCE0;
+  --chatbot-message-bg: #EAF3FF;
+  --chatbot-message-text: #202124;
+  
+  /* Hover States */
+  --sidebar-hover: #24304D;
+  --accent-hover: #1A237E;
+  
+  /* Dimensions */
+  --sidebar-width: 250px;
+  --input-height: 50px;
+  --border-radius: 8px;
+  
+  /* Spacing */
+  --spacing-xs: 6px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 20px;
+  
+  /* Typography */
+  --font-family: "Roboto", Arial, sans-serif;
+  --font-size-base: 16px;
+  --font-size-sm: 14px;
+  --font-size-lg: 20px;
+  --line-height: 1.5;
+  
+  /* Font Weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  
+  /* Transitions */
+  --transition-speed: 0.2s;
+}

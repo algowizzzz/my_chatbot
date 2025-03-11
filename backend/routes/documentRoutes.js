@@ -9,6 +9,7 @@ const vectorStore = require('../utils/vectorStore');
 const documentProcessor = require('../utils/textSplitter');
 const { ChatOpenAI } = require('@langchain/openai');
 const { HumanMessage, SystemMessage } = require('@langchain/core/messages');
+const { ApiError } = require('../middleware/errorHandler');
 
 // Configure multer for memory storage
 const upload = multer({ 
@@ -76,69 +77,130 @@ router.post('/upload', upload.single('document'), async (req, res) => {
       });
     }
 
+    // Log request details for debugging
+    console.log('Document upload request:', {
+      fileName: req.file.originalname,
+      fileType: req.file.mimetype,
+      fileSize: req.file.size,
+      userId: req.body.userId || 'not provided'
+    });
+
     // Process document and store in MongoDB
+    // Use a default 'test-user' if userId is not provided
+    const userId = req.body.userId || 'test-user';
+    console.log('Using userId for document:', userId);
+    
     const document = new Document({
       name: req.file.originalname,
-      userId: req.body.userId,
+      userId: userId,
       type: req.file.mimetype
     });
-    await document.save();
+    
+    try {
+      await document.save();
+      console.log('Document metadata saved to MongoDB with ID:', document._id);
+    } catch (dbError) {
+      console.error('MongoDB save error:', dbError);
+      return res.status(500).json({
+        error: 'Failed to save document metadata',
+        details: dbError.message,
+        code: 'DB_SAVE_ERROR'
+      });
+    }
 
     // Process and store vectors
-    const processed = await documentProcessor.processDocument(text);
-    await vectorStore.addDocumentChunks(document._id, processed.chunks);
-
-    res.json({
-      message: 'Document processed successfully',
-      documentId: document._id,
-      ...processed.metadata
-    });
+    try {
+      const processed = await documentProcessor.processDocument(text);
+      await vectorStore.addDocumentChunks(document._id, processed.chunks);
+      console.log('Document vectors stored in Pinecone, chunks:', processed.chunks.length);
+      
+      res.json({
+        message: 'Document processed successfully',
+        documentId: document._id,
+        userId: userId,
+        name: document.name,
+        ...processed.metadata
+      });
+    } catch (vectorError) {
+      console.error('Vector processing error:', vectorError);
+      // Document metadata was saved but vector processing failed
+      // We should clean up the document from MongoDB
+      try {
+        await Document.findByIdAndDelete(document._id);
+        console.log('Cleaned up document metadata after vector processing failure');
+      } catch (cleanupError) {
+        console.error('Failed to clean up document after vector error:', cleanupError);
+      }
+      
+      return res.status(500).json({
+        error: 'Failed to process document vectors',
+        details: vectorError.message,
+        code: 'VECTOR_PROCESSING_ERROR'
+      });
+    }
 
   } catch (error) {
     console.error('Upload error:', error);
     res.status(500).json({ 
       error: 'Failed to process document',
-      details: error.message 
+      details: error.message,
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined,
+      code: 'GENERAL_ERROR'
     });
   }
 });
 
-// Add route to get user's documents
-router.get('/list/:userId', async (req, res) => {
+// Get all documents for a user
+router.get('/', async (req, res, next) => {
   try {
-    const documents = await Document.find({ userId: req.params.userId })
+    // Get userId from authenticated user or request parameter
+    // In a production app, this would come from the authenticated user
+    const userId = req.query.userId || 'test-user';
+    
+    const documents = await Document.find({ userId })
       .select('name type createdAt _id')
       .sort('-createdAt');
+    
     res.json(documents);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch documents' });
+    next(new ApiError('Failed to fetch documents', 500, error.message));
   }
 });
 
-// Add route to rename document
-router.put('/rename/:documentId', async (req, res) => {
+// Rename a document
+router.put('/:documentId', async (req, res, next) => {
   try {
     const { name } = req.body;
+    
+    if (!name) {
+      return next(new ApiError('Document name is required', 400));
+    }
+    
     const document = await Document.findByIdAndUpdate(
       req.params.documentId,
       { name },
       { new: true }
     );
+    
+    if (!document) {
+      return next(new ApiError('Document not found', 404));
+    }
+    
     res.json(document);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to rename document' });
+    next(new ApiError('Failed to update document', 500, error.message));
   }
 });
 
 // 2. Document Query Route
-router.post('/query', async (req, res) => {
+router.post('/query', async (req, res, next) => {
   try {
     console.log('Query received:', req.body);
     
     const { query, documentId } = req.body;
     
     if (!query) {
-      return res.status(400).json({ error: 'Query is required' });
+      return next(new ApiError('Query is required', 400));
     }
 
     // Search for relevant chunks
@@ -186,19 +248,19 @@ router.post('/query', async (req, res) => {
   }
 });
 
-// Add new route for direct ChatGPT queries (non-RAG)
-router.post('/query/direct', async (req, res) => {
+// Direct ChatGPT queries (non-RAG)
+router.post('/query/direct', async (req, res, next) => {
   try {
     const { query } = req.body;
     
     if (!query) {
-      return res.status(400).json({ error: 'Query is required' });
+      return next(new ApiError('Query is required', 400));
     }
 
     console.log('Direct query received:', query);
 
     const messages = [
-      new SystemMessage('You are a helpful assistant. Answer questions based on your general knowledge.'),
+      new SystemMessage('You are Algowizz, a BusinessGPT designed to assist businesses with in-depth business analysis and day-to-day operational tasks. Leverage your extensive business expertise to provide clear, actionable insights and solutions. When necessary, you have access to retrieval augmented generation (RAG) capabilities, including internal documents, to enrich your responses with accurate and contextual data. Ensure that all your answers are professional, analytical, and tailored to the needs of a business audience.'),
       new HumanMessage(query)
     ];
 
@@ -218,4 +280,26 @@ router.post('/query/direct', async (req, res) => {
   }
 });
 
-module.exports = router; 
+// Delete a document
+router.delete('/:documentId', async (req, res, next) => {
+  try {
+    const document = await Document.findByIdAndDelete(req.params.documentId);
+    
+    if (!document) {
+      return next(new ApiError('Document not found', 404));
+    }
+    
+    // Also delete associated vector embeddings
+    await vectorStore.deleteDocument(req.params.documentId);
+    
+    res.json({ 
+      success: true, 
+      message: 'Document deleted successfully',
+      documentId: req.params.documentId
+    });
+  } catch (error) {
+    next(new ApiError('Failed to delete document', 500, error.message));
+  }
+});
+
+module.exports = router;

@@ -1,0 +1,56 @@
+/* ModeSelector Component Styles */
+.mode-selector-container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-top: 1px solid var(--border-color);
+  margin-top: 10px;
+}
+
+.mode-selector-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.mode-selector-header h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.mode-selector-content {
+  padding: var(--spacing-sm) var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mode-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.mode-radio-button {
+  width: 100%;
+  text-align: left;
+  height: auto;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mode-label {
+  margin-left: 4px;
+}
+
+.mode-description {
+  font-size: 0.8rem;
+  padding: 0 4px;
+}

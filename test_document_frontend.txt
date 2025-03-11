@@ -1,0 +1,1 @@
+This is a test document for our chatbot application. It contains some sample text that will be processed by our document upload system. The system should extract metadata and create chunks from this content.

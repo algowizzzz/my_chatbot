@@ -1,0 +1,6 @@
+John Smith is the CEO of TechCorp. He leads a team of 500 employees.
+Sarah Johnson is the CTO and reports directly to John Smith.
+TechCorp was founded in 2010 and specializes in AI technology.
+The company's headquarters is located in San Francisco.
+Sarah Johnson previously worked at Google as a Senior Engineer.
+TechCorp's main product, AIAssist, has over 1 million users worldwide.
