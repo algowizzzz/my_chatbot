@@ -1,384 +1,612 @@
-import React, { useState, useRef, useEffect } from 'react';
-import Login from './components/Login';
-import Register from './components/Register';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import ChatWindow from './components/ChatWindow';
+import ChatList from './components/ChatList';
+import DocumentUpload from './components/DocumentUpload';
+import LandingPage from './components/LandingPage';
+import { Layout, Button, message, Modal, List, Select } from 'antd';
+import { 
+  MessageOutlined, 
+  MenuFoldOutlined, 
+  MenuUnfoldOutlined, 
+  FileTextOutlined, 
+  UploadOutlined,
+  DeleteOutlined,
+  ExclamationCircleOutlined,
+  RobotOutlined
+} from '@ant-design/icons';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import ConfigPage from './pages/ConfigPage';
+const { Content, Sider } = Layout;
+
+// Add API base URL
+export const API_BASE_URL = 'http://localhost:5005'; // backend server port
 
 function App() {
-  const [authState, setAuthState] = useState('login');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userId, setUserId] = useState(null);
-  const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState('');
-  const [currentChatId, setCurrentChatId] = useState(null);
+  const [chatHistory, setChatHistory] = useState([]);
+  const [currentChat, setCurrentChat] = useState(null);
   const [chats, setChats] = useState([]);
-  const messagesEndRef = useRef(null);
+  const [mode, setMode] = useState('direct'); // 'direct', 'doc_qa', or 'graph_rag'
+  const [selectedDocs, setSelectedDocs] = useState([]);
+  const [rightSiderVisible, setRightSiderVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [documents, setDocuments] = useState([]);
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [uploading, setUploading] = useState(false);
-  const [uploadProgress, setUploadProgress] = useState(0);
-  const [selectedDocument, setSelectedDocument] = useState(null);
-  const [queryResult, setQueryResult] = useState(null);
-  const [selectedDocuments, setSelectedDocuments] = useState(new Set());
-  const [isMultiSearchMode, setIsMultiSearchMode] = useState(false);
-  const [searchedDocs, setSearchedDocs] = useState([]);
+  const [uploadModalVisible, setUploadModalVisible] = useState(false);
+  const [deleteDocsModalVisible, setDeleteDocsModalVisible] = useState(false);
+  const [documentToDelete, setDocumentToDelete] = useState(null);
 
-  // Fetch user's chats when logged in
+  // Load chats on mount
   useEffect(() => {
-    if (isLoggedIn && userId) {
-      fetchChats();
-    }
-  }, [isLoggedIn, userId]);
-
-  // Add this effect to fetch existing documents on load
-  useEffect(() => {
-    if (userId) {
+    fetchChats();
+    if (mode === 'rag') {
       fetchDocuments();
     }
-  }, [userId]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  
+  // Fetch documents when mode changes to document-based modes
+  useEffect(() => {
+    if (mode === 'doc_qa' || mode === 'graph_rag') {
+      fetchDocuments();
+    }
+  }, [mode]);
+
+  // Update UI based on mode
+  useEffect(() => {
+    if (mode === 'direct') {
+      setSelectedDocs([]); // Clear selected docs when switching to direct mode
+    }
+  }, [mode]);
 
   const fetchChats = async () => {
     try {
-      const response = await fetch(`http://localhost:5004/user/${userId}/chats`);
+      const response = await fetch(`${API_BASE_URL}/api/chats`);
       const data = await response.json();
       setChats(data);
-      
-      // If no current chat, set the most recent one
-      if (data.length > 0 && !currentChatId) {
-        setCurrentChatId(data[0]._id);
-        setMessages(data[0].messages || []);
-      } else if (data.length === 0) {
-        // If no chats exist, create one
-        handleNewChat();
+      if (data.length > 0 && !currentChat) {
+        setCurrentChat(data[0]);
+        fetchChatHistory(data[0]._id);
       }
     } catch (error) {
-      console.error('Error fetching chats:', error);
+      console.error('Failed to fetch chats:', error);
     }
   };
-
+  
   const fetchDocuments = async () => {
     try {
-      const response = await fetch(`http://localhost:5004/documents/${userId}`);
+      const response = await fetch(`${API_BASE_URL}/api/documents/list/test-user`);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch documents: ${response.statusText}`);
+      }
       const data = await response.json();
       setDocuments(data);
     } catch (error) {
       console.error('Error fetching documents:', error);
+      message.error('Failed to fetch documents');
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!input.trim()) return;
-
+  const fetchChatHistory = async (chatId) => {
     try {
-      const endpoint = isMultiSearchMode
-        ? `http://localhost:5004/query-multiple`
-        : 'http://localhost:5004/chat';
-
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 
-          message: input,
-          userId: userId
-        }),
-      });
-      
+      const response = await fetch(`${API_BASE_URL}/api/chats/${chatId}/messages`);
       const data = await response.json();
-      
-      // Add user message
-      setMessages(prev => [...prev, { role: 'user', content: input }]);
-      
-      // If in multi-search mode, show searched documents
-      if (isMultiSearchMode && data.searchedDocs) {
-        setSearchedDocs(data.searchedDocs);
-        setMessages(prev => [...prev, {
-          role: 'system',
-          content: `🔍 Searched documents: ${data.searchedDocs.join(', ')}`
-        }]);
-      }
-      
-      // Add AI response
-      setMessages(prev => [...prev, { role: 'assistant', content: data.message }]);
-      setInput('');
+      setChatHistory(data);
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Failed to fetch chat history:', error);
     }
   };
 
   const handleNewChat = async () => {
     try {
-      const response = await fetch(`http://localhost:5004/user/${userId}/chats`, {
-        method: 'POST'
-      });
-      const newChat = await response.json();
-      setCurrentChatId(newChat._id);
-      setMessages([]);
-      setInput('');
-      fetchChats();
-    } catch (error) {
-      console.error('Error creating new chat:', error);
-    }
-  };
-
-  const switchChat = async (chatId) => {
-    try {
-      const chat = chats.find(c => c._id === chatId);
-      if (chat) {
-        setCurrentChatId(chatId);
-        setMessages(chat.messages || []);
-      }
-    } catch (error) {
-      console.error('Error switching chat:', error);
-    }
-  };
-
-  const handleLogin = (userData) => {
-    setUserId(userData.userId);
-    setIsLoggedIn(true);
-    // Create initial chat
-    handleNewChat();
-  };
-
-  const handleFileSelect = (event) => {
-    const file = event.target.files[0];
-    setSelectedFile(file);
-    setUploadProgress(0);
-  };
-
-  const handleUpload = async () => {
-    if (!selectedFile) return;
-
-    setUploading(true);
-    setUploadProgress(10); // Start progress
-
-    const formData = new FormData();
-    formData.append('document', selectedFile);
-    formData.append('userId', userId);
-
-    try {
-      const response = await fetch('http://localhost:5004/upload-document', {
+      const response = await fetch(`${API_BASE_URL}/api/chats/new`, {
         method: 'POST',
-        body: formData,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: 'New Chat',
+          userId: 'test-user' // We'll replace this with actual user ID later
+        })
       });
 
-      setUploadProgress(90); // Almost done
-
-      const data = await response.json();
-      if (response.ok) {
-        setDocuments(prev => [...prev, data]);
-        setSelectedFile(null);
-        setUploadProgress(100);
-      } else {
-        throw new Error(data.error || 'Upload failed');
+      if (!response.ok) {
+        throw new Error('Failed to create new chat');
       }
+
+      const newChat = await response.json();
+      console.log('Created new chat:', newChat);
+      
+      setChats(prev => Array.isArray(prev) ? [newChat, ...prev] : [newChat]);
+      setCurrentChat(newChat);
+      setChatHistory([]);
+      message.success('New chat created');
     } catch (error) {
-      console.error('Error uploading document:', error);
-      alert('Failed to upload document');
-    } finally {
-      setUploading(false);
-      setTimeout(() => setUploadProgress(0), 1000); // Reset progress after 1s
+      console.error('Failed to create new chat:', error);
+      message.error('Failed to create new chat');
     }
   };
 
-  const handleDocumentClick = async (doc) => {
-    setSelectedDocument(doc);
-    // Clear previous messages when selecting a new document
-    setMessages([]);
+  const handleChatSelect = (chat) => {
+    setCurrentChat(chat);
+    fetchChatHistory(chat._id);
   };
 
-  const handleDeleteDocument = async (docId, e) => {
-    e.stopPropagation(); // Prevent document selection when clicking delete
-
-    if (!window.confirm('Are you sure you want to delete this document?')) {
+  const handleChatUpdate = (updatedChat) => {
+    if (!updatedChat || !updatedChat._id) {
+      console.error('Invalid chat data received:', updatedChat);
       return;
     }
 
-    try {
-      const response = await fetch(`http://localhost:5004/documents/${docId}`, {
-        method: 'DELETE',
-      });
-
-      if (response.ok) {
-        // Remove from documents list
-        setDocuments(docs => docs.filter(doc => doc._id !== docId));
-        
-        // Clear selection if deleted document was selected
-        if (selectedDocument?._id === docId) {
-          setSelectedDocument(null);
-        }
-      } else {
-        throw new Error('Failed to delete document');
-      }
-    } catch (error) {
-      console.error('Error deleting document:', error);
-      alert('Failed to delete document');
+    // Immediately update the chat in the list
+    setChats(prevChats => prevChats.map(chat => 
+      chat._id === updatedChat._id ? { ...chat, ...updatedChat } : chat
+    ));
+    
+    // Update current chat if it's the one being renamed
+    if (currentChat?._id === updatedChat._id) {
+      setCurrentChat(prevChat => ({ ...prevChat, ...updatedChat }));
     }
   };
 
-  const handleDocumentSelect = (docId, e) => {
-    e.stopPropagation();
-    setSelectedDocuments(prev => {
-      const newSelection = new Set(prev);
-      if (newSelection.has(docId)) {
-        newSelection.delete(docId);
+
+
+  // This function is no longer needed as we're directly setting selectedDocs in the dropdown
+  // Keeping it for backward compatibility with any other components
+  const handleDocSelect = (docId) => {
+    setSelectedDocs(prev => {
+      const isSelected = prev.includes(docId);
+      if (isSelected) {
+        return prev.filter(id => id !== docId);
       } else {
-        newSelection.add(docId);
+        return [...prev, docId];
       }
-      return newSelection;
     });
   };
 
-  if (!isLoggedIn) {
-    if (authState === 'login') {
-      return (
-        <Login 
-          onLogin={handleLogin}
-          switchToRegister={() => setAuthState('register')}
-        />
-      );
-    } else {
-      return (
-        <Register 
-          onRegister={handleLogin}
-          switchToLogin={() => setAuthState('login')}
-        />
-      );
+  const handleSendMessage = async (message) => {
+    try {
+      setLoading(true);
+      // Add user message immediately to show in UI
+      const newUserMessage = { role: 'user', content: message };
+      setChatHistory(prev => [...prev, newUserMessage]);
+
+      // Use the correct endpoint based on mode
+      let endpoint, body;
+      
+      switch(mode) {
+        case 'doc_qa':
+          endpoint = `${API_BASE_URL}/api/documents/query`;
+          body = { query: message, documentId: selectedDocs[0] };
+          break;
+        case 'graph_rag':
+          endpoint = `${API_BASE_URL}/api/documents/query/graph`;
+          body = { query: message, documentId: selectedDocs[0] };
+          break;
+        default: // direct mode
+          endpoint = `${API_BASE_URL}/api/documents/query/direct`;
+          body = { query: message };
+      }
+
+      console.log('Sending request to:', endpoint);
+      console.log('With body:', body);
+
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Server error:', errorText);
+        throw new Error(`Server error: ${response.status} ${errorText}`);
+      }
+
+      const data = await response.json();
+      console.log('Server response:', data);
+      
+      // Add assistant's response to chat with analysis if available
+      const assistantMessage = { 
+        role: 'assistant', 
+        content: data.answer,
+        analysis: data.analysis // Include the chunk analysis data
+      };
+      setChatHistory(prev => [...prev, assistantMessage]);
+
+      // Save messages to backend if you're tracking chat history
+      if (currentChat) {
+        await fetch(`${API_BASE_URL}/api/chats/${currentChat._id}/messages`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ 
+            messages: [newUserMessage, assistantMessage]
+          })
+        });
+      }
+    } catch (error) {
+      console.error('Detailed error:', error);
+      setChatHistory(prev => [...prev, {
+        role: 'assistant',
+        content: `Error: ${error.message}`
+      }]);
+      // Use notification instead of message to avoid conflicts
+      console.error('Failed to send message');
+      // Display error in chat instead of using message.error
+      // This avoids potential conflicts with Ant Design's message API
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
-  return (
-    <div className="app-container">
-      <div className="sidebar">
-        <button onClick={handleNewChat} className="new-chat-button">
-          New Chat
-        </button>
-        <div className="chats-list">
-          {Array.isArray(chats) && chats.map(chat => (
-            <div
-              key={chat._id}
-              className={`chat-item ${currentChatId === chat._id ? 'active' : ''}`}
-              onClick={() => switchChat(chat._id)}
-            >
-              {chat.title || 'New Chat'}
-            </div>
-          ))}
-        </div>
-      </div>
-      <main className="main-content">
-        <div className="header">
-          <h1 className="title">DeepLearnHQ</h1>
-          {selectedDocument && (
-            <div className="selected-document-info">
-              Querying: {selectedDocument.title}
-              <button 
-                onClick={() => setSelectedDocument(null)}
-                className="clear-document-button"
-              >
-                ✕
-              </button>
-            </div>
-          )}
-        </div>
-        <div className="chat-messages">
-          {messages.map((message, index) => (
-            <div key={index} className={`message ${message.role}`}>
-              <div className="message-content">{message.content}</div>
-            </div>
-          ))}
-          <div ref={messagesEndRef} />
-        </div>
+  const handleDeleteChat = async (chatId) => {
+    Modal.confirm({
+      title: 'Delete Chat',
+      icon: <ExclamationCircleOutlined />,
+      content: 'Are you sure you want to delete this chat? This action cannot be undone.',
+      okText: 'Delete',
+      okType: 'danger',
+      cancelText: 'Cancel',
+      onOk: async () => {
+        try {
+          console.log(`Attempting to delete chat with ID: ${chatId}`);
+          const deleteUrl = `${API_BASE_URL}/api/chats/${chatId}`;
+          console.log(`DELETE request to: ${deleteUrl}`);
+          
+          const response = await fetch(deleteUrl, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+          
+          console.log(`Delete chat response status: ${response.status}`);
+          
+          if (!response.ok) {
+            const errorText = await response.text();
+            console.error(`Server error response: ${errorText}`);
+            throw new Error(`Failed to delete chat: ${response.status} ${errorText}`);
+          }
 
-        <form onSubmit={handleSubmit} className="input-form">
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Type your message..."
-            className="message-input"
-          />
-          <button type="submit" className="send-button">Send</button>
-        </form>
-      </main>
+          const responseData = await response.json();
+          console.log('Delete chat response data:', responseData);
 
-      <div className="document-sidebar">
-        <div className="document-header">
-          <div className="document-header-top">
-            <h2>Documents</h2>
-            <button 
-              className={`multi-search-toggle ${isMultiSearchMode ? 'active' : ''}`}
-              onClick={() => {
-                setIsMultiSearchMode(!isMultiSearchMode);
-                setSearchedDocs([]);
-              }}
-              title={isMultiSearchMode ? "Semantic search across all documents" : "Single document mode"}
-            >
-              {isMultiSearchMode ? 'Semantic Search' : 'Single Doc'}
-            </button>
-          </div>
-          <div className="upload-section">
-            <input
-              type="file"
-              onChange={handleFileSelect}
-              accept=".txt,.pdf"
-              className="file-input"
-              id="file-input"
-            />
-            <label htmlFor="file-input" className="file-label">
-              {uploading ? 'Uploading...' : 'Choose File'}
-            </label>
-            {selectedFile && (
-              <>
-                <div className="selected-file">
-                  {selectedFile.name}
-                </div>
-                <button 
-                  onClick={handleUpload} 
-                  className="upload-button"
-                  disabled={uploading}
-                >
-                  {uploading ? 'Uploading...' : 'Upload'}
-                </button>
-              </>
-            )}
-            {uploadProgress > 0 && (
-              <div className="progress-bar-container">
-                <div 
-                  className="progress-bar" 
-                  style={{ width: `${uploadProgress}%` }}
-                />
-              </div>
-            )}
-          </div>
-        </div>
-        <div className="documents-list">
-          {documents.map((doc) => (
-            <div 
-              key={doc._id} 
-              className={`document-item ${
-                searchedDocs.includes(doc.title) ? 'searched' : ''
-              }`}
-              onClick={() => !isMultiSearchMode && handleDocumentClick(doc)}
-            >
-              <div className="document-info">
-                <span className="document-title">{doc.title}</span>
-                <span className="document-date">
-                  {new Date(doc.createdAt).toLocaleDateString()}
+          // Update the chats state to remove the deleted chat
+          setChats(prevChats => prevChats.filter(chat => chat._id !== chatId));
+          
+          // If the deleted chat was the current chat, select the first available chat
+          if (currentChat?._id === chatId) {
+            // Important: Use the updated chats array, not the stale one
+            const remainingChats = chats.filter(chat => chat._id !== chatId);
+            if (remainingChats.length > 0) {
+              setCurrentChat(remainingChats[0]);
+              fetchChatHistory(remainingChats[0]._id);
+            } else {
+              setCurrentChat(null);
+              setChatHistory([]);
+            }
+          }
+
+          message.success('Chat deleted');
+        } catch (error) {
+          console.error('Error deleting chat:', error);
+          message.error(`Failed to delete chat: ${error.message}`);
+        }
+      },
+      // Make sure the modal is destroyed when closed
+      destroyOnClose: true
+    });
+  };
+
+  const handleDeleteDocument = async (documentId) => {
+    Modal.confirm({
+      title: 'Delete Document',
+      icon: <ExclamationCircleOutlined />,
+      content: 'Are you sure you want to delete this document? This action cannot be undone.',
+      okText: 'Delete',
+      okType: 'danger',
+      cancelText: 'Cancel',
+      onOk: async () => {
+        try {
+          setLoading(true);
+          console.log(`Attempting to delete document with ID: ${documentId}`);
+          const deleteUrl = `${API_BASE_URL}/api/documents/${documentId}?userId=test-user`;
+          console.log(`DELETE request to: ${deleteUrl}`);
+          
+          const response = await fetch(deleteUrl, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+          
+          console.log(`Delete document response status: ${response.status}`);
+          
+          if (!response.ok) {
+            const errorText = await response.text();
+            console.error(`Server error response: ${errorText}`);
+            throw new Error(`Failed to delete document: ${response.status} ${errorText}`);
+          }
+          
+          const responseData = await response.json();
+          console.log('Delete document response data:', responseData);
+          
+          // Remove from selected docs if it was selected
+          if (selectedDocs.includes(documentId)) {
+            setSelectedDocs(prev => prev.filter(id => id !== documentId));
+          }
+          
+          // Refresh documents list
+          fetchDocuments();
+          message.success(responseData.message);
+        } catch (error) {
+          console.error('Error deleting document:', error);
+          message.error(`Failed to delete document: ${error.message}`);
+        } finally {
+          setLoading(false);
+        }
+      }
+    });
+  };
+
+  const ChatbotApp = () => (
+    <Layout style={{ height: '100vh' }}>
+            {/* Top header with logo - full width */}
+            <div style={{ 
+              position: 'fixed', 
+              top: 0, 
+              left: 0, 
+              right: 0, 
+              backgroundColor: '#fff',
+              borderBottom: '1px solid #f0f0f0',
+              padding: '12px 24px',
+              display: 'flex',
+              justifyContent: 'flex-start',
+              alignItems: 'center',
+              zIndex: 100
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <RobotOutlined style={{ fontSize: '24px', color: '#1890ff' }} />
+                <span style={{ fontSize: '18px', fontWeight: 600, color: '#1890ff' }}>
+                  AlgoWiz AI
                 </span>
               </div>
-              <button 
-                className="delete-document-button"
-                onClick={(e) => handleDeleteDocument(doc._id, e)}
-                title="Delete document"
-              >
-                ×
-              </button>
             </div>
-          ))}
-        </div>
-      </div>
-    </div>
+            
+            <Sider
+              width={280}
+              style={{
+                backgroundColor: '#fff',
+                borderRight: '1px solid #f0f0f0',
+                height: 'calc(100vh - 50px)',
+                position: 'fixed',
+                left: 0,
+                top: '50px',
+                zIndex: 1
+              }}
+            >
+              <div style={{ 
+                padding: '16px',
+                borderBottom: '1px solid #f0f0f0',
+                backgroundColor: '#fff'
+              }}>
+                <Select
+                  value={mode}
+                  onChange={(value) => setMode(value)}
+                  style={{ width: '100%', marginBottom: '10px' }}
+                  options={[
+                    { value: 'direct', label: 'General ChatGPT' },
+                    { value: 'doc_qa', label: 'Document Q&A' },
+                    { value: 'graph_rag', label: 'Graph RAG' }
+                  ]}
+                />
+                
+                {/* Document Selection UI - Shown in both document-based modes */}
+                {(mode === 'doc_qa' || mode === 'graph_rag') && (
+                  <div style={{ marginBottom: '16px', borderTop: '1px solid #f0f0f0', paddingTop: '16px' }}>
+                    <div style={{ marginBottom: '10px' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                        <span style={{ fontWeight: 500 }}>Documents</span>
+                        <span style={{ color: '#8c8c8c', fontSize: '12px' }}>{documents.length} available</span>
+                      </div>
+                      <Select
+                        placeholder="Select documents"
+                        mode="multiple"
+                        style={{ width: '100%', marginBottom: '10px' }}
+                        value={selectedDocs}
+                        onChange={(values) => {
+                          // Handle multiple document selection
+                          setSelectedDocs(values);
+                        }}
+                        optionLabelProp="label"
+                        maxTagCount={2}
+                        dropdownRender={(menu) => (
+                          <div>
+                            {menu}
+                            {documents.length > 0 && (
+                              <div style={{ padding: '8px', borderTop: '1px solid #e8e8e8' }}>
+                                <Button 
+                                  type="text" 
+                                  danger 
+                                  icon={<DeleteOutlined />}
+                                  onClick={() => setDeleteDocsModalVisible(true)}
+                                  size="small"
+                                  style={{ width: '100%', textAlign: 'left' }}
+                                >
+                                  Manage Documents
+                                </Button>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      >
+                        {documents.map(doc => (
+                          <Select.Option key={doc._id} value={doc._id} label={doc.name}>
+                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                              <FileTextOutlined style={{ marginRight: '8px' }} />
+                              <span>{doc.name}</span>
+                            </div>
+                          </Select.Option>
+                        ))}
+                      </Select>
+                    </div>
+                    <Button 
+                      icon={<UploadOutlined />} 
+                      onClick={() => setUploadModalVisible(true)}
+                      block
+                    >
+                      Add Document
+                    </Button>
+                  </div>
+                )}
+              </div>
+              <div style={{ height: mode === 'rag' ? 'calc(100vh - 250px)' : 'calc(100vh - 123px)', overflow: 'auto' }}>
+                <ChatList
+                  chats={chats}
+                  onChatSelect={handleChatSelect}
+                  currentChat={currentChat}
+                  onDeleteChat={handleDeleteChat}
+                  onChatUpdate={handleChatUpdate}
+                />
+              </div>
+            </Sider>
+            {/* Chat header and Tool section */}
+            <div style={{ position: 'fixed', top: 50, left: 280, right: 0, zIndex: 99 }}>
+              <div style={{
+                padding: '12px 24px',
+                backgroundColor: '#fff',
+                borderBottom: '1px solid #f0f0f0',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <MessageOutlined style={{ fontSize: '18px', color: '#1890ff' }} />
+                  <span style={{ fontSize: '16px', fontWeight: 500 }}>
+                    {currentChat?.title || 'New Chat'}
+                  </span>
+                </div>
+                {mode === 'rag' && (
+                  <Button 
+                    type="text" 
+                    onClick={() => setRightSiderVisible(!rightSiderVisible)}
+                    icon={rightSiderVisible ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
+                  />
+                )}
+              </div>
+            </div>
+            
+
+            
+            <Layout style={{ marginLeft: 280, height: 'calc(100vh - 100px)', marginTop: '100px' }}>
+              <Content style={{ 
+                height: '100%',
+                padding: '20px',
+                display: 'flex',
+                flexDirection: 'column',
+                overflow: 'hidden',
+                position: 'relative'
+              }}>
+                <div style={{ 
+                  position: 'absolute',
+                  top: '20px',
+                  left: '20px',
+                  right: '20px',
+                  bottom: '20px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  overflow: 'hidden'
+                }}>
+                  <ChatWindow 
+                    messages={chatHistory}
+                    onSendMessage={handleSendMessage}
+                    loading={loading}
+                    onNewChat={handleNewChat}
+                  />
+                </div>
+              </Content>
+            </Layout>
+
+            {/* Document Upload Modal */}
+            <Modal
+              title="Upload Document"
+              open={uploadModalVisible}
+              onCancel={() => setUploadModalVisible(false)}
+              footer={null}
+              width={500}
+            >
+              <DocumentUpload
+                onUploadSuccess={(data) => {
+                  message.success(data.message);
+                  fetchDocuments();
+                  setUploadModalVisible(false);
+                }}
+                onUploadError={(error) => {
+                  message.error('Upload failed: ' + error);
+                }}
+              />
+            </Modal>
+            
+            {/* Document Management Modal */}
+            <Modal
+              title="Manage Documents"
+              open={deleteDocsModalVisible}
+              onCancel={() => setDeleteDocsModalVisible(false)}
+              footer={[
+                <Button key="close" onClick={() => setDeleteDocsModalVisible(false)}>
+                  Close
+                </Button>
+              ]}
+              width={600}
+            >
+              <div style={{ maxHeight: '400px', overflow: 'auto' }}>
+                {documents.length === 0 ? (
+                  <div style={{ textAlign: 'center', padding: '20px' }}>
+                    <p>No documents available</p>
+                    <Button 
+                      type="primary" 
+                      icon={<UploadOutlined />}
+                      onClick={() => {
+                        setDeleteDocsModalVisible(false);
+                        setUploadModalVisible(true);
+                      }}
+                    >
+                      Upload Document
+                    </Button>
+                  </div>
+                ) : (
+                  <List
+                    itemLayout="horizontal"
+                    dataSource={documents}
+                    renderItem={(doc) => (
+                      <List.Item
+                        actions={[
+                          <Button 
+                            type="text" 
+                            danger 
+                            icon={<DeleteOutlined />} 
+                            onClick={() => handleDeleteDocument(doc._id)}
+                          />
+                        ]}
+                      >
+                        <List.Item.Meta
+                          avatar={<FileTextOutlined style={{ fontSize: '24px' }} />}
+                          title={doc.name}
+                          description={`Uploaded: ${new Date(doc.createdAt).toLocaleString()}`}
+                        />
+                      </List.Item>
+                    )}
+                  />
+                )}
+              </div>
+            </Modal>
+    </Layout>
+  );
+
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/app" element={<ChatbotApp />} />
+        <Route path="/config" element={<ConfigPage apiBaseUrl={API_BASE_URL} />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </Router>
   );
 }
 

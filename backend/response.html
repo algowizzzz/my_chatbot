@@ -1,0 +1,795 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>LCH Query Results</title>
+            <script src="https://d3js.org/d3.v7.min.js"></script>
+            <style>
+                body {
+                    font-family: 'Segoe UI', Arial, sans-serif;
+                    max-width: 1000px;
+                    margin: 40px auto;
+                    padding: 30px;
+                    line-height: 1.8;
+                    color: #333;
+                    background-color: #f8f9fa;
+                }
+                .container {
+                    background: white;
+                    padding: 30px;
+                    border-radius: 10px;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                }
+                .section {
+                    margin-bottom: 30px;
+                    padding: 20px;
+                    border-radius: 8px;
+                    background: #fff;
+                    border: 1px solid #dee2e6;
+                }
+                .query {
+                    background: #e9ecef;
+                    border-left: 5px solid #007bff;
+                }
+                .answer {
+                    background: #f1f8ff;
+                }
+                .answer ul {
+                    margin: 0;
+                    padding-left: 20px;
+                }
+                .entities {
+                    background: #f3f0ff;
+                }
+                .entities-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                    gap: 10px;
+                    margin-top: 10px;
+                }
+                .entity-item {
+                    padding: 5px 10px;
+                    background: #e9ecef;
+                    border-radius: 4px;
+                    font-size: 0.9em;
+                }
+                .chunk {
+                    background: white;
+                    padding: 15px;
+                    margin: 10px 0;
+                    border-radius: 6px;
+                    border: 1px solid #e9ecef;
+                }
+                h2 {
+                    color: #212529;
+                    margin: 0 0 15px;
+                    font-size: 1.3em;
+                }
+                .scores {
+                    font-size: 0.9em;
+                    color: #666;
+                    margin-bottom: 10px;
+                }
+                .graph-section {
+                    background: #f0f7ff;
+                    padding: 25px;
+                    border-radius: 8px;
+                    margin: 20px 0;
+                    border: 1px solid #cce4ff;
+                }
+                .entity-card {
+                    background: white;
+                    padding: 20px;
+                    margin: 15px 0;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+                }
+                .entity-name {
+                    font-weight: bold;
+                    color: #0056b3;
+                    font-size: 1.1em;
+                    padding-bottom: 10px;
+                    border-bottom: 2px solid #e9ecef;
+                }
+                .relationship-container {
+                    margin-top: 15px;
+                }
+                .relationship-item {
+                    background: #e9ecef;
+                    padding: 8px 15px;
+                    margin: 5px;
+                    border-radius: 20px;
+                    display: inline-block;
+                    color: #495057;
+                }
+                .relationship-arrow {
+                    color: #6c757d;
+                    margin: 0 5px;
+                }
+                .relevance-stats {
+                    background: #e9ecef;
+                    padding: 15px;
+                    border-radius: 8px;
+                    margin-bottom: 20px;
+                    font-size: 0.95em;
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 10px;
+                }
+                .stat-item {
+                    padding: 10px;
+                    background: white;
+                    border-radius: 6px;
+                }
+                #knowledge-graph {
+                    width: 100%;
+                    height: 500px;
+                    background: #f8f9fa;
+                    border: 1px solid #dee2e6;
+                    border-radius: 8px;
+                    margin: 20px 0;
+                }
+                .node {
+                    fill: #fff;
+                    stroke: #007bff;
+                    stroke-width: 2px;
+                }
+                .node text {
+                    font-size: 12px;
+                    fill: #333;
+                }
+                .link {
+                    stroke: #999;
+                    stroke-opacity: 0.6;
+                    stroke-width: 1px;
+                }
+                .link-label {
+                    font-size: 10px;
+                    fill: #666;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="section query">
+                    <h2>📝 Query</h2>
+                    Analyze LCHs initial margin calculation details focusing on: 1) Full revaluation vs DGV approach, 2) Confidence interval percentage, 3) Frequency of parameter updates, 4) Frequency of calculation. Include specific criteria mentioned for each.
+                </div>
+                
+                <div class="section answer">
+                    <h2>💡 Concise Answer</h2>
+                    - LCH uses a Full Revaluation approach for initial margin calculation, ensuring all positions are revalued using current market prices.
+- The confidence interval percentage is not specified in the provided text.
+- Parameters used for initial margin calculation are updated on a daily basis, ensuring accuracy and responsiveness to market changes.
+- Initial margin calculations are performed daily, reflecting the current market conditions and ensuring adequate risk coverage.
+                </div>
+
+                <div class="graph-section">
+                    <h2>🎯 Relevant Entities and Relationships</h2>
+                    <div class="relevance-stats">
+                        <div class="stat-item">
+                            <strong>Relevant Entities:</strong> 26
+                        </div>
+                        <div class="stat-item">
+                            <strong>Relevant Relationships:</strong> 
+                            0
+                        </div>
+                    </div>
+                    
+                    
+                        <div class="entity-card">
+                            <div class="entity-name">🔹 2024</div>
+                            <div class="relationship-container">No direct relationships</div>
+                        </div>
+                    
+                        <div class="entity-card">
+                            <div class="entity-name">🔹 LCH Limited</div>
+                            <div class="relationship-container">No direct relationships</div>
+                        </div>
+                    
+                        <div class="entity-card">
+                            <div class="entity-name">🔹 LCH</div>
+                            <div class="relationship-container">No direct relationships</div>
+                        </div>
+                    
+                        <div class="entity-card">
+                            <div class="entity-name">🔹 CCP</div>
+                            <div class="relationship-container">No direct relationships</div>
+                        </div>
+                    
+                        <div class="entity-card">
+                            <div class="entity-name">🔹 Risk Committee</div>
+                            <div class="relationship-container">No direct relationships</div>
+                        </div>
+                    
+                        <div class="entity-card">
+                            <div class="entity-name">🔹 CPMI-IOSCO PFMI</div>
+                            <div class="relationship-container">No direct relationships</div>
+                        </div>
+                    
+                        <div class="entity-card">
+                            <div class="entity-name">🔹 FMI</div>
+                            <div class="relationship-container">No direct relationships</div>
+                        </div>
+                    
+                        <div class="entity-card">
+                            <div class="entity-name">🔹 Board</div>
+                            <div class="relationship-container">No direct relationships</div>
+                        </div>
+                    
+                        <div class="entity-card">
+                            <div class="entity-name">🔹 Management Team</div>
+                            <div class="relationship-container">No direct relationships</div>
+                        </div>
+                    
+                        <div class="entity-card">
+                            <div class="entity-name">🔹 Executive Risk Committee</div>
+                            <div class="relationship-container">No direct relationships</div>
+                        </div>
+                    
+                        <div class="entity-card">
+                            <div class="entity-name">🔹 Self-Assessment</div>
+                            <div class="relationship-container">No direct relationships</div>
+                        </div>
+                    
+                        <div class="entity-card">
+                            <div class="entity-name">🔹 CCPs</div>
+                            <div class="relationship-container">No direct relationships</div>
+                        </div>
+                    
+                        <div class="entity-card">
+                            <div class="entity-name">🔹 Rule Change Committee</div>
+                            <div class="relationship-container">No direct relationships</div>
+                        </div>
+                    
+                        <div class="entity-card">
+                            <div class="entity-name">🔹 LCH Board</div>
+                            <div class="relationship-container">No direct relationships</div>
+                        </div>
+                    
+                        <div class="entity-card">
+                            <div class="entity-name">🔹 LCH Group</div>
+                            <div class="relationship-container">No direct relationships</div>
+                        </div>
+                    
+                        <div class="entity-card">
+                            <div class="entity-name">🔹 LCH Board Risk Committee</div>
+                            <div class="relationship-container">No direct relationships</div>
+                        </div>
+                    
+                        <div class="entity-card">
+                            <div class="entity-name">🔹 CSDs</div>
+                            <div class="relationship-container">No direct relationships</div>
+                        </div>
+                    
+                        <div class="entity-card">
+                            <div class="entity-name">🔹 LCH Remuneration Committee</div>
+                            <div class="relationship-container">No direct relationships</div>
+                        </div>
+                    
+                        <div class="entity-card">
+                            <div class="entity-name">🔹 CPMI-IOSCO</div>
+                            <div class="relationship-container">No direct relationships</div>
+                        </div>
+                    
+                        <div class="entity-card">
+                            <div class="entity-name">🔹 PFMI</div>
+                            <div class="relationship-container">No direct relationships</div>
+                        </div>
+                    
+                        <div class="entity-card">
+                            <div class="entity-name">🔹 CMS</div>
+                            <div class="relationship-container">No direct relationships</div>
+                        </div>
+                    
+                        <div class="entity-card">
+                            <div class="entity-name">🔹 UK Financial Markets and Insolvency (Settlement Finality) Regulations 1999</div>
+                            <div class="relationship-container">No direct relationships</div>
+                        </div>
+                    
+                        <div class="entity-card">
+                            <div class="entity-name">🔹 Board Risk Committee</div>
+                            <div class="relationship-container">No direct relationships</div>
+                        </div>
+                    
+                        <div class="entity-card">
+                            <div class="entity-name">🔹 30 business days</div>
+                            <div class="relationship-container">No direct relationships</div>
+                        </div>
+                    
+                        <div class="entity-card">
+                            <div class="entity-name">🔹 two member groups</div>
+                            <div class="relationship-container">No direct relationships</div>
+                        </div>
+                    
+                        <div class="entity-card">
+                            <div class="entity-name">🔹 LSEG</div>
+                            <div class="relationship-container">No direct relationships</div>
+                        </div>
+                    
+                </div>
+                
+                <div class="section">
+                    <h2>📚 Source Chunks</h2>
+                    
+                        <div class="chunk">
+                            <div class="scores">
+                                <strong>Chunk 1</strong> (Score: 29.466)<br>
+                                Semantic: 0.798 | 
+                                Entity: 0.091 | 
+                                Relationship: 145.800 | 
+                                Position: 0.302
+                            </div>
+                            Key  Consideration  3: An 
+FMI    should    maintain    a 
+viable  recovery  or  orderly 
+wind-down  plan and should 
+hold   sufficient   liquid   net 
+assets  funded  by  equity  to 
+implement  this  plan   At  a 
+minimum,   an   FMI   should 
+hold     liquid     net     assets 
+funded by equity equal to at 
+LCH maintains a Recovery Plan and a Wind Down Plan, both of which are reviewed at least annually, or following material 
+changes, and approved by the LCH Board  
+The Wind Down Plan sets out the steps it would be necessary to follow should LCH need to wind down its clearing business  
+The plan sets out the roles and responsibilities of the internal functions to ensure an orderly wind down of the activities 
+within six months  In addition, this plan takes into account the impact of such a wind down on external stakeholders such 
+as members and the markets   
+The Recovery Plan sets out the steps that LCH should take in order to maintain the continuity of its services, should such 
+continuity be threatened  This plan takes into consideration the triggers for such a plan, the governance steps LCH must 
+
+LCH Limited | 2024 CPMI-IOSCO PFMI Self-Assessment 
+ 81 
+least  six  months  of  current 
+operating  expenses   These 
+assets   are   in   addition   to 
+resources   held   to   cover 
+participant defaults or  other 
+risks   covered   under   the 
+financial resources 
+principles   However,  equity 
+held    under    international 
+risk-based capital standards 
+can    be    included    where 
+relevant  and  appropriate  to 
+avoid duplicate capital 
+requirements  
+take to invoke the plan and a number of recovery tools that are available to LCH  Each available tool is assessed for its 
+impacts to LCH’s clearing members       
+LCH  holds  capital  equal  to  the  operating  expenses  for  the  six-month  period  required  to  wind  down   LCH  bases  its 
+calculation on the latest audited expenses   
+LCH  invests  its  capital  including  the  capital  used  to  cover  general  business  risks  and  the  wind  down  plan  in  very  high 
+quality, very liquid instruments with low market risk, in line with applicable regulatory requirements  LCH capital is held on 
+the balance sheet of LCH separately from the resources designated to cover clearing members’ defaults  
+ 
+Key Consideration 4: 
+Assets held to cover general 
+business  risk  should  be  of 
+high  quality  and  sufficiently 
+liquid  in  order  to  allow  the 
+FMI to meet  its current and 
+projected operating 
+expenses  under  a  range  of 
+scenarios, including in 
+adverse market conditions  
+LCH’s assets held to cover business risk are composed of short-term reverse repos, the purchase  of short  term highly 
+liquid government securities and overnight cash deposits  The maturity profile of the reverse repos and cash held to cover 
+general business risk means no conversion of assets is required  The securities are high quality, very liquid and with low 
+market risk   
+LCH  assesses  the  quality  and  degree  of  liquidity  and  marked  to  market  value  of  its  liquid  net  assets  through  daily 
+monitoring, regular reporting and monthly internal governance reviews  
+ 
+Key  Consideration  5: An 
+FMI    should    maintain    a 
+viable    plan     for     raising 
+additional  equity  should  its 
+equity fall close to or below 
+the   amount   needed    This 
+plan should be approved by 
+LCH produces a Recovery Plan which sets out the steps that the CCP will take in order to maintain the continuity of the 
+services that it  provides and the activities that it carries out in the event that such continuity is threatened   This plan is 
+approved by the LCH Board as well other executive committees (Management Team, Executive Risk Committee and Risk 
+Committee)  
+The Recovery Plan covers the capital raising strategy which is to utilise existing capital balances (e g
+                        </div>
+                    
+                        <div class="chunk">
+                            <div class="scores">
+                                <strong>Chunk 2</strong> (Score: 29.363)<br>
+                                Semantic: 0.783 | 
+                                Entity: 0.000 | 
+                                Relationship: 145.600 | 
+                                Position: 0.081
+                            </div>
+                            LCH  is 
+connected to a number of intermediaries to perform its services, including other FMIs such as interoperating CCPs, CSDs 
+and other parties used for settlement, payment or custody purposes; and LCH ensures fair and open access to and from 
+these in line with applicable regulatory requirements in the jurisdictions where it operates, as well as its internal standards    
+LCH  is  partly  owned  by  its  clearing  members,  which  therefore  are  included  in  the  LCH  governance  process  by  being 
+represented on relevant committees  The LCH Board and the LCH Board Risk Committee include user and independent 
+director representation  LCH also has several advisory and risk working groups related to specific clearing services where 
+new product initiatives, collateral extensions, and projects are discussed with clearing members  Proposals for significant 
+changes  to  risk  models  must  be  reviewed with  clearing  members  in  these  working  groups,  and  their  views  will  be 
+documented and included with the proposals where approval is necessary, including at the Risk Committee and Board  
+Through these forums and clearing member consultation, LCH ensures appropriate consideration of its users’ needs  
+Any change which may fundamentally affect the way LCH operates will involve a change to the LCH Rulebook and such 
+changes are considered by the Rule Change Committee  This Committee will independently assess the changes and set 
+a minimum time for clearing member consultation for rule amendments that are deemed material  Feedback received from 
+clearing members is assessed and any further material changes proposed will be considered again by the Rule Change 
+Committee before they can be made live  Further, LCH is an active market participant, providing thought leadership into 
+industry-wide initiatives to promote financial stability and to improve the effectiveness and efficiency of the markets  Any 
+significant change that fundamentally affects the LCH operating model are made only after clearing member consultation  
+
+LCH Limited | 2024 CPMI-IOSCO PFMI Self-Assessment 
+ 107 
+Additionally, clearing members are involved in the development and testing of new service releases of technology relating 
+to new products, services or systems   
+The LCH client management functions collect and collate enhancement and change requests from clearing members and 
+submit to senior management for consideration  
+Key  Consideration  2: An 
+FMI   should   have   clearly 
+defined goals and 
+objectives that are 
+measurable and 
+achievable,  such  as  in  the 
+areas  of  minimum  service 
+levels,    risk    management 
+expectations,  and  business 
+priorities  
+LCH’s corporate strategic objectives are: 
+• To provide market leading risk management and clearing solutions   
+• To manage our members’ and clients’ risk by providing effective and efficient clearing services  
+• To promote a safe and stable financial market foremost in all that we do   
+The strategy for achieving these objectives is to continue to offer LCH’s proven risk management capabilities across a 
+range of asset classes with a commitment to partner with clearing members to develop the services that make markets 
+more efficient and safe   
+The LCH Board, through its internal governance process, creates and maintains well defined strategic and financial plans  
+Progress against goals and objectives are included in the publicly available consolidated LCH Group report and accounts    
+LCH senior management reporting enables the LCH Board to assess and have oversight of the progress of LCH against 
+its goals and objectives, in line with the strategy and the priorities of its senior management  LCH management assesses 
+performance against its annual corporate strategic objectives on a quarterly basis  Performance against these objectives 
+is reported to the LCH Group Board and the LCH Remuneration Committee
+                        </div>
+                    
+                        <div class="chunk">
+                            <div class="scores">
+                                <strong>Chunk 3</strong> (Score: 28.876)<br>
+                                Semantic: 0.798 | 
+                                Entity: 0.125 | 
+                                Relationship: 142.600 | 
+                                Position: 0.663
+                            </div>
+                            However, to date, there have never been any exceptions granted to the collateral policy for LCH  Exceptions are available 
+as a contingency measure and only to be used in exceptional circumstances  The Collateral Risk policy is reviewed annually, 
+and any revisions are subject to LCH Board approval  
+To provide flexibility in collateral eligibility, LCH accepts a range of currencies and traded securities as initial margin  LCH 
+maintains a list of collateral eligible for use in its services on its website, including details of haircuts  Typically, LCH engages 
+with its participants in advance of changes to collateral eligibility to minimise any disruption from such changes   
+LCH operates and maintains CMS through which requests by clearing members to deposit or release collateral are made  
+CMS lists only LCH eligible collateral, thereby preventing the submission or receipt into the CCP of ineligible collateral  
+
+LCH Limited | 2024 CPMI-IOSCO PFMI Self-Assessment 
+ 38 
+LCH maintains a framework for the monitoring and identification of wrong-way and other concentration risks  The collateral 
+risk framework covers several risks, including wrong-way and concentration risk, that require review and escalation when 
+breaches of concentration limits occur, along with mitigation steps  
+LCH’s risk policies are reviewed on an annual basis    
+Key  Consideration  2: An 
+FMI should establish 
+prudent  valuation  practices 
+and  develop  haircuts  that 
+are   regularly   tested   and 
+take  into  account  stressed 
+market conditions  
+LCH marks its collateral holdings to market daily using observed market prices from published sources in accordance with 
+internal LCH policy  LCH introduced additional checks during the review period, whereby it tests its ability to stand up an 
+alternative price data source for collateral valuation using an additional vendor  This ensures LCH is able to mark-to-market 
+collateral on a real time basis, even in the event its main data provider is unavailable  
+LCH is entitled to give any instrument or security lodged as collateral a zero value if it is found in any way to be unacceptable  
+Further, if, in the opinion of LCH, any asset that has been transferred to it by a clearing member as collateral is no longer 
+either of sufficient value or otherwise acceptable to LCH, it shall be entitled to demand further collateral from such member, 
+in keeping with the LCH Rulebook provisions  
+LCH’s internal policy defines its collateral haircut framework; the framework includes regular monitoring and review of 
+haircuts, and a stress testing regime  that contains extreme but plausible scenarios  Collateral haircuts are  made  up of a 
+base haircut as well as add-ons, and cover market risk, credit risk, wrong-way risk and FX risk in addition to concentration 
+and liquidity risk  The methodology used takes into consideration various factors including the ability to realise the value of 
+a piece of collateral, appropriate lookback periods, attributes of issuers and price correlations  Haircuts must also comply 
+with the internal policy on procyclicality  FX haircuts are determined based on the historic volatility of the relevant currency 
+pair and are applied consistently across all collateral, cash or securities  
+Key   Consideration   3: In 
+order to reduce the need for 
+procyclical  adjustments,  an 
+FMI should  establish stable 
+and   conservative   haircuts 
+that are calibrated to include 
+periods  of  stressed  market 
+conditions,   to   the   extent 
+practicable and prudent  
+During  the  routine  review  of  haircuts  in  normal  and  stressed  market  conditions,  LCH  may  defer  or  phase  in  changes  to 
+haircuts, if deemed necessary, to avoid excessively procyclical effects in accordance with the LCH Procyclicality policy  LCH 
+internal policies require that a 10-year price history, plus a stress period, is to be used in haircut calibrations thereby reducing 
+the need for procyclical adjustments
+                        </div>
+                    
+                        <div class="chunk">
+                            <div class="scores">
+                                <strong>Chunk 4</strong> (Score: 28.807)<br>
+                                Semantic: 0.795 | 
+                                Entity: 0.000 | 
+                                Relationship: 142.600 | 
+                                Position: 0.488
+                            </div>
+                            In    all 
+cases,    an    FMI    should 
+document    its    supporting 
+rationale   for,   and   should 
+have appropriate 
+governance   arrangements 
+relating  to,  the  amount  and 
+form of total liquid resources 
+it maintains  
+also subject to  annual review by the  Board Risk Committee, which  in turn makes recommendation  to the LCH  Board for 
+approval  
+ 
+Key  Consideration  10: An 
+FMI should establish explicit 
+rules  and  procedures  that 
+enable   the   FMI   to   effect 
+same-day and, where 
+appropriate,   intraday   and 
+multiday settlement of 
+payment obligations on time 
+following  any  individual  or 
+combined default among its 
+participants     These rules 
+and     procedures     should 
+address    unforeseen    and 
+potentially uncovered 
+LCH maintains arrangements for ensuring settlement finality as described in the assessment of compliance with Principle 8  
+These  arrangements  along  with  its  liquidity  risk  framework  (see  above - Key  Consideration  1)  provide  the  structure  for 
+ensuring LCH can settle payment obligations on time even in the event of participant(s) default  LCH’s Liquidity Risk policy 
+requires and sets parameters for a minimum liquidity buffer over and above the total liquidity requirement   
+The  liquidity  risk  framework  has  key  tests  which  are  used  to  determine  the  liquidity  requirement  in  the  event  of  member 
+default(s):  the  intraday  liquidity  stress  test  and  the  30-day  liquidity  stress  test   The  30-day  liquidity  stress  test  forecasts 
+liquidity requirements that arise over the next 30 business days under stressed market conditions and assumes the default 
+of the two member groups with the largest liquidity requirements, plus a stressed business-as-usual target   
+Consequently, LCH’s Liquidity Risk Framework ensures that it maintains significant excess liquidity to meet intraday and 
+daily liquidity needs following the default of the two clearing members (with their affiliates and clients) with the largest liquidity 
+requirements   The  LCH  Liquidity  Plan  and  the  Recovery  Plan  describe  the  actions  that  LCH  could  take  to  address  any 
+uncovered liquidity shortfall and the replenishment of its liquidity resources  For example, the Liquidity Plan incorporates the 
+
+LCH Limited | 2024 CPMI-IOSCO PFMI Self-Assessment 
+ 58 
+liquidity shortfalls and 
+should aim to avoid 
+unwinding,     revoking,     or 
+delaying the same-day 
+settlement of payment 
+obligations  These rules and 
+procedures     should     also 
+indicate  the  FMI’s  process 
+to   replenish   any   liquidity 
+resources   it   may   employ 
+during  a  stress  event,  so 
+that    it    can    continue    to 
+operate in a safe and sound 
+manner  
+tools  that  can  be  used  to  fund  operational  and  default  liquidity  needs  and  assesses  all  the  available  tools  under  various 
+scenarios including during periods of market stress or a ‘liquidity event’ (defined as a situation where there is an actual or 
+perceived risk of a shortfall)  Restricted access to liquidity sources is also incorporated in LCH’s liquidity stress testing  
+ 
+Publicly available 
+resources 
+LCH Rulebook  
+CPMI-IOSCO Quantitative Disclosure  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+LCH Limited | 2024 CPMI-IOSCO PFMI Self-Assessment 
+ 59 
+Principle 8: Settlement Finality 
+An FMI should provide clear and certain final settlement, at a minimum by the end of the value date   Where necessary or preferable, an FMI 
+should provide final settlement intraday or in real time  
+LCH’s arrangements for ensuring settlement finality are founded on the designation of LCH under the UK Financial Markets and Insolvency (Settlement 
+Finality)  Regulations  1999  (UK  SFR);  Rulebook  provisions;  and  the  commissioning  of  legal  opinions  in  support of  the  applicable  provisions  within  its 
+Rulebook
+                        </div>
+                    
+                        <div class="chunk">
+                            <div class="scores">
+                                <strong>Chunk 5</strong> (Score: 28.722)<br>
+                                Semantic: 0.806 | 
+                                Entity: 0.143 | 
+                                Relationship: 142.000 | 
+                                Position: 0.233
+                            </div>
+                            Key  Consideration  3: An 
+FMI   should   have   clearly 
+defined operational 
+reliability    objectives    and 
+should    have    policies    in 
+place  that  are  designed  to 
+achieve those objectives  
+LCH’s corporate strategic objective underpin the firm’s commitment to effective risk, control, stability management  The 
+first two corporate objectives being ‘to provide market-leading  risk  management  and  resilience  standards  and  clearing 
+solutions’ and ‘to manage our members’ and clients’ risk by providing effective and efficient clearing services’  The Board 
+sets a risk appetite and endorses the LCH Risk Management Framework to manage reliance, reliability, and stability of the 
+CCP, which is cascaded throughout the firm  LCH has further defined service levels based on key performance indicators  
+Key  Consideration  4: An 
+FMI  should  ensure  that  it 
+has scalable capacity 
+adequate to handle 
+increasing  stress  volumes 
+and  to  achieve  its  service-
+level objectives  
+Minimum systems capacity levels are equal to two times the peak of at least the previous two years and must be tested 
+annually  The capacity testing must cover key processes such as those for registering trades and calculating margin and 
+settlement   Services  experiencing  significant  growth  in  volumes  are  expected  to  forecast  their  future  requirements  and 
+ensure that sufficient capacity will exist in the future  
+The policy also requires that technology systems supporting critical services must meet a stressed capacity requirement  
+Capacity utilisation must be monitored at least daily and stressed capacity tested at least annually  In addition, each service 
+is the subject of monthly service reviews, which include an assessment of key performance indicators, such as capacity  
+Furthermore, ahead of the implementation of new products or material system changes, LCH performs testing to provide 
+assurance that system capacity will be, or will remain, adequate for normal and stressed volumes   
+LCH systems are subject to regular risk based independent review by the internal audit function   
+Should  real-time  system  monitoring  and  monthly  service  reviews  reveal  capacity  performance  and  trends  which  have 
+disrupted  or  may  disrupt  operational  functioning,  action  will  be  taken  to  investigate  the  cause  and  identify  necessary 
+timelines for increasing headroom for capacity  If capacity were to be exceeded, this would be investigated and remediated  
+Following remediation LCH would investigate the root cause and implement steps to prevent reoccurrence  
+Key  Consideration  5: An 
+FMI should have 
+comprehensive physical 
+and    information    security 
+policies   that   address   all 
+LCH  has  a  number  of  policies,  standards  and  controls  in  place  for  safeguarding  its  physical  and  information  security  
+Regular  reviews  are  undertaken  to  understand  potential  vulnerabilities  and  threats  i e ,  physical,  intrusion  and  natural 
+disaster, that LCH may be subject to  
+
+LCH Limited | 2024 CPMI-IOSCO PFMI Self-Assessment 
+ 90 
+potential  vulnerabilities  and 
+threats  
+The polices that govern these potential vulnerabilities are:  
+• The  LSEG  Physical  Security  policy,  which  covers  people,  physical  assets,  material  assets  and  confidential 
+information   
+• The LSEG and LCH Information Security Risk policies address the risks of unauthorised access, use, disclosure, 
+modification,  destruction  of  or  disruption  to  information  and/or  information  systems   LCH  has  added  an  entity-
+specific appendix  LCH has also adopted LSEG’s 21 information security standards and 29 technology standards, 
+which are to be read in conjunction with the LSEG Information Security policy  
+• In addition, LCH complies with the LSEG Enterprise Records Management policy and LSEG Confidentiality policy
+                        </div>
+                    
+                </div>
+
+                <div class="graph-section">
+                    <h2>🕸️ Knowledge Graph Visualization</h2>
+                    <div id="knowledge-graph"></div>
+                </div>
+            </div>
+
+            <script>
+                // Prepare graph data
+                const graphData = {
+                    nodes: Array.from(["2024","LCH Limited","LCH","CCP","Risk Committee","CPMI-IOSCO PFMI","FMI","Board","Management Team","Executive Risk Committee","Self-Assessment","CCPs","Rule Change Committee","LCH Board","LCH Group","LCH Board Risk Committee","CSDs","LCH Remuneration Committee","CPMI-IOSCO","PFMI","CMS","UK Financial Markets and Insolvency (Settlement Finality) Regulations 1999","Board Risk Committee","30 business days","two member groups","LSEG"]).map(id => ({
+                        id,
+                        group: 1
+                    })),
+                    links: Array.from([])
+                        .flatMap(([source, relations]) => 
+                            Array.from(relations).map(rel => ({
+                                source,
+                                target: rel.target,
+                                label: rel.type
+                            }))
+                        )
+                };
+
+                // Create force directed graph
+                const width = document.getElementById('knowledge-graph').clientWidth;
+                const height = 500;
+
+                const simulation = d3.forceSimulation(graphData.nodes)
+                    .force("link", d3.forceLink(graphData.links).id(d => d.id).distance(150))
+                    .force("charge", d3.forceManyBody().strength(-300))
+                    .force("center", d3.forceCenter(width / 2, height / 2));
+
+                const svg = d3.select("#knowledge-graph")
+                    .append("svg")
+                    .attr("width", width)
+                    .attr("height", height);
+
+                // Add arrow markers
+                svg.append("defs").selectAll("marker")
+                    .data(["end"])
+                    .enter().append("marker")
+                    .attr("id", String)
+                    .attr("viewBox", "0 -5 10 10")
+                    .attr("refX", 25)
+                    .attr("refY", 0)
+                    .attr("markerWidth", 6)
+                    .attr("markerHeight", 6)
+                    .attr("orient", "auto")
+                    .append("path")
+                    .attr("d", "M0,-5L10,0L0,5");
+
+                // Draw links
+                const link = svg.append("g")
+                    .selectAll("line")
+                    .data(graphData.links)
+                    .enter().append("line")
+                    .attr("class", "link")
+                    .attr("marker-end", "url(#end)");
+
+                // Add link labels
+                const linkLabel = svg.append("g")
+                    .selectAll(".link-label")
+                    .data(graphData.links)
+                    .enter().append("text")
+                    .attr("class", "link-label")
+                    .text(d => d.label);
+
+                // Draw nodes
+                const node = svg.append("g")
+                    .selectAll("circle")
+                    .data(graphData.nodes)
+                    .enter().append("g")
+                    .call(d3.drag()
+                        .on("start", dragstarted)
+                        .on("drag", dragged)
+                        .on("end", dragended));
+
+                node.append("circle")
+                    .attr("class", "node")
+                    .attr("r", 20);
+
+                node.append("text")
+                    .attr("dx", 25)
+                    .attr("dy", ".35em")
+                    .text(d => d.id);
+
+                // Update positions
+                simulation.on("tick", () => {
+                    link
+                        .attr("x1", d => d.source.x)
+                        .attr("y1", d => d.source.y)
+                        .attr("x2", d => d.target.x)
+                        .attr("y2", d => d.target.y);
+
+                    linkLabel
+                        .attr("x", d => (d.source.x + d.target.x) / 2)
+                        .attr("y", d => (d.source.y + d.target.y) / 2);
+
+                    node
+                        .attr("transform", d => `translate(${d.x},${d.y})`);
+                });
+
+                // Drag functions
+                function dragstarted(event, d) {
+                    if (!event.active) simulation.alphaTarget(0.3).restart();
+                    d.fx = d.x;
+                    d.fy = d.y;
+                }
+
+                function dragged(event, d) {
+                    d.fx = event.x;
+                    d.fy = event.y;
+                }
+
+                function dragended(event, d) {
+                    if (!event.active) simulation.alphaTarget(0);
+                    d.fx = null;
+                    d.fy = null;
+                }
+            </script>
+        </body>
+        </html>
+        
