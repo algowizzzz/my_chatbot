@@ -3,7 +3,7 @@ node_modules/
 
 # Environment variables and secrets
 .env
-.env.*
+.env.[^e]* # ignore all .env files except .env.example
 .ebextensions/*_env.config
 .ebextensions/env-vars.config
 update_env.sh
